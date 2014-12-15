@@ -6,7 +6,7 @@
 int main() {
     srand((unsigned)time(NULL));
     Block b = Block();
-    b.generate();
+    b.generate(NULL);
     char **target = new char*[BLOCKHEIGHT];
     for(int y = 0; y < BLOCKHEIGHT; y++)
         target[y] = new char[BLOCKWIDTH];
