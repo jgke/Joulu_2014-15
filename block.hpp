@@ -1,8 +1,8 @@
 #ifndef BLOCK_HPP
 #define BLOCK_HPP
 
-#define BLOCKWIDTH 16
-#define BLOCKHEIGHT 16
+#define BLOCKWIDTH 17
+#define BLOCKHEIGHT 17
 
 class Block {
     public:
