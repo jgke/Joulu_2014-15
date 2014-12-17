@@ -1,6 +1,9 @@
+#ifndef LIST_HPP
+#error Cannot compile list.cpp directly
+#endif
+
 #include <vector>
 
-#include "list.hpp"
 
 template <class T> List<T>::List() {
     this->arr = new std::vector<T>();
