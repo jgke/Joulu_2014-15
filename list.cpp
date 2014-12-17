@@ -4,7 +4,6 @@
 
 #include <vector>
 
-
 template <class T> List<T>::List() {
     this->arr = new std::vector<T>();
 }
