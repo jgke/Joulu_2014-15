@@ -7,4 +7,14 @@ void list_test() {
     test_equal("List starts with size 0", cur.size(), 0);
     cur.add(1);
     test_equal("List grows to size 1", cur.size(), 1);
+    cur.remove(0);
+    test_equal("List shrinks to size 0", cur.size(), 0);
+    NO_DEATH_TEST("List doesn't crash when constructor/destructor is called", {
+        List<int> *tmp = new List<int>();
+        delete tmp;
+    });
+    DEATH_TEST("List crashes on out of bounds get", {
+        List<int> tmp;
+        tmp.get(0);
+    });
 }
