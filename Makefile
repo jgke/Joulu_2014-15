@@ -2,7 +2,7 @@ include config.mk
 
 .PHONY: prog doc test
 
-all: prog doc test
+all: prog test
 
 clean:
 	cd src; make clean
