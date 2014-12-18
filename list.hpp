@@ -8,7 +8,7 @@
 template <class T> class List {
     public:
         List();
-        int add(T t);
+        void add(T t);
         T get(int i);
         T remove(int i);
         int size();

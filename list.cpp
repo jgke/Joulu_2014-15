@@ -8,17 +8,16 @@ template <class T> List<T>::List() {
     this->arr = new std::vector<T>();
 }
 
-template <class T> int List<T>::add(T t) {
+template <class T> void List<T>::add(T t) {
     this->arr->push_back(t);
-    return this->arr->size()-1;
 }
 
 template <class T> T List<T>::get(int i) {
-    return (*this->arr)[i];
+    return this->arr->at(i);
 }
 
 template <class T> T List<T>::remove(int i) {
-    T ret = (*this->arr)[i];
+    T ret = this->arr->at(i);
     this->arr->erase(this->arr->begin() + i);
     return ret;
 }
