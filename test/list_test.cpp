@@ -1,5 +1,6 @@
+#include "list.hpp"
+
 #include "test.hpp"
-#include "../list.hpp"
 #include "list_test.hpp"
 
 void list_test() {

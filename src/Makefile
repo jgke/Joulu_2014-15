@@ -1,7 +1,7 @@
 include ../config.mk
 
-TARGET=../out-test
-OBJECTS=main.o test.o list_test.o
+TARGET=../out
+OBJECTS=main.o block.o
 
 %.o : %.cpp
 	${CC} -c ${CCFLAGS} $< -o $@

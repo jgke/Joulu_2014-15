@@ -1,19 +1,16 @@
 include config.mk
 
-TARGET=out
-OBJECTS=main.o block.o
-.PHONY: doc test
+.PHONY: prog doc test
 
-%.o : %.cpp
-	${CC} -c ${CCFLAGS} $< -o $@
-
-${TARGET}: ${OBJECTS}
-	${CC} ${CCFLAGS} ${OBJECTS} -o ${TARGET}
-
-all: ${TARGET}
+all: prog doc test
 
 clean:
-	rm -f out *.o
+	cd src; make clean
+	cd doc; make clean
+	cd test; make clean
+
+prog:
+	cd src; make
 
 doc:
 	cd doc; make

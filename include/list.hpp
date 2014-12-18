@@ -1,6 +1,21 @@
 #ifndef LIST_HPP
-#error Cannot compile list.cpp directly
-#endif
+#define LIST_HPP
+
+#include <vector>
+
+#define LIST_DEFAULT_SIZE 16;
+
+template <class T> class List {
+    public:
+        List();
+        void add(T t);
+        T get(int i);
+        T remove(int i);
+        int size();
+        ~List();
+    private:
+        std::vector<T> *arr;
+};
 
 #include <vector>
 
@@ -29,3 +44,5 @@ template <class T> int List<T>::size() {
 template <class T> List<T>::~List() {
     delete this->arr;
 }
+
+#endif
