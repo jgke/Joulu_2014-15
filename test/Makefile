@@ -1,6 +1,16 @@
 TARGET=out
-FILES=main.cpp test.cpp list_test.cpp
+OBJECTS=main.o test.o list_test.o
 FLAGS=-g -Wall
 CC=g++
-all:
-	${CC} ${FLAGS} ${FILES} -o ${TARGET}
+.PHONY: Makefile all clean
+
+%.o : %.cpp
+	${CC} -c ${FLAGS} $< -o $@
+
+${TARGET}: ${OBJECTS}
+	${CC} ${FLAGS} ${OBJECTS} -o ${TARGET}
+
+all: ${TARGET}
+
+clean:
+	rm -f *.o out

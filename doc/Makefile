@@ -1,7 +1,12 @@
-SOURCES=src/maarittely.tex
+TARGETS=maarittely.pdf
 FLAGS= -c -b
 
-%.pdf : %.tex
-	texi2pdf $(FLAGS) -o $(@F) $<
+.PHONY: Makefile all clean
 
-all: ${SOURCES:.tex=.pdf}
+%.pdf : src/%.tex
+	texi2pdf $(FLAGS) -o $@ src/$*.tex
+
+all: ${TARGETS}
+
+clean:
+	rm -f *.pdf
