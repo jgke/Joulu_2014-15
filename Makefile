@@ -1,14 +1,14 @@
+include config.mk
+
 TARGET=out
 OBJECTS=main.o block.o
-FLAGS=-g -Wall
-CC=g++
-.PHONY: Makefile all clean doc test
+.PHONY: doc test
 
 %.o : %.cpp
-	${CC} -c ${FLAGS} $< -o $@
+	${CC} -c ${CCFLAGS} $< -o $@
 
 ${TARGET}: ${OBJECTS}
-	${CC} ${FLAGS} ${OBJECTS} -o ${TARGET}
+	${CC} ${CCFLAGS} ${OBJECTS} -o ${TARGET}
 
 all: ${TARGET}
 

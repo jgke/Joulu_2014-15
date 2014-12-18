@@ -1,8 +1,7 @@
+include ../config.mk
+
 TARGET=out
 OBJECTS=main.o test.o list_test.o
-FLAGS=-g -Wall
-CC=g++
-.PHONY: Makefile all clean
 
 %.o : %.cpp
 	${CC} -c ${FLAGS} $< -o $@

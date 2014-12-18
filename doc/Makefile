@@ -1,10 +1,9 @@
-TARGETS=maarittely.pdf
-FLAGS= -c -b
+include ../config.mk
 
-.PHONY: Makefile all clean
+TARGETS=maarittely.pdf
 
 %.pdf : src/%.tex
-	texi2pdf $(FLAGS) -o $@ src/$*.tex
+	${TEX2PDF} -o $@ src/$*.tex
 
 all: ${TARGETS}
 
