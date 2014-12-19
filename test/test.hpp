@@ -18,7 +18,7 @@ template <class T> void test_equal(const char *name, T a, T b) {
     else {
         std::stringstream sstream;
         sstream << "expected ";
-        sstream << b;
+        sstream << a;
         sstream << ", got ";
         sstream << b;
         test_failure(name, sstream.str().c_str());
