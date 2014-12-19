@@ -3,6 +3,8 @@
 \usepackage[utf8]{inputenc}
 \usepackage{amsmath}
 \usepackage{amsfonts}
+\usepackage{color, colortbl}
+\definecolor{Gray}{gray}{0.9}
 \author{Jaakko Hannikainen}
 
 \title{Tietorakenteiden ja algoritmien harjoitustyö - Määrittelydokumentti}
@@ -10,13 +12,20 @@
 \maketitle
 
 \section{Ratkaistava ongelma}
-Tehokas dynaaminen luolaston luominen ilman, että muisti loppuu.
+Tehokas dynaaminen luolaston luominen erilaisilla algoritmeilla, kun luolaston
+koko lähenee ääretöntä.
 
 \section{Toteutettavat tietorakenteet ja algoritmit}
-Quadtree luolaston säilömiseen, ettei kulu turhaa tilaa generoimattoman luolan
-säilytykseen.
-Prim luolaston generoimiseen.
-Dynaaminen lista primin jonona.
+\begin{table}[h]
+\begin{tabular}{| l | l |}
+\hline
+\rowcolor{Gray}
+Algoritmi tai tietorakenne & Mihin tarkoitukseen      \\ \hline
+Quadtree                   & Luolaston säilyttämiseen \\ \hline
+Prim                       & Luolaston luomiseen      \\ \hline
+Dynaaminen lista           & Primin prioriteettijono  \\ \hline
+\end{tabular}
+\end{table}
 
 \section{Tavoiteaika- ja tilavaatimus}
 Aikavaatimustavoite $O(n^2)$, tilavaatimustavoite $O(n \log n)$.
