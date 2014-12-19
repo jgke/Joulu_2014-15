@@ -5,6 +5,7 @@
 #include <signal.h>
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 #include <unistd.h>
 
 #include "test.hpp"
@@ -15,7 +16,7 @@ int failure_count = 0;
 void handle(int sig, siginfo_t *siginfo, void *context) {
     void *trace[10];
     size_t len = backtrace(trace, sizeof(trace)/sizeof(trace[0]));
-    fprintf(stderr, "SIGSEGV on test\n");
+    fprintf(stderr, "Signal %d(%s) while testing\n", sig, strsignal(sig));
     backtrace_symbols_fd(trace, len, STDERR_FILENO);
     exit(1);
 }
@@ -26,6 +27,10 @@ void init_tests() {
     act.sa_flags = SA_SIGINFO;
     if(sigaction(SIGSEGV, &act, NULL)) {
         std::cerr << "Failed to handle sigsegv." << std::endl;
+        exit(1);
+    }
+    if(sigaction(SIGABRT, &act, NULL)) {
+        std::cerr << "Failed to handle sigabrt." << std::endl;
         exit(1);
     }
 }
