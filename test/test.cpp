@@ -31,17 +31,18 @@ void init_tests() {
 }
 
 void test_success(const char *name) {
-    std::cout << "SUCCESS: " << name << std::endl;
+    std::cout << "\033[32mSUCCESS: \033[0m" << name << std::endl;
     success_count++;
 }
 
 void test_failure(const char *name) {
-    std::cout << "FAILURE: " << name << std::endl;
+    std::cout << "\033[31mFAILURE: \033[0m" << name << std::endl;
     failure_count++;
 }
 
 void test_failure(const char *name, const char *reason) {
-    std::cout << "FAILURE: " << name << " (" << reason << ")" << std::endl;
+    std::cout << "\033[31mFAILURE: \033[0m" << name
+        << " (" << reason << ")" << std::endl;
     failure_count++;
 }
 
