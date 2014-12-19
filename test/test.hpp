@@ -2,14 +2,27 @@
 #define TEST_HPP
 
 #include <iostream>
+#include <string>
+#include <sstream>
 
+void init_tests();
 void test_success(const char *name);
 void test_failure(const char *name);
+void test_failure(const char *name, const char *reason);
 void test_true(const char *name, bool value);
 void test_false(const char *name, bool value);
 void print_test_status();
 template <class T> void test_equal(const char *name, T a, T b) {
-    test_true(name, a == b);
+    if(a == b)
+        test_success(name);
+    else {
+        std::stringstream sstream;
+        sstream << "expected ";
+        sstream << b;
+        sstream << ", got ";
+        sstream << b;
+        test_failure(name, sstream.str().c_str());
+    }
 }
 
 #define NO_DEATH_TEST(name, func) \
