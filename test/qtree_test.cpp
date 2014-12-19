@@ -21,11 +21,11 @@ void qtree_test() {
     cur.add(1, 0, 0);
     test_equal("Can add element to Qtree(0, 0)", 1, cur.get(0, 0));
     cur.add(1, 0, 0);
-    test_true("Qtree contains element at (0, 0)", cur.containsValue(0, 0));
-    test_false("Qtree doesn't contain element at (1, 0)", cur.containsValue(1, 0));
-    test_false("Qtree doesn't contain element at (-1, 0)", cur.containsValue(-1, 0));
-    test_false("Qtree doesn't contain element at (0, 1)", cur.containsValue(0, 1));
-    test_false("Qtree doesn't contain element at (0, -1)", cur.containsValue(0, -1));
+    test_true("Qtree contains element at (0, 0)", cur.contains(0, 0));
+    test_false("Qtree doesn't contain element at (1, 0)", cur.contains(1, 0));
+    test_false("Qtree doesn't contain element at (-1, 0)", cur.contains(-1, 0));
+    test_false("Qtree doesn't contain element at (0, 1)", cur.contains(0, 1));
+    test_false("Qtree doesn't contain element at (0, -1)", cur.contains(0, -1));
     cur.add(1, 1, 0);
-    test_true("Qtree doesn't contain element at (1, 0)", cur.containsValue(1, 0));
+    test_true("Qtree contains element at (1, 0)", cur.contains(1, 0));
 }

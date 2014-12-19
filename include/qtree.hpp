@@ -11,7 +11,7 @@ template <class T> class Qtree {
         Qtree(const Qtree<T> &qtree);
         Qtree& operator= (const Qtree<T>& qtree);
         void add(const T &t, int x, int y);
-        bool containsValue(int x, int y);
+        bool contains(int x, int y);
         T get(int x, int y);
         QtreeNode<T> *getChild();
         ~Qtree();
@@ -78,7 +78,7 @@ template <class T> void Qtree<T>::add(const T &t, int x, int y) {
     }
 }
 
-template <class T> bool Qtree<T>::containsValue(int x, int y) {
+template <class T> bool Qtree<T>::contains(int x, int y) {
     return this->child->containsValue(x, y);
 }
 
