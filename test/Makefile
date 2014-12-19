@@ -1,7 +1,7 @@
 include ../config.mk
 
 TARGET=../out-test
-OBJECTS=main.o test.o list_test.o qtree_test.o
+OBJECTS=main.o test.o list_test.o qtreenode_test.o qtree_test.o
 
 %.o : %.cpp
 	${CC} -c ${CCFLAGS} -rdynamic $< -o $@
