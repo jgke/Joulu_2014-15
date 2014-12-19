@@ -10,8 +10,11 @@ template <class T> class Qtree {
         Qtree();
         Qtree(const Qtree<T> &qtree);
         Qtree& operator= (const Qtree<T>& qtree);
+        /* O(log n) */
         void add(const T &t, int x, int y);
+        /* O(log n) */
         bool contains(int x, int y);
+        /* O(log n) */
         T get(int x, int y);
         QtreeNode<T> *getChild();
         ~Qtree();
@@ -24,10 +27,15 @@ template <class T> class QtreeNode {
         QtreeNode(int size, int x, int y);
         QtreeNode(const QtreeNode<T> &node);
         QtreeNode& operator= (const QtreeNode<T>& node);
+        /* O(log n) */
         void add(const T &t, int x, int y);
+        /* O(log n) */
         void add(QtreeNode<T> *node, int x, int y, int size);
+        /* O(1) */
         bool contains(int x, int y);
+        /* O(log n) */
         bool containsValue(int x, int y);
+        /* O(log n) */
         T get(int x, int y);
         int getSize();
         ~QtreeNode();

@@ -8,9 +8,13 @@
 template <class T> class List {
     public:
         List();
+        /* amortized O(1) */
         void add(T t);
+        /* O(1) */
         T get(int i);
+        /* O(n) */
         T remove(int i);
+        /* O(1) */
         int size();
         ~List();
     private:
