@@ -1,13 +1,13 @@
 include ../config.mk
 
 TARGET=../out-test
-OBJECTS=main.o test.o list_test.o
+OBJECTS=main.o test.o list_test.o qtree_test.o
 
 %.o : %.cpp
-	${CC} -c ${CCFLAGS} $< -o $@
+	${CC} -c ${CCFLAGS} -rdynamic $< -o $@
 
-${TARGET}: ${OBJECTS}
-	${CC} ${CCFLAGS} ${OBJECTS} -o ${TARGET}
+${TARGET}: ${OBJECTS} ${HEADERS}
+	${CC} ${CCFLAGS} -rdynamic ${OBJECTS} -o ${TARGET}
 
 all: ${TARGET}
 

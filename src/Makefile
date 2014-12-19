@@ -6,7 +6,7 @@ OBJECTS=main.o block.o
 %.o : %.cpp
 	${CC} -c ${CCFLAGS} $< -o $@
 
-${TARGET}: ${OBJECTS}
+${TARGET}: ${OBJECTS} ${HEADERS}
 	${CC} ${CCFLAGS} ${OBJECTS} -o ${TARGET}
 
 all: ${TARGET}
