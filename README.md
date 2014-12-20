@@ -19,6 +19,17 @@ running
 
 Use ./libtest to run tests against the library.
 
+
+documentation
+=============
+
+        $ make doc
+
+After compilation, documentation is located at doc/*.pdf.
+
+depends on:
+* texi2pdf
+
 usage
 =====
 
