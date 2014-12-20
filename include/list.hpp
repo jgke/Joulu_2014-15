@@ -1,21 +1,47 @@
+/**
+ * \file list.hpp
+ * Dynamic list.
+ */
+
 #ifndef LIST_HPP
 #define LIST_HPP
 
 #include <vector>
 
-#define LIST_DEFAULT_SIZE 16;
-
+/**
+ * Dynamic list.
+ */
 template <class T> class List {
     public:
+        /**
+         * Constructor for list.
+         */
         List();
-        /* amortized O(1) */
+        /**
+         * Add a member to this list.
+         * O(1).
+         * @param t Member to add.
+         */
         void add(T t);
-        /* O(1) */
+        /**
+         * Get a member from this list.
+         * O(1).
+         * @param i Index of member.
+         */
         T get(int i);
-        /* O(n) */
+        /**
+         * Remove a member from this list.
+         * O(n).
+         * @param i Index of member.
+         */
         T remove(int i);
-        /* O(1) */
+        /**
+         * Get size of this list.
+         */
         int size();
+        /**
+         * Destructor for list.
+         */
         ~List();
     private:
         std::vector<T> *arr;

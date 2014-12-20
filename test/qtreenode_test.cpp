@@ -15,7 +15,7 @@ void qtreenode_test() {
     test_false("QtreeNode doesn't contain value at 1, 0",
             curnode.containsValue(1, 0));
     curnode = QtreeNode<int>(0, 0, 2);
-    test_equal("Can create QtreeNode of size 2", 2, curnode.getSize());
+    test_equal("Can create QtreeNode of size 2", 2, curnode.size);
     curnode.add(1, 0, 0);
     test_equal("Can add element to QtreeNode", 1, curnode.get(0, 0));
     curnode.add(1, 1, 0);

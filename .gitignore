@@ -1,4 +1,5 @@
 putkijuoksu
 libtest
+doc/html
 *.o
 *.pdf
