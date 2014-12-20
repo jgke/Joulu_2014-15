@@ -9,10 +9,12 @@
 
 int mw, mh;
 
+// check if out of bounds
 bool valid(int x, int y) {
     return x >= 0 && x < mw && y >= 0 && y < mh;
 }
 
+// make visible around a block
 void visible_block(bool **visible, int cx, int cy) {
     for(int y = cy-1; y <= cy+1; y++)
         for(int x = cx-1; x <= cx+1; x++)
@@ -20,6 +22,7 @@ void visible_block(bool **visible, int cx, int cy) {
                 visible[y][x] = true;
 }
 
+// make things visible in a straight line
 void visible_line(char **render, bool **visible, int cx, int cy, int mx, int my) {
     int x = cx;
     int y = cy;
@@ -39,18 +42,25 @@ int main() {
     srand((unsigned)time(NULL));
     prim_generate(data, GENDISTANCE);
     char **render = data.render();
+
+    /* ncurses stuff */
     WINDOW *win = initscr();
     keypad(win, TRUE);
     timeout(-1);
     noecho();
+
     mw = data.width();
     mh = data.height();
+    /* true = (x, y) is visible */
     bool **visible = new bool*[mh];
     for(int i = 0; i < data.height(); i++)
         visible[i] = new bool[mw]();
     int cx, cy;
+    /* (cx, cy) = center */
     cx = cy = GENDISTANCE;
+    /* make stuff visible from the beginning */
     visible_line(render, visible, cx, cy, mw, mh);
+    render[cy][cx] = '.';
     while(true) {
         int input = getch();
         int nx, ny;
@@ -77,6 +87,7 @@ int main() {
             cy = ny;
         }
         visible_line(render, visible, cx, cy, mw, mh);
+        /* draw screen, with player as % */
         render[cy][cx] = '%';
         for(int y = 0; y < mh; y++) {
             for(int x = 0; x < mw; x++)

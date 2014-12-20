@@ -176,6 +176,8 @@ template <class T> void Qtree<T>::add(const T &t, int x, int y) {
     if(this->child->contains(x, y))
         this->child->add(t, x, y);
     else {
+        /* add would be out of bounds so create
+           a new child and double the size */
         QtreeNode<T> *oc = this->child;
         int nx, ny, ns;
         nx = oc->x;
@@ -206,9 +208,9 @@ template <class T> int Qtree<T>::height() {
 }
 
 template <class T> T **Qtree<T>::render() {
-    T **target = new T *[this->maxy-this->miny+1];
-    for(int i = 0; i < this->maxy-this->miny+1; i++)
-        target[i] = new T[this->maxx-this->minx+1]();
+    T **target = new T *[this->height()];
+    for(int i = 0; i < this->height(); i++)
+        target[i] = new T[this->width()]();
     this->child->render(target, this->minx, this->miny);
     return target;
 }
@@ -326,6 +328,7 @@ template <class T> T QtreeNode<T>::get(int x, int y) {
     throw std::out_of_range("tried to add an out of range QtreeNode");
 }
 
+//get the index to this->content where (x, y) is
 template <class T> int QtreeNode<T>::get_id(int x, int y) {
     if(size == 1)
         throw std::invalid_argument("Tried to get id of content from a QtreeNode with size 1");
