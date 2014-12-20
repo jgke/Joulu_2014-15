@@ -3,6 +3,8 @@
 
 #include <iostream>
 
+#include "util.hpp"
+
 template <class T> class QtreeNode;
 
 template <class T> class Qtree {
@@ -17,9 +19,11 @@ template <class T> class Qtree {
         /* O(log n) */
         T get(int x, int y);
         QtreeNode<T> *getChild();
+        T **render();
         ~Qtree();
     private:
         QtreeNode<T> *child;
+        int minx, miny, maxx, maxy;
 };
 
 template <class T> class QtreeNode {
@@ -38,6 +42,7 @@ template <class T> class QtreeNode {
         /* O(log n) */
         T get(int x, int y);
         int getSize();
+        void render(T **target, int minx, int miny);
         ~QtreeNode();
         int x, y;
     private:
@@ -53,19 +58,32 @@ template <class T> class QtreeNode {
 
 template <class T> Qtree<T>::Qtree() {
     this->child = new QtreeNode<T>(0, 0, 1);
+    minx = miny = maxx = maxy = 0;
 }
 
 template <class T> Qtree<T>::Qtree(const Qtree &qtree) {
     QtreeNode<T> *child = qtree.getChild();
     this->child = new QtreeNode<T>(*child);
+    this->minx = qtree.minx;
+    this->maxx = qtree.maxx;
+    this->miny = qtree.miny;
+    this->maxy = qtree.maxy;
 }
 
 template <class T> Qtree<T> &Qtree<T>::operator= (const Qtree<T> &qtree) {
     this->child = new QtreeNode<T>(*qtree.child);
+    this->minx = qtree.minx;
+    this->maxx = qtree.maxx;
+    this->miny = qtree.miny;
+    this->maxy = qtree.maxy;
     return *this;
 }
 
 template <class T> void Qtree<T>::add(const T &t, int x, int y) {
+    minx = MIN(minx, x);
+    maxx = MAX(maxx, x);
+    miny = MIN(miny, y);
+    maxy = MAX(maxy, y);
     if(this->child->contains(x, y))
         this->child->add(t, x, y);
     else {
@@ -96,6 +114,14 @@ template <class T> T Qtree<T>::get(int x, int y) {
 
 template <class T> QtreeNode<T> *Qtree<T>::getChild() {
     return this->child;
+}
+
+template <class T> T **Qtree<T>::render() {
+    T **target = new T *[this->maxy-this->miny+1];
+    for(int i = 0; i < this->maxy-this->miny+1; i++)
+        target[i] = new T[this->maxx-this->minx+1];
+    this->child->render(target, this->minx, this->miny);
+    return target;
 }
 
 template <class T> Qtree<T>::~Qtree() {
@@ -224,6 +250,14 @@ template <class T> int QtreeNode<T>::get_id(int x, int y) {
 
 template <class T> int QtreeNode<T>::getSize() {
     return this->size;
+}
+
+template <class T> void QtreeNode<T>::render(T **target, int minx, int miny) {
+    if(size == 1 && this->value_set)
+        target[this->y - miny][this->x - minx] = this->value;
+    else if(size > 1 && this->content[0] != NULL)
+        for(int i = 0; i < 4; i++)
+            this->content[i]->render(target, minx, miny);
 }
 
 template <class T> QtreeNode<T>::~QtreeNode() {}
