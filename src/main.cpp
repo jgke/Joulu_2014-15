@@ -19,13 +19,29 @@ void visible_block(bool **visible, int cx, int cy) {
             if(valid(x, y))
                 visible[y][x] = true;
 }
+
+void visible_line(char **render, bool **visible, int cx, int cy) {
+    int x = cx;
+    int y = cy;
+    for(; render[y][x] == '.'; x--);
+    x++;
+    for(; render[y][x] == '.'; x++)
+        visible_block(visible, x, y);
+    x = cx;
+    for(; render[y][x] == '.'; y--);
+    y++;
+    for(; render[y][x] == '.'; y++)
+        visible_block(visible, x, y);
+}
+
 int main() {
     Qtree<char> data;
     srand((unsigned)time(NULL));
     prim_generate(data, GENDISTANCE);
     char **render = data.render();
-    initscr();
+    keypad(initscr(), TRUE);
     timeout(-1);
+    noecho();
     mw = data.width();
     mh = data.height();
     bool **visible = new bool*[mh];
@@ -33,42 +49,33 @@ int main() {
         visible[i] = new bool[mw]();
     int cx, cy;
     cx = cy = GENDISTANCE;
+    visible_line(render, visible, cx, cy);
     while(true) {
-        char input = getch();
+        int input = getch();
         int nx, ny;
         nx = cx;
         ny = cy;
         switch(input) {
-        case 'w':
+        case KEY_UP:
             ny--;
             break;
-        case 'a':
+        case KEY_LEFT:
             nx--;
             break;
-        case 's':
+        case KEY_DOWN:
             ny++;
             break;
-        case 'd':
+        case KEY_RIGHT:
             nx++;
             break;
+        case 'q':
+            goto end;
         }
         if(valid(nx, ny) && render[ny][nx] == '.') {
             cx = nx;
             cy = ny;
         }
-        {
-            int x = cx;
-            int y = cy;
-            for(; render[y][x] == '.'; x--);
-            x++;
-            for(; render[y][x] == '.'; x++)
-                visible_block(visible, x, y);
-            x = cx;
-            for(; render[y][x] == '.'; y--);
-            y++;
-            for(; render[y][x] == '.'; y++)
-                visible_block(visible, x, y);
-        }
+        visible_line(render, visible, cx, cy);
         render[cy][cx] = '%';
         for(int y = 0; y < mh; y++) {
             for(int x = 0; x < mw; x++)
@@ -81,5 +88,7 @@ int main() {
         }
         render[cy][cx] = '.';
     }
+end:
+    endwin();
     return 0;
 }
