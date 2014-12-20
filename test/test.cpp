@@ -1,8 +1,6 @@
 #include <iostream>
 
-#if (defined(unix) || defined(__unix__) || defined(__unix) || defined(__APPLE__) && defined(__MACH__))
-#define SENSIBLE_OS
-#endif
+#include "common.h" //SENSIBLE_OS
 
 #ifdef SENSIBLE_OS
 //sigsegv handling
