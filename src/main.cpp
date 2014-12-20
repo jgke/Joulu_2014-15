@@ -2,7 +2,7 @@
 #include <curses.h>
 #include <iostream>
 
-#define GENDISTANCE 50
+#define GENDISTANCE 20
 
 #include "qtree.hpp"
 #include "generators/prim.hpp"
@@ -20,17 +20,17 @@ void visible_block(bool **visible, int cx, int cy) {
                 visible[y][x] = true;
 }
 
-void visible_line(char **render, bool **visible, int cx, int cy) {
+void visible_line(char **render, bool **visible, int cx, int cy, int mx, int my) {
     int x = cx;
     int y = cy;
-    for(; render[y][x] == '.'; x--);
+    for(; x >= 0 && render[y][x] == '.'; x--);
     x++;
-    for(; render[y][x] == '.'; x++)
+    for(; x < mx && render[y][x] == '.'; x++)
         visible_block(visible, x, y);
     x = cx;
-    for(; render[y][x] == '.'; y--);
+    for(; y >= 0 && render[y][x] == '.'; y--);
     y++;
-    for(; render[y][x] == '.'; y++)
+    for(; y < my && render[y][x] == '.'; y++)
         visible_block(visible, x, y);
 }
 
@@ -39,7 +39,8 @@ int main() {
     srand((unsigned)time(NULL));
     prim_generate(data, GENDISTANCE);
     char **render = data.render();
-    //keypad(initscr(), TRUE);
+    WINDOW *win = initscr();
+    keypad(win, TRUE);
     timeout(-1);
     noecho();
     mw = data.width();
@@ -49,8 +50,8 @@ int main() {
         visible[i] = new bool[mw]();
     int cx, cy;
     cx = cy = GENDISTANCE;
-    visible_line(render, visible, cx, cy);
-    while(false) {
+    visible_line(render, visible, cx, cy, mw, mh);
+    while(true) {
         int input = getch();
         int nx, ny;
         nx = cx;
@@ -75,7 +76,7 @@ int main() {
             cx = nx;
             cy = ny;
         }
-        visible_line(render, visible, cx, cy);
+        visible_line(render, visible, cx, cy, mw, mh);
         render[cy][cx] = '%';
         for(int y = 0; y < mh; y++) {
             for(int x = 0; x < mw; x++)
@@ -95,6 +96,8 @@ end:
     }
     delete[] visible;
     delete[] render;
+    keypad(win, FALSE);
+    echo();
     endwin();
     return 0;
 }
