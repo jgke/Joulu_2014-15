@@ -79,6 +79,11 @@ int main() {
         case KEY_RIGHT:
             nx++;
             break;
+        case 'p':
+            for(int y = 0; y < mh; y++)
+                for(int x = 0; x < mw; x++)
+                    visible[y][x] = true;
+            break;
         case 'q':
             goto end;
         }
