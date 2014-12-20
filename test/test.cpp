@@ -1,5 +1,10 @@
 #include <iostream>
 
+#if (defined(unix) || defined(__unix__) || defined(__unix) || defined(__APPLE__) && defined(__MACH__))
+#define SENSIBLE_OS
+#endif
+
+#ifdef SENSIBLE_OS
 //sigsegv handling
 #include <execinfo.h>
 #include <signal.h>
@@ -7,12 +12,14 @@
 #include <stdlib.h>
 #include <string.h>
 #include <unistd.h>
+#endif
 
 #include "test.hpp"
 
 int success_count = 0;
 int failure_count = 0;
 
+#ifdef SENSIBLE_OS
 void handle(int sig, siginfo_t *siginfo, void *context) {
     void *trace[10];
     size_t len = backtrace(trace, sizeof(trace)/sizeof(trace[0]));
@@ -20,8 +27,10 @@ void handle(int sig, siginfo_t *siginfo, void *context) {
     backtrace_symbols_fd(trace, len, STDERR_FILENO);
     exit(1);
 }
+#endif
 
 void init_tests() {
+#ifdef SENSIBLE_OS
     struct sigaction act;
     act.sa_sigaction = &handle;
     act.sa_flags = SA_SIGINFO;
@@ -33,6 +42,7 @@ void init_tests() {
         std::cerr << "Failed to handle sigabrt." << std::endl;
         exit(1);
     }
+#endif
 }
 
 void test_success(const char *name) {
