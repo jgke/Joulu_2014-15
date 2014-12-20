@@ -18,8 +18,10 @@ template <class T> class Qtree {
         bool contains(int x, int y);
         /* O(log n) */
         T get(int x, int y);
+        int height();
         QtreeNode<T> *getChild();
         T **render();
+        int width();
         ~Qtree();
     private:
         QtreeNode<T> *child;
@@ -116,12 +118,20 @@ template <class T> QtreeNode<T> *Qtree<T>::getChild() {
     return this->child;
 }
 
+template <class T> int Qtree<T>::height() {
+    return this->maxy - this->miny+1;
+}
+
 template <class T> T **Qtree<T>::render() {
     T **target = new T *[this->maxy-this->miny+1];
     for(int i = 0; i < this->maxy-this->miny+1; i++)
         target[i] = new T[this->maxx-this->minx+1]();
     this->child->render(target, this->minx, this->miny);
     return target;
+}
+
+template <class T> int Qtree<T>::width() {
+    return this->maxx - this->minx+1;
 }
 
 template <class T> Qtree<T>::~Qtree() {
