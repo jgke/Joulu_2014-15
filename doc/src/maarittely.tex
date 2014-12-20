@@ -16,14 +16,35 @@ Tehokas dynaaminen luolaston luominen erilaisilla algoritmeilla, kun luolaston
 koko lähenee ääretöntä.
 
 \section{Toteutettavat tietorakenteet ja algoritmit}
+Tietorakenteet:
+
 \begin{table}[h]
 \begin{tabular}{| l | l |}
 \hline
 \rowcolor{Gray}
-Algoritmi tai tietorakenne & Mihin tarkoitukseen      \\ \hline
+Tietorakenne               & Mihin tarkoitukseen      \\ \hline
 Quadtree                   & Luolaston säilyttämiseen \\ \hline
-Prim                       & Luolaston luomiseen      \\ \hline
 Dynaaminen lista           & Primin prioriteettijono  \\ \hline
+\end{tabular}
+\end{table}
+
+\noindent
+Luolaston luomiseen tarkoitetut algoritmit:
+\begin{table}[h]
+\begin{tabular}{| l | p{6.5cm} | l |}
+\hline
+\rowcolor{Gray}
+Algoritmi   & Kuvaus                                & Ominaisuudet              \\ \hline
+Prim        & Ota jonosta satunnainen piste, lisää  & Puumainen, helppo löytää  \\
+            & jonoon nykyisen pisteen naapurit      & alkupiste                 \\ \hline
+Kruskal     & Lisää kaikki pisteet joukkoon, ota    & Kaikki sokkelot yhtä      \\
+            & satunnainen piste joukosta            & todennäköisiä             \\ \hline
+Recursive   & Ota huone, jaa neljään osaan, leikkaa & Suorakulmiomaisia         \\ 
+division    & kolmeen seinään neljästä aukko        & sokkeloita                \\ \hline
+Random room & Sijoita suorakulmioita kartalle,      & Perinteinen roguelike-    \\ 
+placement   & muodosta polkuja huoneiden välille    & generaattori              \\ \hline
+Cellular    & Satunnainen alkutila, aja muutama     & Luonnollisen näköisiä     \\ 
+automata    & generaatio B3/S1234-automataa         & luolia                    \\ \hline
 \end{tabular}
 \end{table}
 
