@@ -2,10 +2,17 @@ include ../config.mk
 
 TARGETS=maarittely.pdf vk1.pdf
 
+.PHONY: latex doxygen
+
 %.pdf : src/%.tex
 	${TEX2PDF} -o $@ src/$*.tex
 
-all: ${TARGETS}
+all: latex doxygen
+
+latex: ${TARGETS}
+
+doxygen:
+	doxygen Doxyfile
 
 clean:
-	rm -f *.pdf
+	rm -rf *.pdf html

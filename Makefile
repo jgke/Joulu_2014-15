@@ -14,7 +14,6 @@ putkijuoksu:
 
 doc:
 	cd doc; make
-	doxygen Doxyfile
 
 test:
 	cd test; make
