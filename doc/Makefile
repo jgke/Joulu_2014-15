@@ -1,6 +1,6 @@
 include ../config.mk
 
-TARGETS=maarittely.pdf
+TARGETS=maarittely.pdf vk1.pdf
 
 %.pdf : src/%.tex
 	${TEX2PDF} -o $@ src/$*.tex
