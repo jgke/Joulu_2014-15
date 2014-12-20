@@ -25,10 +25,12 @@ documentation
 
         $ make doc
 
-After compilation, documentation is located at doc/*.pdf.
+After compilation, documentation is located at doc/*.pdf, and doxygen output
+is located at doc/html/index.html.
 
 depends on:
 * texi2pdf
+* doxygen
 
 usage
 =====
