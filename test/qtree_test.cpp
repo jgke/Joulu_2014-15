@@ -19,13 +19,17 @@ void qtree_test() {
     test_equal("Can add element at Qtree(10, -10)", 5, cur.get(10, -10));
     cur = Qtree<int>();
     cur.add(1, 0, 0);
-    test_equal("Can add element to Qtree(0, 0)", 1, cur.get(0, 0));
-    cur.add(1, 0, 0);
-    test_true("Qtree contains element at (0, 0)", cur.contains(0, 0));
     test_false("Qtree doesn't contain element at (1, 0)", cur.contains(1, 0));
     test_false("Qtree doesn't contain element at (-1, 0)", cur.contains(-1, 0));
     test_false("Qtree doesn't contain element at (0, 1)", cur.contains(0, 1));
     test_false("Qtree doesn't contain element at (0, -1)", cur.contains(0, -1));
-    cur.add(1, 1, 0);
+    cur.add(3, 1, 0);
+    cur.add(1, 0, 1);
+    cur.add(5, 1, 1);
     test_true("Qtree contains element at (1, 0)", cur.contains(1, 0));
+    int **render = cur.render();
+    test_equal("Qtree renders top left correctly", 1, render[0][0]);
+    test_equal("Qtree renders top right correctly", 3, render[0][1]);
+    test_equal("Qtree renders bottom left correctly", 1, render[1][0]);
+    test_equal("Qtree renders bottom right correctly", 5, render[1][1]);
 }
