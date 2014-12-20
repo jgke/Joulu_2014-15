@@ -1,6 +1,6 @@
 include ../config.mk
 
-TARGET=../out
+TARGET=../putkijuoksu
 OBJECTS=main.o generators/prim.o
 LIBS=-lncurses
 
@@ -13,4 +13,4 @@ ${TARGET}: ${OBJECTS}
 all: ${TARGET}
 
 clean:
-	rm -f ${TARGET} *.o
+	rm -f ${TARGET} *.o generators/*.o

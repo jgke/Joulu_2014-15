@@ -1,15 +1,15 @@
 include config.mk
 
-.PHONY: prog doc test
+.PHONY: putkijuoksu doc test
 
-all: prog test
+all: putkijuoksu test
 
 clean:
 	cd src; make clean
 	cd doc; make clean
 	cd test; make clean
 
-prog:
+putkijuoksu:
 	cd src; make
 
 doc:

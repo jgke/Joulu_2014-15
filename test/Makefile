@@ -1,6 +1,6 @@
 include ../config.mk
 
-TARGET=../out-test
+TARGET=../libtest
 OBJECTS=main.o test.o list_test.o qtreenode_test.o qtree_test.o
 
 %.o : %.cpp ${HEADERS}

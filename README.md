@@ -1,4 +1,18 @@
-Joulu_2014-15
-=============
+putkijuoksu
+===========
 
-Vuodenvaihde 2014-15 Tiralabra. Ohjaajat Toni Annala sekä Kristiina Paloheimo
+putkijuoksu is a dynamic dungeon generator.
+
+compiling
+=========
+
+* make
+
+depends on:
+* ncurses
+* c++ compiler
+
+usage
+=====
+
+Arrow keys to move around, q to quit.
