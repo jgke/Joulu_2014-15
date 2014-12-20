@@ -1,12 +1,12 @@
 include ../config.mk
 
 TARGET=../out
-OBJECTS=main.o
+OBJECTS=main.o generators/prim.o
 
-%.o : %.cpp
+%.o : %.cpp ${HEADERS}
 	${CC} -c ${CCFLAGS} $< -o $@
 
-${TARGET}: ${OBJECTS} ${HEADERS}
+${TARGET}: ${OBJECTS}
 	${CC} ${CCFLAGS} ${OBJECTS} -o ${TARGET}
 
 all: ${TARGET}

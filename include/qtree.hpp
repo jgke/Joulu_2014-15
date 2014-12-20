@@ -119,7 +119,7 @@ template <class T> QtreeNode<T> *Qtree<T>::getChild() {
 template <class T> T **Qtree<T>::render() {
     T **target = new T *[this->maxy-this->miny+1];
     for(int i = 0; i < this->maxy-this->miny+1; i++)
-        target[i] = new T[this->maxx-this->minx+1];
+        target[i] = new T[this->maxx-this->minx+1]();
     this->child->render(target, this->minx, this->miny);
     return target;
 }
