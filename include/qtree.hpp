@@ -166,11 +166,12 @@ template <class T> QtreeNode<T>::QtreeNode(const QtreeNode &node) {
 
 template <class T> QtreeNode<T> &QtreeNode<T>::operator= (const QtreeNode<T> &node) {
     this->size = node.size;
+    this->x = node.x;
+    this->y = node.y;
     if(node.size == 1) {
-        this->x = node.x;
-        this->y = node.y;
         this->value_set = node.value_set;
-        this->value = node.value;
+        if(this->value_set)
+            this->value = node.value;
     }
     if(node.content[0] != NULL)
         for(int i = 0; i < 4; i++)
@@ -270,6 +271,10 @@ template <class T> void QtreeNode<T>::render(T **target, int minx, int miny) {
             this->content[i]->render(target, minx, miny);
 }
 
-template <class T> QtreeNode<T>::~QtreeNode() {}
+template <class T> QtreeNode<T>::~QtreeNode() {
+    if(this->content[0] != NULL)
+        for(int i = 0; i < 4; i++)
+            delete this->content[i];
+}
 
 #endif

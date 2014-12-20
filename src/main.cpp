@@ -39,7 +39,7 @@ int main() {
     srand((unsigned)time(NULL));
     prim_generate(data, GENDISTANCE);
     char **render = data.render();
-    keypad(initscr(), TRUE);
+    //keypad(initscr(), TRUE);
     timeout(-1);
     noecho();
     mw = data.width();
@@ -50,7 +50,7 @@ int main() {
     int cx, cy;
     cx = cy = GENDISTANCE;
     visible_line(render, visible, cx, cy);
-    while(true) {
+    while(false) {
         int input = getch();
         int nx, ny;
         nx = cx;
@@ -89,6 +89,12 @@ int main() {
         render[cy][cx] = '.';
     }
 end:
+    for(int i = 0; i < data.height(); i++) {
+        delete[] visible[i];
+        delete[] render[i];
+    }
+    delete[] visible;
+    delete[] render;
     endwin();
     return 0;
 }
