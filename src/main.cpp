@@ -22,9 +22,11 @@ jmp_buf env;
 
 #ifdef SENSIBLE_OS
 void handle(int sig, siginfo_t *siginfo, void *context) {
+#else
+void handle(int sig) {
+#endif
     longjmp(env, 1);
 }
-#endif
 
 void init_handle() {
 #ifdef SENSIBLE_OS
@@ -39,6 +41,8 @@ void init_handle() {
         std::cerr << "Failed to handle sigabrt." << std::endl;
         exit(1);
     }
+#else
+    signal(SIGSEGV, handle);
 #endif
 }
 
@@ -56,18 +60,33 @@ void visible_block(bool **visible, int cx, int cy) {
 }
 
 // make things visible in a straight line
-void visible_line(char **render, bool **visible, int cx, int cy, int mx, int my) {
+void visible_line(char **render, bool **visible, int cx, int cy) {
     int x = cx;
     int y = cy;
     for(; x >= 0 && render[y][x] == '.'; x--);
     x++;
-    for(; x < mx && render[y][x] == '.'; x++)
+    for(; x < mw && render[y][x] == '.'; x++)
         visible_block(visible, x, y);
     x = cx;
     for(; y >= 0 && render[y][x] == '.'; y--);
     y++;
-    for(; y < my && render[y][x] == '.'; y++)
+    for(; y < mh && render[y][x] == '.'; y++)
         visible_block(visible, x, y);
+}
+
+//render screen
+void render_screen(char **render, bool **visible, int cx, int cy) {
+    render[cy][cx] = '%';
+    for(int y = 0; y < mh; y++) {
+        for(int x = 0; x < mw; x++)
+            if(visible[y][x] && render[y][x])
+                mvaddch(y, x, render[y][x]);
+            else if(visible[y][x])
+                mvaddch(y, x, '#');
+            else
+                mvaddch(y, x, ' ');
+    }
+    render[cy][cx] = '.';
 }
 
 int main() {
@@ -93,8 +112,9 @@ int main() {
     /* (cx, cy) = center */
     cx = cy = GENDISTANCE;
     /* make stuff visible from the beginning */
-    visible_line(render, visible, cx, cy, mw, mh);
     render[cy][cx] = '.';
+    visible_line(render, visible, cx, cy);
+    render_screen(render, visible, cx, cy);
     if(!setjmp(env)) {
         while(true) {
             int input = getch();
@@ -126,19 +146,8 @@ int main() {
                 cx = nx;
                 cy = ny;
             }
-            visible_line(render, visible, cx, cy, mw, mh);
-            /* draw screen, with player as % */
-            render[cy][cx] = '%';
-            for(int y = 0; y < mh; y++) {
-                for(int x = 0; x < mw; x++)
-                    if(visible[y][x] && render[y][x])
-                        mvaddch(y, x, render[y][x]);
-                    else if(visible[y][x])
-                        mvaddch(y, x, '#');
-                    else
-                        mvaddch(y, x, ' ');
-            }
-            render[cy][cx] = '.';
+            visible_line(render, visible, cx, cy);
+            render_screen(render, visible, cx, cy);
         }
     }
 end:
