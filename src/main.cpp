@@ -63,9 +63,11 @@ bool isVisible(int x, int y) {
 
 // make visible around a block
 void visible_block(int cx, int cy) {
-    for(int y = cy-1; y <= cy+1; y++)
-        for(int x = cx-1; x <= cx+1; x++)
-            visible.add(true, x, y);
+    visible.add(true, cx, cy-1);
+    visible.add(true, cx-1, cy);
+    visible.add(true, cx, cy);
+    visible.add(true, cx+1, cy);
+    visible.add(true, cx, cy+1);
 }
 
 // make things visible in a straight line
