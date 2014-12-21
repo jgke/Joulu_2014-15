@@ -50,59 +50,53 @@ void init_handle() {
 #endif
 }
 
-// check if out of bounds
-bool valid(int x, int y) {
-    return x >= 0 && x < mw && y >= 0 && y < mh;
-}
-
-bool isVisible(int x, int y) {
+bool isVisible(const Coord &coord) {
     if(hax)
         return true;
-    return visible.contains(x, y) && visible.get(x, y);
+    return visible.contains(coord) && visible.get(coord);
 }
 
 // make visible around a block
-void visible_block(int cx, int cy) {
-    visible.add(true, cx, cy-1);
-    visible.add(true, cx-1, cy);
-    visible.add(true, cx, cy);
-    visible.add(true, cx+1, cy);
-    visible.add(true, cx, cy+1);
+void visible_block(const Coord &coord) {
+    visible.add(true, coord + Coord(0, -1));
+    visible.add(true, coord + Coord(-1, 0));
+    visible.add(true, coord + Coord(0, 0));
+    visible.add(true, coord + Coord(1, 0));
+    visible.add(true, coord + Coord(0, 1));
 }
 
 // make things visible in a straight line
-void visible_line(int cx, int cy) {
-    int x = cx;
-    int y = cy;
-    for(; data.contains(x, y) && data.get(x, y) == '.'; x--);
-    x++;
-    for(; data.contains(x, y) && data.get(x, y) == '.'; x++)
-        visible_block(x, y);
-    x = cx;
-    for(; data.contains(x, y) && data.get(x, y) == '.'; y--);
-    y++;
-    for(; data.contains(x, y) && data.get(x, y) == '.'; y++)
-        visible_block(x, y);
+void visible_line(const Coord &coord) {
+    Coord cur = Coord(coord);
+    for(; data.contains(cur) && data.get(cur) == '.'; cur += Coord(-1, 0));
+    cur += Coord(1, 0);
+    for(; data.contains(cur) && data.get(cur) == '.'; cur += Coord(1, 0))
+        visible_block(cur);
+    cur = Coord(coord);
+    for(; data.contains(cur) && data.get(cur) == '.'; cur += Coord(0, -1));
+    cur += Coord(0, 1);
+    for(; data.contains(cur) && data.get(cur) == '.'; cur += Coord(0, 1))
+        visible_block(cur);
 }
 
 //render screen
-void render(int cx, int cy) {
+void render(const Coord &coord) {
     int mx, my;
     int hx, hy;
     getmaxyx(win, my, mx);
     hx = mx/2;
     hy = my/2;
-    for(int y = cy-hy; y < cy+hy; y++) {
-        for(int x = cx-hx; x < cx+hx; x++)
-            if(data.contains(x, y) && isVisible(x, y))
-                mvaddch(y-(cy-hy), x-(cx-hx), data.get(x, y));
-            else if(isVisible(x, y))
-                mvaddch(y-(cy-hy), x-(cx-hx), '#');
+    for(int y = coord.y-hy; y < coord.y+hy; y++) {
+        for(int x = coord.x-hx; x < coord.x+hx; x++)
+            if(data.contains(Coord(x, y)) && isVisible(Coord(x, y)))
+                mvaddch(y-(coord.y-hy), x-(coord.x-hx), data.get(Coord(x, y)));
+            else if(isVisible(Coord(x, y)))
+                mvaddch(y-(coord.y-hy), x-(coord.x-hx), '#');
             else
-                mvaddch(y-(cy-hy), x-(cx-hx), ' ');
+                mvaddch(y-(coord.y-hy), x-(coord.x-hx), ' ');
     }
-    mvaddch(cy-(cy-hy), cx-(cx-hx), '%');
-    move(cy-(cy-hy), cx-(cx-hx));
+    mvaddch(coord.y-(coord.y-hy), coord.x-(coord.x-hx), '%');
+    move(coord.y-(coord.y-hy), coord.x-(coord.x-hx));
 }
 
 int main() {
@@ -119,33 +113,27 @@ int main() {
 
     mw = data.width();
     mh = data.height();
-    /* true = (x, y) is visible */
-    int cx, cy;
-    /* (cx, cy) = center */
-    cx = cy = 0;
-    /* make stuff visible from the beginning */
+    Coord plr;
     if(!setjmp(env)) {
         while(true) {
             if(localvision)
                 visible = Qtree<bool>();
-            visible_line(cx, cy);
-            render(cx, cy);
+            visible_line(plr);
+            render(plr);
             int input = getch();
-            int nx, ny;
-            nx = cx;
-            ny = cy;
+            Coord newpos = plr;
             switch(input) {
                 case KEY_UP:
-                    ny--;
+                    newpos += Coord(0, -1);
                     break;
                 case KEY_LEFT:
-                    nx--;
+                    newpos += Coord(-1, 0);
                     break;
                 case KEY_DOWN:
-                    ny++;
+                    newpos += Coord(0, 1);
                     break;
                 case KEY_RIGHT:
-                    nx++;
+                    newpos += Coord(1, 0);
                     break;
                 case 'p':
                     hax = !hax;
@@ -156,10 +144,8 @@ int main() {
                 case 'q':
                     goto end;
             }
-            if(data.contains(nx, ny) && data.get(nx, ny) == '.') {
-                cx = nx;
-                cy = ny;
-            }
+            if(data.contains(newpos) && data.get(newpos) == '.')
+                plr = newpos;
         }
     }
 end:

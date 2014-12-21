@@ -30,23 +30,22 @@ template <class T> class Qtree {
          */
         Qtree& operator= (const Qtree<T>& qtree);
         /**
-         * Add an element to (x, y) at this quadtree.
+         * Add an element to coord at this quadtree.
          * O(log n).
          * @param t element to add
-         * @param x x-position of element
-         * @param y y-position of element
+         * @param coord position of element
          */
-        void add(const T &t, int x, int y);
+        void add(const T &t, const Coord &coord);
         /**
-         * Return true if this quadtree contains an element at (x, y).
+         * Return true if this quadtree contains an element at coord.
          * O(log n).
          */
-        bool contains(int x, int y);
+        bool contains(const Coord &coord);
         /**
-         * Get an element from (x, y) at this quadtree.
+         * Get an element from coord at this quadtree.
          * O(log n).
          */
-        T get(int x, int y);
+        T get(const Coord &coord);
         /**
          * Get the height of this quadtree.
          */
@@ -77,10 +76,9 @@ template <class T> class QtreeNode {
         /**
          * Constructor for QtreeNode.
          * @param size positive power of 2 size of this node
-         * @param x x-position of this node
-         * @param y y-position of this node
+         * @param coord position of this node
          */
-        QtreeNode(int size, int x, int y);
+        QtreeNode(const Coord &coord, int size);
         /**
          * Copy constructor for QtreeNode.
          */
@@ -92,27 +90,26 @@ template <class T> class QtreeNode {
         /** Add an element to this QtreeNode.
          * O(log n).
          * @param t element to add
-         * @param x x-position of the element
-         * @param y y-position of the element
+         * @param coord position of the element
          * */
-        void add(const T &t, int x, int y);
+        void add(const T &t, const Coord &coord);
         /** Add an QtreeNode to this QtreeNode.
          * O(log n).
          * @param node QtreeNode to add
          */
         void add(QtreeNode<T> *node);
-        /** Return true if (x, y) is within this QtreeNode
+        /** Return true if coord is within this QtreeNode
          * O(1).
          */
-        bool contains(int x, int y);
-        /** Return true if this QtreeNode contains a value at (x, y).
+        bool contains(const Coord &coord);
+        /** Return true if this QtreeNode contains a value at coord.
          * O(log n).
          */
-        bool containsValue(int x, int y);
-        /** Get the element from this QtreeNode from (x, y).
+        bool containsValue(const Coord &coord);
+        /** Get the element from this QtreeNode from coord.
          * O(log n).
          */
-        T get(int x, int y);
+        T get(const Coord &coord);
         /** Render this QtreeNode to target.
          * Applies transformation pos -= (minx, miny).
          * @param target Array to render to.
@@ -125,20 +122,16 @@ template <class T> class QtreeNode {
          */
         ~QtreeNode();
         /**
-         * x-position of the QtreeNode.
+         * Position of the QtreeNode.
          */
-        int x;
-        /**
-         * y-position of the QtreeNode.
-         */
-        int y;
+        Coord coord;
         /**
          * Size of the QtreeNode.
          */
         int size;
     private:
         void fill_content();
-        int get_id(int x, int y);
+        int get_id(const Coord &coord);
         QtreeNode<T> *content[4];
         bool value_set;
         T value;
@@ -147,7 +140,7 @@ template <class T> class QtreeNode {
 #include <stdexcept>
 
 template <class T> Qtree<T>::Qtree() {
-    this->child = new QtreeNode<T>(0, 0, 1);
+    this->child = new QtreeNode<T>(Coord(0, 0), 1);
     minx = miny = maxx = maxy = 0;
 }
 
@@ -168,39 +161,38 @@ template <class T> Qtree<T> &Qtree<T>::operator= (const Qtree<T> &qtree) {
     return *this;
 }
 
-template <class T> void Qtree<T>::add(const T &t, int x, int y) {
-    minx = MIN(minx, x);
-    maxx = MAX(maxx, x);
-    miny = MIN(miny, y);
-    maxy = MAX(maxy, y);
-    if(this->child->contains(x, y))
-        this->child->add(t, x, y);
+template <class T> void Qtree<T>::add(const T &t, const Coord &coord) {
+    minx = MIN(minx, coord.x);
+    maxx = MAX(maxx, coord.x);
+    miny = MIN(miny, coord.y);
+    maxy = MAX(maxy, coord.y);
+    if(this->child->contains(coord))
+        this->child->add(t, coord);
     else {
         /* add would be out of bounds so create
            a new child and double the size */
         QtreeNode<T> *oc = this->child;
-        int nx, ny, ns;
-        nx = oc->x;
-        ny = oc->y;
+        int ns;
         ns = oc->size;
-        if(x < nx)
-            nx -= ns;
-        if(y < ny)
-            ny -= ns;
+        Coord newpos = oc->coord;
+        if(coord.x < newpos.x)
+            newpos.x -= ns;
+        if(coord.y < newpos.y)
+            newpos.y -= ns;
         ns *= 2;
-        this->child = new QtreeNode<T>(nx, ny, ns*2);
+        this->child = new QtreeNode<T>(newpos, ns*2);
         this->child->add(oc);
         /* tail call recursion */
-        this->add(t, x, y);
+        this->add(t, coord);
     }
 }
 
-template <class T> bool Qtree<T>::contains(int x, int y) {
-    return this->child->containsValue(x, y);
+template <class T> bool Qtree<T>::contains(const Coord &coord) {
+    return this->child->containsValue(coord);
 }
 
-template <class T> T Qtree<T>::get(int x, int y) {
-    return this->child->get(x, y);
+template <class T> T Qtree<T>::get(const Coord &coord) {
+    return this->child->get(coord);
 }
 
 template <class T> int Qtree<T>::height() {
@@ -223,24 +215,22 @@ template <class T> Qtree<T>::~Qtree() {
     delete this->child;
 }
 
-template <class T> QtreeNode<T>::QtreeNode(int x, int y, int size) {
+template <class T> QtreeNode<T>::QtreeNode(const Coord &coord, int size) {
     if(size == 0)
         throw std::invalid_argument("Tried to create a QtreeNode with size 0");
 
     for(int i = 0; i < 4; i++) {
         this->content[i] = NULL;
     }
-    this->x = x;
-    this->y = y;
+    this->coord = coord;
     this->size = size;
     this->value_set = false;
 }
 
 template <class T> QtreeNode<T>::QtreeNode(const QtreeNode &node) {
     this->size = node.size;
+    this->coord = node.coord;
     if(node.size == 1) {
-        this->x = node.x;
-        this->y = node.y;
         this->value_set = node.value_set;
         this->value = node.value;
     }
@@ -251,8 +241,7 @@ template <class T> QtreeNode<T>::QtreeNode(const QtreeNode &node) {
 
 template <class T> QtreeNode<T> &QtreeNode<T>::operator= (const QtreeNode<T> &node) {
     this->size = node.size;
-    this->x = node.x;
-    this->y = node.y;
+    this->coord = node.coord;
     if(node.size == 1) {
         this->value_set = node.value_set;
         if(this->value_set)
@@ -267,17 +256,17 @@ template <class T> QtreeNode<T> &QtreeNode<T>::operator= (const QtreeNode<T> &no
 template <class T> void QtreeNode<T>::fill_content() {
     int hs = this->size/2;
     if(this->content[0] == NULL)
-        this->content[0] = new QtreeNode<T>(this->x, this->y, hs);
+        this->content[0] = new QtreeNode<T>(this->coord, hs);
     if(this->content[1] == NULL)
-        this->content[1] = new QtreeNode<T>(this->x+hs, this->y, hs);
+        this->content[1] = new QtreeNode<T>(this->coord + Coord(hs, 0), hs);
     if(this->content[2] == NULL)
-        this->content[2] = new QtreeNode<T>(this->x, this->y+hs, hs);
+        this->content[2] = new QtreeNode<T>(this->coord + Coord(0, hs), hs);
     if(this->content[3] == NULL)
-        this->content[3] = new QtreeNode<T>(this->x+hs, this->y+hs, hs);
+        this->content[3] = new QtreeNode<T>(this->coord + Coord(hs, hs), hs);
 }
 
-template <class T> void QtreeNode<T>::add(const T &t, int x, int y) {
-    if(!this->contains(x, y))
+template <class T> void QtreeNode<T>::add(const T &t, const Coord &coord) {
+    if(!this->contains(coord))
         throw std::out_of_range("tried to add an out of range value to QtreeNode");
     if(this->size == 1) {
         this->value = t;
@@ -286,14 +275,14 @@ template <class T> void QtreeNode<T>::add(const T &t, int x, int y) {
     }
     fill_content();
     for(int i = 0; i < 4; i++)
-        if(this->content[i]->contains(x, y))
-            this->content[i]->add(t, x, y);
+        if(this->content[i]->contains(coord))
+            this->content[i]->add(t, coord);
 }
 
 template <class T> void QtreeNode<T>::add(QtreeNode *node) {
-    if(!this->contains(node->x, node->y))
+    if(!this->contains(node->coord))
         throw std::out_of_range("tried to add an out of range QtreeNode");
-    int id = get_id(node->x, node->y);
+    int id = get_id(node->coord);
     fill_content();
     if(this->size == node->size*2) {
         delete this->content[id];
@@ -303,48 +292,49 @@ template <class T> void QtreeNode<T>::add(QtreeNode *node) {
         this->content[id]->add(node);
 }
 
-template <class T> bool QtreeNode<T>::contains(int x, int y) {
-    return (this->x <= x && this->y <= y &&
-             this->x + size > x && this->y + size > y);
+template <class T> bool QtreeNode<T>::contains(const Coord &coord) {
+    return (this->coord.x <= coord.x && this->coord.y <= coord.y &&
+             this->coord.x + this->size > coord.x &&
+             this->coord.y + this->size > coord.y);
 }
 
-template <class T> bool QtreeNode<T>::containsValue(int x, int y) {
-    if(!this->contains(x, y))
+template <class T> bool QtreeNode<T>::containsValue(const Coord &coord) {
+    if(!this->contains(coord))
         return false;
     if(this->size == 1)
         return this->value_set;
-    int id = get_id(x, y);
-    return this->content[id] != NULL && this->content[id]->containsValue(x, y);
+    int id = get_id(coord);
+    return this->content[id] != NULL && this->content[id]->containsValue(coord);
 }
 
-template <class T> T QtreeNode<T>::get(int x, int y) {
-    if(!this->contains(x, y))
+template <class T> T QtreeNode<T>::get(const Coord &coord) {
+    if(!this->contains(coord))
         throw std::out_of_range("tried to add an out of range QtreeNode");
     if(this->size == 1)
         return this->value;
     for(int i = 0; i < 4; i++)
-        if(this->content[i]->contains(x, y))
-            return this->content[i]->get(x, y);
+        if(this->content[i]->contains(coord))
+            return this->content[i]->get(coord);
     throw std::out_of_range("tried to add an out of range QtreeNode");
 }
 
 //get the index to this->content where (x, y) is
-template <class T> int QtreeNode<T>::get_id(int x, int y) {
+template <class T> int QtreeNode<T>::get_id(const Coord &coord) {
     if(size == 1)
         throw std::invalid_argument("Tried to get id of content from a QtreeNode with size 1");
-    if(this->x + this->size/2 > x)
-        if(this->y + this->size/2 > y)
+    if(this->coord.x + this->size/2 > coord.x)
+        if(this->coord.y + this->size/2 > coord.y)
             return 0;
         else
             return 2;
-    else if(this->y + this->size/2 > y)
+    else if(this->coord.y + this->size/2 > coord.y)
         return 1;
     return 3;
 }
 
 template <class T> void QtreeNode<T>::render(T **target, int minx, int miny) {
     if(size == 1 && this->value_set)
-        target[this->y - miny][this->x - minx] = this->value;
+        target[this->coord.y - miny][this->coord.x - minx] = this->value;
     else if(size > 1 && this->content[0] != NULL)
         for(int i = 0; i < 4; i++)
             this->content[i]->render(target, minx, miny);
