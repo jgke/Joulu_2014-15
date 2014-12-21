@@ -8,7 +8,7 @@
 
 #include <iostream>
 
-#include "util.hpp"
+#include "common.hpp"
 
 template <class T> class QtreeNode;
 

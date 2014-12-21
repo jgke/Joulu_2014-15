@@ -5,7 +5,7 @@
 
 #define GENDISTANCE 100
 
-#include "common.h"
+#include "common.hpp"
 #include "qtree.hpp"
 #include "generators/prim.hpp"
 

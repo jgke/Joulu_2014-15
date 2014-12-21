@@ -1,8 +1,8 @@
 #include <cstdlib> //rand
 
-#include "qtree.hpp"
+#include "common.hpp"
 #include "list.hpp"
-#include "util.hpp"
+#include "qtree.hpp"
 
 typedef std::pair<int, int> coord;
 

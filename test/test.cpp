@@ -1,6 +1,6 @@
 #include <iostream>
 
-#include "common.h" //SENSIBLE_OS
+#include "common.hpp" //SENSIBLE_OS
 
 #ifdef SENSIBLE_OS
 //sigsegv handling
