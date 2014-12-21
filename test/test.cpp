@@ -25,6 +25,11 @@ void handle(int sig, siginfo_t *siginfo, void *context) {
     backtrace_symbols_fd(trace, len, STDERR_FILENO);
     exit(1);
 }
+#else
+void handle(int sig) {
+    fprintf(stderr, "Signal %d(%s) while testing\n", sig, strsignal(sig));
+    exit(1);
+}
 #endif
 
 void init_tests() {
@@ -37,6 +42,15 @@ void init_tests() {
         exit(1);
     }
     if(sigaction(SIGABRT, &act, NULL)) {
+        std::cerr << "Failed to handle sigabrt." << std::endl;
+        exit(1);
+    }
+#else
+    if(signal(SIGSEGV, handle)) {
+        std::cerr << "Failed to handle sigsegv." << std::endl;
+        exit(1);
+    }
+    if(signal(SIGABRT, handle)) {
         std::cerr << "Failed to handle sigabrt." << std::endl;
         exit(1);
     }
