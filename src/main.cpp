@@ -3,7 +3,7 @@
 #include <iostream>
 #include <setjmp.h>
 
-#define GENDISTANCE 20
+#define GENDISTANCE 100
 
 #include "common.h"
 #include "qtree.hpp"
@@ -19,6 +19,10 @@
 
 int mw, mh;
 jmp_buf env;
+WINDOW *win;
+Qtree<char> data;
+Qtree<bool> visible;
+bool hax = false;
 
 #ifdef SENSIBLE_OS
 void handle(int sig, siginfo_t *siginfo, void *context) {
@@ -51,53 +55,62 @@ bool valid(int x, int y) {
     return x >= 0 && x < mw && y >= 0 && y < mh;
 }
 
+bool isVisible(int x, int y) {
+    if(hax)
+        return true;
+    return visible.contains(x, y) && visible.get(x, y);
+}
+
 // make visible around a block
-void visible_block(bool **visible, int cx, int cy) {
+void visible_block(int cx, int cy) {
     for(int y = cy-1; y <= cy+1; y++)
         for(int x = cx-1; x <= cx+1; x++)
-            if(valid(x, y))
-                visible[y][x] = true;
+            visible.add(true, x, y);
 }
 
 // make things visible in a straight line
-void visible_line(char **render, bool **visible, int cx, int cy) {
+void visible_line(int cx, int cy) {
     int x = cx;
     int y = cy;
-    for(; x >= 0 && render[y][x] == '.'; x--);
+    for(; data.contains(x, y) && data.get(x, y) == '.'; x--);
     x++;
-    for(; x < mw && render[y][x] == '.'; x++)
-        visible_block(visible, x, y);
+    for(; data.contains(x, y) && data.get(x, y) == '.'; x++)
+        visible_block(x, y);
     x = cx;
-    for(; y >= 0 && render[y][x] == '.'; y--);
+    for(; data.contains(x, y) && data.get(x, y) == '.'; y--);
     y++;
-    for(; y < mh && render[y][x] == '.'; y++)
-        visible_block(visible, x, y);
+    for(; data.contains(x, y) && data.get(x, y) == '.'; y++)
+        visible_block(x, y);
 }
 
 //render screen
-void render_screen(char **render, bool **visible, int cx, int cy) {
-    render[cy][cx] = '%';
-    for(int y = 0; y < mh; y++) {
-        for(int x = 0; x < mw; x++)
-            if(visible[y][x] && render[y][x])
-                mvaddch(y, x, render[y][x]);
-            else if(visible[y][x])
-                mvaddch(y, x, '#');
+void render(int cx, int cy) {
+    int mx, my;
+    int hx, hy;
+    getmaxyx(win, my, mx);
+    hx = mx/2;
+    hy = my/2;
+    for(int y = cy-hy; y < cy+hy; y++) {
+        for(int x = cx-hx; x < cx+hx; x++)
+            if(data.contains(x, y) && isVisible(x, y))
+                mvaddch(y-(cy-hy), x-(cx-hx), data.get(x, y));
+            else if(isVisible(x, y))
+                mvaddch(y-(cy-hy), x-(cx-hx), '#');
             else
-                mvaddch(y, x, ' ');
+                mvaddch(y-(cy-hy), x-(cx-hx), ' ');
     }
-    render[cy][cx] = '.';
+    mvaddch(cy-(cy-hy), cx-(cx-hx), '%');
+    move(cy-(cy-hy), cx-(cx-hx));
 }
 
 int main() {
-    Qtree<char> data;
+    bool localvision = false;
     srand((unsigned)time(NULL));
     init_handle();
     prim_generate(data, GENDISTANCE);
-    char **render = data.render();
 
     /* ncurses stuff */
-    WINDOW *win = initscr();
+    win = initscr();
     keypad(win, TRUE);
     timeout(-1);
     noecho();
@@ -105,18 +118,16 @@ int main() {
     mw = data.width();
     mh = data.height();
     /* true = (x, y) is visible */
-    bool **visible = new bool*[mh];
-    for(int i = 0; i < data.height(); i++)
-        visible[i] = new bool[mw]();
     int cx, cy;
     /* (cx, cy) = center */
-    cx = cy = GENDISTANCE;
+    cx = cy = 0;
     /* make stuff visible from the beginning */
-    render[cy][cx] = '.';
-    visible_line(render, visible, cx, cy);
-    render_screen(render, visible, cx, cy);
     if(!setjmp(env)) {
         while(true) {
+            if(localvision)
+                visible = Qtree<bool>();
+            visible_line(cx, cy);
+            render(cx, cy);
             int input = getch();
             int nx, ny;
             nx = cx;
@@ -135,28 +146,21 @@ int main() {
                     nx++;
                     break;
                 case 'p':
-                    for(int y = 0; y < mh; y++)
-                        for(int x = 0; x < mw; x++)
-                            visible[y][x] = true;
+                    hax = !hax;
+                    break;
+                case 'l':
+                    localvision = !localvision;
                     break;
                 case 'q':
                     goto end;
             }
-            if(valid(nx, ny) && render[ny][nx] == '.') {
+            if(data.contains(nx, ny) && data.get(nx, ny) == '.') {
                 cx = nx;
                 cy = ny;
             }
-            visible_line(render, visible, cx, cy);
-            render_screen(render, visible, cx, cy);
         }
     }
 end:
-    for(int i = 0; i < data.height(); i++) {
-        delete[] visible[i];
-        delete[] render[i];
-    }
-    delete[] visible;
-    delete[] render;
     keypad(win, FALSE);
     echo();
     endwin();

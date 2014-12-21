@@ -59,4 +59,5 @@ void prim_generate(Qtree<char> &data, int dist) {
 free:
         delete cur;
     }
+    data.add('.', 0, 0);
 }
