@@ -9,6 +9,7 @@
 #include <iostream>
 
 #include "common.hpp"
+#include "coord.hpp"
 
 template <class T> class QtreeNode;
 
@@ -46,6 +47,12 @@ template <class T> class Qtree {
          * O(log n).
          */
         T get(const Coord &coord);
+        /**
+         * Get an element from coord at this quadtree,
+         * return value if coord is not in this quadtree.
+         * O(log n).
+         */
+        T get(const Coord &coord, T value);
         /**
          * Get the height of this quadtree.
          */
@@ -193,6 +200,10 @@ template <class T> bool Qtree<T>::contains(const Coord &coord) {
 
 template <class T> T Qtree<T>::get(const Coord &coord) {
     return this->child->get(coord);
+}
+
+template <class T> T Qtree<T>::get(const Coord &coord, T value) {
+    return this->child->containsValue(coord) ? this->child->get(coord) : value;
 }
 
 template <class T> int Qtree<T>::height() {
