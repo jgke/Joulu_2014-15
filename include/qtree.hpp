@@ -236,8 +236,10 @@ template <class T> Qtree<T>::~Qtree() {
 }
 
 template <class T> QtreeNode<T>::QtreeNode(const Coord &coord, int size) {
+#ifdef DEBUG
     if(size == 0)
         throw std::invalid_argument("Tried to create a QtreeNode with size 0");
+#endif
 
     for(int i = 0; i < 4; i++) {
         this->content[i] = NULL;
@@ -292,8 +294,10 @@ template <class T> void QtreeNode<T>::fill_content() {
 }
 
 template <class T> void QtreeNode<T>::add(const T &t, const Coord &coord) {
+#ifdef DEBUG
     if(!this->contains(coord))
         throw std::out_of_range("tried to add an out of range value to QtreeNode");
+#endif
     if(this->size == 1) {
         this->value = t;
         this->value_set = true;
@@ -306,8 +310,10 @@ template <class T> void QtreeNode<T>::add(const T &t, const Coord &coord) {
 }
 
 template <class T> void QtreeNode<T>::add(QtreeNode *node) {
+#ifdef DEBUG
     if(!this->contains(node->coord))
         throw std::out_of_range("tried to add an out of range QtreeNode");
+#endif
     int id = get_id(node->coord);
     fill_content();
     if(this->size == node->size*2) {
@@ -334,8 +340,10 @@ template <class T> bool QtreeNode<T>::containsValue(const Coord &coord) const {
 }
 
 template <class T> T QtreeNode<T>::get(const Coord &coord) const {
+#ifdef DEBUG
     if(!this->contains(coord))
         throw std::out_of_range("tried to add an out of range QtreeNode");
+#endif
     if(this->size == 1)
         return this->value;
     for(int i = 0; i < 4; i++)
@@ -346,8 +354,10 @@ template <class T> T QtreeNode<T>::get(const Coord &coord) const {
 
 //get the index to this->content where (x, y) is
 template <class T> int QtreeNode<T>::get_id(const Coord &coord) const {
+#ifdef DEBUG
     if(size == 1)
         throw std::invalid_argument("Tried to get id of content from a QtreeNode with size 1");
+#endif
     if(this->coord.x + this->size/2 > coord.x)
         if(this->coord.y + this->size/2 > coord.y)
             return 0;
