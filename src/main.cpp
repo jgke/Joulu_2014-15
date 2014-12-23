@@ -12,6 +12,7 @@
 #include "list.hpp"
 #include "queue.hpp"
 #include "generators/prim.hpp"
+#include "generators/life.hpp"
 
 //sigsegv handling
 #include <signal.h>
@@ -64,7 +65,8 @@ bool isVisible(const Coord &coord) {
 void generate(const Coord &coord) {
     List<Coord> points;
     points.add(coord);
-    prim_generate(data, points, GENDISTANCE);
+    //prim_generate(data, points, GENDISTANCE);
+    life_generate(data, points, GENDISTANCE);
 }
 
 // make a tile visible
@@ -86,14 +88,18 @@ void visible_block(const Coord &coord) {
 // make things visible in a straight line
 void visible_line(const Coord &coord) {
     Coord cur = Coord(coord);
-    for(; data.contains(cur) && data.get(cur) == '.'; cur += Coord(-1, 0));
+    for(; coord.x - cur.x < GENDISTANCE && data.contains(cur) &&
+            data.get(cur) == '.'; cur += Coord(-1, 0));
     cur += Coord(1, 0);
-    for(; data.contains(cur) && data.get(cur) == '.'; cur += Coord(1, 0))
+    for(; cur.x - coord.x < GENDISTANCE && data.contains(cur) &&
+            data.get(cur) == '.'; cur += Coord(1, 0))
         visible_block(cur);
     cur = Coord(coord);
-    for(; data.contains(cur) && data.get(cur) == '.'; cur += Coord(0, -1));
+    for(; coord.y - cur.y < GENDISTANCE && data.contains(cur) &&
+            data.get(cur) == '.'; cur += Coord(0, -1));
     cur += Coord(0, 1);
-    for(; data.contains(cur) && data.get(cur) == '.'; cur += Coord(0, 1))
+    for(; cur.y - coord.y < GENDISTANCE && data.contains(cur) &&
+            data.get(cur) == '.'; cur += Coord(0, 1))
         visible_block(cur);
 }
 

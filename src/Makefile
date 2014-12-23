@@ -1,7 +1,7 @@
 include ../config.mk
 
 TARGET=../putkijuoksu
-OBJECTS=main.o generators/prim.o
+OBJECTS=main.o generators/prim.o generators/life.o
 LIBS=-lncurses
 
 %.o : %.cpp ${HEADERS}
