@@ -138,6 +138,8 @@ void path(Queue<Coord> &target, const Coord &a, const Coord &b) {
             continue;
         if(prev.contains(c.first))
             continue;
+        if(!visible.contains(c.first))
+            continue;
         prev.add(c.second, c.first);
         if(c.first == b)
             goto found;
