@@ -4,7 +4,7 @@
 #include <limits.h>
 #include <setjmp.h>
 
-#define GENDISTANCE 100
+#define GENDISTANCE 30
 
 #include "common.hpp"
 #include "coord.hpp"
@@ -61,13 +61,26 @@ bool isVisible(const Coord &coord) {
     return visible.contains(coord) && visible.get(coord);
 }
 
+void generate(const Coord &coord) {
+    List<Coord> points;
+    points.add(coord);
+    prim_generate(data, points, GENDISTANCE);
+}
+
+// make a tile visible
+void visible_tile(const Coord &coord) {
+    visible.add(true, coord);
+    if(!data.contains(coord))
+        generate(coord);
+}
+
 // make visible around a block
 void visible_block(const Coord &coord) {
-    visible.add(true, coord + Coord(0, -1));
-    visible.add(true, coord + Coord(-1, 0));
-    visible.add(true, coord + Coord(0, 0));
-    visible.add(true, coord + Coord(1, 0));
-    visible.add(true, coord + Coord(0, 1));
+    visible_tile(coord + Coord(0, -1));
+    visible_tile(coord + Coord(-1, 0));
+    visible_tile(coord + Coord(0, 0));
+    visible_tile(coord + Coord(1, 0));
+    visible_tile(coord + Coord(0, 1));
 }
 
 // make things visible in a straight line
@@ -97,7 +110,7 @@ void render(const Coord &coord) {
             if(data.contains(Coord(x, y)) && isVisible(Coord(x, y)))
                 mvaddch(y-(coord.y-hy), x-(coord.x-hx), data.get(Coord(x, y)));
             else if(isVisible(Coord(x, y)))
-                mvaddch(y-(coord.y-hy), x-(coord.x-hx), '#');
+                mvaddch(y-(coord.y-hy), x-(coord.x-hx), ' ');
             else
                 mvaddch(y-(coord.y-hy), x-(coord.x-hx), ' ');
     }
@@ -203,7 +216,7 @@ int main() {
     bool localvision = false;
     srand((unsigned)time(NULL));
     init_handle();
-    prim_generate(data, GENDISTANCE);
+    generate(Coord(0, 0));
 
     init_ncurses();
 

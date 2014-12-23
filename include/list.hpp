@@ -22,13 +22,13 @@ template <class T> class List {
          * O(1).
          * @param t Member to add.
          */
-        void add(const T &t);
+        void add(T t);
         /**
          * Get a member from this list.
          * O(1).
          * @param i Index of member.
          */
-        T get(int i);
+        T get(int i) const;
         /**
          * Remove a member from this list.
          * O(n).
@@ -38,7 +38,7 @@ template <class T> class List {
         /**
          * Get size of this list.
          */
-        int size();
+        int size() const;
         /**
          * Destructor for list.
          */
@@ -53,11 +53,11 @@ template <class T> List<T>::List() {
     this->arr = new std::vector<T>();
 }
 
-template <class T> void List<T>::add(const T &t) {
+template <class T> void List<T>::add(T t) {
     this->arr->push_back(t);
 }
 
-template <class T> T List<T>::get(int i) {
+template <class T> T List<T>::get(int i) const {
     return this->arr->at(i);
 }
 
@@ -67,7 +67,7 @@ template <class T> T List<T>::remove(int i) {
     return ret;
 }
 
-template <class T> int List<T>::size() {
+template <class T> int List<T>::size() const {
     return this->arr->size();
 }
 
