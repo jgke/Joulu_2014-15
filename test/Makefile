@@ -1,7 +1,7 @@
 include ../config.mk
 
 TARGET=../libtest
-OBJECTS=main.o test.o list_test.o qtreenode_test.o qtree_test.o
+OBJECTS=main.o test.o coord_test.o list_test.o qtreenode_test.o qtree_test.o queue_test.o
 
 %.o : %.cpp ${HEADERS}
 	${CC} -c ${CCFLAGS} -rdynamic $< -o $@

@@ -1,6 +1,7 @@
 #include <cstdlib> //rand
 
 #include "common.hpp"
+#include "coord.hpp"
 #include "list.hpp"
 #include "qtree.hpp"
 

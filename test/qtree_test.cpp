@@ -1,3 +1,4 @@
+#include "coord.hpp"
 #include "qtree.hpp"
 
 #include "test.hpp"
@@ -32,4 +33,7 @@ void qtree_test() {
     test_equal("Qtree renders top right correctly", 3, render[0][1]);
     test_equal("Qtree renders bottom left correctly", 1, render[1][0]);
     test_equal("Qtree renders bottom right correctly", 5, render[1][1]);
+    for(int i = 0; i < cur.height(); i++)
+        delete[] render[i];
+    delete[] render;
 }

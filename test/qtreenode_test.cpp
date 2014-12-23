@@ -1,6 +1,7 @@
 #include "qtree.hpp"
 
 #include "common.hpp"
+#include "coord.hpp"
 #include "test.hpp"
 #include "qtreenode_test.hpp"
 

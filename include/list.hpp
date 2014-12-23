@@ -22,7 +22,7 @@ template <class T> class List {
          * O(1).
          * @param t Member to add.
          */
-        void add(T t);
+        void add(const T &t);
         /**
          * Get a member from this list.
          * O(1).
@@ -43,7 +43,7 @@ template <class T> class List {
          * Destructor for list.
          */
         ~List();
-    private:
+    public:
         std::vector<T> *arr;
 };
 
@@ -53,7 +53,7 @@ template <class T> List<T>::List() {
     this->arr = new std::vector<T>();
 }
 
-template <class T> void List<T>::add(T t) {
+template <class T> void List<T>::add(const T &t) {
     this->arr->push_back(t);
 }
 

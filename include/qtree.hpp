@@ -29,7 +29,7 @@ template <class T> class Qtree {
         /**
          * Assignment operator for Qtree.
          */
-        Qtree& operator= (const Qtree<T>& qtree);
+        Qtree &operator= (const Qtree<T> &qtree);
         /**
          * Add an element to coord at this quadtree.
          * O(log n).
@@ -241,6 +241,9 @@ template <class T> QtreeNode<T>::QtreeNode(const Coord &coord, int size) {
 template <class T> QtreeNode<T>::QtreeNode(const QtreeNode &node) {
     this->size = node.size;
     this->coord = node.coord;
+    for(int i = 0; i < 4; i++) {
+        this->content[i] = NULL;
+    }
     if(node.size == 1) {
         this->value_set = node.value_set;
         this->value = node.value;
@@ -253,6 +256,9 @@ template <class T> QtreeNode<T>::QtreeNode(const QtreeNode &node) {
 template <class T> QtreeNode<T> &QtreeNode<T>::operator= (const QtreeNode<T> &node) {
     this->size = node.size;
     this->coord = node.coord;
+    for(int i = 0; i < 4; i++) {
+        this->content[i] = NULL;
+    }
     if(node.size == 1) {
         this->value_set = node.value_set;
         if(this->value_set)

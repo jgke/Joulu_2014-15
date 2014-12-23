@@ -34,7 +34,7 @@ void handle(int sig) {
 
 void init_tests() {
 #ifdef SENSIBLE_OS
-    struct sigaction act;
+    struct sigaction act = {};
     act.sa_sigaction = &handle;
     act.sa_flags = SA_SIGINFO;
     if(sigaction(SIGSEGV, &act, NULL)) {
