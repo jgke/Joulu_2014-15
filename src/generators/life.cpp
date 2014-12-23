@@ -1,4 +1,5 @@
 #include <cstdlib> //rand
+#include <limits.h>
 
 #include "coord.hpp"
 #include "qtree.hpp"
@@ -29,6 +30,7 @@ int nbor(const Qtree<char> &data, const Coord &coord) {
 void life_generate(Qtree<char> &data, const List<Coord> &points, int dist) {
     List<Life_entry*> stack;
     Qtree<char> newdata;
+    Qtree<int> disttree;
     for(int i = 0; i < points.size(); i++) {
         stack.add(new Life_entry(Coord(points.get(i)), 1));
     }
@@ -36,9 +38,10 @@ void life_generate(Qtree<char> &data, const List<Coord> &points, int dist) {
         Life_entry *cur = stack.remove(stack.size()-1);
         if(cur->b >= dist)
             goto free;
-        if(newdata.contains(cur->a) || data.contains(cur->a))
+        if(disttree.get(cur->a, INT_MAX) <= cur->b || data.contains(cur->a))
             goto free;
         newdata.add(rand()%2 ? '.' : '#', cur->a);
+        disttree.add(cur->b, cur->a);
         stack.add(new Life_entry(cur->a + Coord(1, 0), cur->b+1));
         stack.add(new Life_entry(cur->a + Coord(-1, 0), cur->b+1));
         stack.add(new Life_entry(cur->a + Coord(0, 1), cur->b+1));

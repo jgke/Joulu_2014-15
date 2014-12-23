@@ -65,8 +65,10 @@ bool isVisible(const Coord &coord) {
 void generate(const Coord &coord) {
     List<Coord> points;
     points.add(coord);
-    //prim_generate(data, points, GENDISTANCE);
-    life_generate(data, points, GENDISTANCE);
+    if(rand()%2)
+        prim_generate(data, points, GENDISTANCE);
+    else
+        life_generate(data, points, GENDISTANCE);
 }
 
 // make a tile visible
