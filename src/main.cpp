@@ -105,25 +105,31 @@ void visible_line(const Coord &coord) {
         visible_block(cur);
 }
 
+void drawchar(int x, int y, char c) {
+    mvaddch(y, x*2, c);
+    mvaddch(y, x*2+1, ' ');
+}
+
 //render screen
 void render(const Coord &coord) {
 #ifndef DEBUG
     int mx, my;
     int hx, hy;
     getmaxyx(win, my, mx);
+    mx/=2;
     hx = mx/2;
     hy = my/2;
     for(int y = coord.y-hy; y < coord.y+hy; y++) {
         for(int x = coord.x-hx; x < coord.x+hx; x++)
             if(data.contains(Coord(x, y)) && isVisible(Coord(x, y)))
-                mvaddch(y-(coord.y-hy), x-(coord.x-hx), data.get(Coord(x, y)));
+                drawchar(x-(coord.x-hx), y-(coord.y-hy), data.get(Coord(x, y)));
             else if(isVisible(Coord(x, y)))
-                mvaddch(y-(coord.y-hy), x-(coord.x-hx), ' ');
+                drawchar(x-(coord.x-hx), y-(coord.y-hy), ' ');
             else
-                mvaddch(y-(coord.y-hy), x-(coord.x-hx), ' ');
+                drawchar(x-(coord.x-hx), y-(coord.y-hy), ' ');
     }
-    mvaddch(coord.y-(coord.y-hy), coord.x-(coord.x-hx), '%');
-    move(coord.y-(coord.y-hy), coord.x-(coord.x-hx));
+    drawchar(coord.x-(coord.x-hx), coord.y-(coord.y-hy), '%');
+    move(coord.y-(coord.y-hy), 2*(coord.x-(coord.x-hx)));
 #else
     std::cout << coord.x << " " << coord.y << std::endl;
 #endif
