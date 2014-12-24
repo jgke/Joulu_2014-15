@@ -1,7 +1,10 @@
 #ifndef COORD_H
 #define COORD_H
 
+#include <algorithm>
 #include <stdexcept>
+
+#include "common.hpp"
 
 /**
  * Class for a coordinate.
@@ -20,6 +23,11 @@ template <class T> class _Coord {
          * Constructor for coord.
          */
         _Coord(const _Coord<T> &c);
+        /**
+         * Length of this coord.
+         * ABS(x) + ABS(y).
+         */
+        T length() const;
         /**
          * Assignment operator for coord.
          */
@@ -51,7 +59,7 @@ template <class T> class _Coord {
         /**
          * Return ith coordinant, x = coord[0], y = coord[1].
          */
-        T operator[](const int &i);
+        T operator[](const int &i) const;
         /**
          * The x-coordinate.
          */
@@ -71,6 +79,10 @@ template <class T> _Coord<T>::_Coord(const T &x, const T &y): x(x), y(y) {}
 template <class T> _Coord<T>::_Coord(const _Coord<T> &c) {
     x = c.x;
     y = c.y;
+}
+
+template <class T> T _Coord<T>::length() const {
+    return ABS(this->x) + ABS(this->y);
 }
 
 template <class T> _Coord<T> _Coord<T>::operator=(const _Coord<T> &c) {
@@ -127,7 +139,7 @@ template <class T> bool _Coord<T>::operator!=(const _Coord<T> &coord) const {
     return this->x != coord.x || this->y != coord.y;
 }
 
-template <class T> T _Coord<T>::operator[](const int &i) {
+template <class T> T _Coord<T>::operator[](const int &i) const {
     switch(i) {
     case 0:
         return this->x;
@@ -140,6 +152,10 @@ template <class T> T _Coord<T>::operator[](const int &i) {
 
 template <class T> std::ostream &operator<<(std::ostream &stream, const _Coord<T> &a) {
     return stream << a.x << ", " << a.y << "]";
+}
+template <class T> void swap(T &a, T &b) {
+    std::swap(a.x, b.x);
+    std::swap(a.y, b.y);
 }
 
 /**
