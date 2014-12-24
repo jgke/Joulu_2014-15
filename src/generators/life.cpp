@@ -1,20 +1,10 @@
 #include <cstdlib> //rand
-#include <limits.h>
 
 #include "coord.hpp"
 #include "qtree.hpp"
 #include "list.hpp"
 #include "life.hpp"
-
-class Life_entry {
-    public:
-        Life_entry(Coord a, int len) {
-            this->a = a;
-            this->b = len;
-        }
-        Coord a;
-        int b;
-};
+#include "search.hpp"
 
 int nbor(const Qtree<char> &data, const Coord &coord) {
     int ret = 0;
@@ -27,28 +17,32 @@ int nbor(const Qtree<char> &data, const Coord &coord) {
     return ret;
 }
 
+struct life_data {
+    Qtree<char> *data;
+    Qtree<char> *newdata;
+    int dist;
+};
+
+bool life_cb(const Coord &pos, const char &value, int len, void *data) {
+    struct life_data *ldata = (struct life_data *)data;
+    if(len >= ldata->dist)
+        return false;
+    if(ldata->data->contains(pos))
+        return false;
+    if(ldata->newdata->contains(pos))
+        return false;
+    ldata->newdata->add(rand()%2 ? '.' : '#', pos);
+    return true;
+}
+
 void life_generate(Qtree<char> &data, const List<Coord> &points, int dist) {
-    List<Life_entry*> stack;
     Qtree<char> newdata;
-    Qtree<int> disttree;
-    for(int i = 0; i < points.size(); i++) {
-        stack.add(new Life_entry(Coord(points.get(i)), 1));
-    }
-    while(stack.size()) {
-        Life_entry *cur = stack.remove(stack.size()-1);
-        if(cur->b >= dist)
-            goto free;
-        if(disttree.get(cur->a, INT_MAX) <= cur->b || data.contains(cur->a))
-            goto free;
-        newdata.add(rand()%2 ? '.' : '#', cur->a);
-        disttree.add(cur->b, cur->a);
-        stack.add(new Life_entry(cur->a + Coord(1, 0), cur->b+1));
-        stack.add(new Life_entry(cur->a + Coord(-1, 0), cur->b+1));
-        stack.add(new Life_entry(cur->a + Coord(0, 1), cur->b+1));
-        stack.add(new Life_entry(cur->a + Coord(0, -1), cur->b+1));
-free:
-        delete cur;
-    }
+    struct life_data cbdata;
+    cbdata.data = &data;
+    cbdata.newdata = &newdata;
+    cbdata.dist = dist;
+    bfs(data, points.get(0), '.', &cbdata, &life_cb);
+
     Coord corner = newdata.corner();
     int width = newdata.width();
     int height = newdata.height();
