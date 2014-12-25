@@ -1,7 +1,8 @@
+#include "test.hpp"
+
 #include "coord.hpp"
 #include "qtree.hpp"
 
-#include "test.hpp"
 #include "qtree_test.hpp"
 
 void qtree_test() {

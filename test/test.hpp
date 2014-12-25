@@ -11,6 +11,8 @@
 #include <string>
 #include <sstream>
 
+#define DEBUG //so that classes throw
+
 /**
  * Initialize tests.
  */

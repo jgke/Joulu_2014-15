@@ -1,5 +1,7 @@
 #include <iostream>
 
+#include "test.hpp"
+
 #include "common.hpp" //SENSIBLE_OS
 
 #ifdef SENSIBLE_OS
@@ -11,8 +13,6 @@
 #include <string.h>
 #include <unistd.h>
 #endif
-
-#include "test.hpp"
 
 int success_count = 0;
 int failure_count = 0;

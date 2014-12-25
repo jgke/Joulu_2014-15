@@ -1,9 +1,9 @@
-#define DEBUG //for throws
-#include "qtree.hpp"
+#include "test.hpp"
 
 #include "common.hpp"
 #include "coord.hpp"
-#include "test.hpp"
+#include "qtree.hpp"
+
 #include "qtreenode_test.hpp"
 
 void qtreenode_test() {

@@ -1,6 +1,8 @@
-#include "coord.hpp"
-#include "coord_test.hpp"
 #include "test.hpp"
+
+#include "coord.hpp"
+
+#include "coord_test.hpp"
 
 void coord_test() {
     NO_DEATH_TEST("Coord doesn't crash when constructor/destuctor is called", {

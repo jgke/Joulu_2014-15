@@ -1,7 +1,10 @@
+#define DEBUG
+
+#include "test.hpp"
+
 #include "coord.hpp"
 #include "list.hpp"
 
-#include "test.hpp"
 #include "list_test.hpp"
 
 void list_test() {

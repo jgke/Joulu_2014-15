@@ -1,6 +1,8 @@
 #include "test.hpp"
-#include "queue_test.hpp"
+
 #include "queue.hpp"
+
+#include "queue_test.hpp"
 
 void queue_test() {
     NO_DEATH_TEST("Queue doesn't crash constructor/destructor is called", {
