@@ -9,6 +9,6 @@
 /**
  * Generate dungeon using Prim.
  */
-void prim_generate(Qtree<char> &data, const List<Coord> &points, int dist);
+void prim_generator(Qtree<char> &data, const List<Coord> &points, int dist);
 
 #endif

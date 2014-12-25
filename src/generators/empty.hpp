@@ -4,6 +4,6 @@
 #include "qtree.hpp"
 #include "list.hpp"
 
-void empty_generate(Qtree<char> &data, const List<Coord> &points, int dist);
+void empty_generator(Qtree<char> &data, const List<Coord> &points, int dist);
 
 #endif

@@ -3,6 +3,6 @@
 
 #define GENERATION_COUNT 2
 
-void life_generate(Qtree<char> &data, const List<Coord> &points, int dist);
+void life_generator(Qtree<char> &data, const List<Coord> &points, int dist);
 
 #endif

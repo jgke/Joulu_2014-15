@@ -32,7 +32,7 @@ bool life_cb(const Coord &pos, const char &value, int len, void *data) {
     return true;
 }
 
-void life_generate(Qtree<char> &data, const List<Coord> &points, int dist) {
+void life_generator(Qtree<char> &data, const List<Coord> &points, int dist) {
     Qtree<char> newdata;
     struct life_data cbdata;
     cbdata.data = &data;
