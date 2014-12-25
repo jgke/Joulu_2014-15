@@ -44,33 +44,29 @@ template <class T> class List {
          */
         ~List();
     private:
-        std::vector<T> *arr;
+        std::vector<T> arr;
 };
 
-template <class T> List<T>::List() {
-    this->arr = new std::vector<T>();
-}
+template <class T> List<T>::List(): arr(std::vector<T>()) {}
 
 template <class T> void List<T>::add(T t) {
-    this->arr->push_back(t);
+    this->arr.push_back(t);
 }
 
 template <class T> T List<T>::get(int i) const {
-    return this->arr->at(i);
+    return this->arr.at(i);
 }
 
 template <class T> T List<T>::remove(int i) {
-    T ret = this->arr->at(i);
-    this->arr->erase(this->arr->begin() + i);
+    T ret = this->arr.at(i);
+    this->arr.erase(this->arr.begin() + i);
     return ret;
 }
 
 template <class T> int List<T>::size() const {
-    return this->arr->size();
+    return this->arr.size();
 }
 
-template <class T> List<T>::~List() {
-    delete this->arr;
-}
+template <class T> List<T>::~List() {}
 
 #endif

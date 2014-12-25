@@ -249,9 +249,7 @@ template <class T> QtreeNode<T>::QtreeNode(const Coord &coord, int size) {
     this->value_set = false;
 }
 
-template <class T> QtreeNode<T>::QtreeNode(const QtreeNode &node) {
-    this->size = node.size;
-    this->coord = node.coord;
+template <class T> QtreeNode<T>::QtreeNode(const QtreeNode &node):coord(node.coord), size(node.size) {
     for(int i = 0; i < 4; i++) {
         this->content[i] = NULL;
     }

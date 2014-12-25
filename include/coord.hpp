@@ -31,7 +31,7 @@ template <class T> class _Coord {
         /**
          * Assignment operator for coord.
          */
-        _Coord operator=(const _Coord<T> &c);
+        _Coord &operator=(const _Coord<T> &c);
         /**
          * Sum two _Coords, (a,b) + (c, d) = (a+c, b+d).
          */
@@ -85,7 +85,7 @@ template <class T> T _Coord<T>::length() const {
     return ABS(this->x) + ABS(this->y);
 }
 
-template <class T> _Coord<T> _Coord<T>::operator=(const _Coord<T> &c) {
+template <class T> _Coord<T> &_Coord<T>::operator=(const _Coord<T> &c) {
     x = c.x;
     y = c.y;
     return *this;

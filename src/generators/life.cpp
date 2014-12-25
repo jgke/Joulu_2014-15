@@ -28,7 +28,7 @@ bool life_cb(const Coord &pos, const char &value, int len, void *data) {
         return false;
     if(ldata->newdata->contains(pos))
         return false;
-    ldata->newdata->add(rand()%2 ? '.' : '#', pos);
+    ldata->newdata->add((rand()%2) ? '.' : '#', pos);
     return true;
 }
 
