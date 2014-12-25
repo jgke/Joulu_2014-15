@@ -290,6 +290,7 @@ int main() {
                     while(tmp.hasNext()) {
                         read_char();
                         newpos = tmp.pop();
+                        fov(newpos);
                         render(newpos);
                     }
                     plr = newpos;
