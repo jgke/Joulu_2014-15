@@ -1,3 +1,8 @@
+/**
+ * \file search.hpp
+ * Search algorithms.
+ */
+
 #ifndef SEARCH_HPP
 #define SEARCH_HPP
 
@@ -8,13 +13,34 @@
 #include "queue.hpp"
 #include "qtree.hpp"
 
+/**
+ * Single BFS queue entry.
+ */
 class BFS_entry {
     public:
+        /**
+         * Constructor for BFS_entry.
+         */
         BFS_entry(Coord a, int len): a(a), len(len) {}
+        /**
+         * Current coordinate.
+         */
         const Coord a;
+        /**
+         * Current length.
+         */
         const int len;
 };
 
+/**
+ * Use breadth-first search to walk through a dataset.
+ * @param data data to walk through
+ * @param start coordinate to start from
+ * @param allowed value that can be traversed
+ * @param dist maximum distance from start
+ * @param cbdata data to be passed to callback
+ * @param cb callback to be called with current position, value and length
+ */
 template <class T> void bfs(Qtree<T> data, const Coord &start, const T &allowed,
         int dist, void *cbdata,
         bool (*cb)(const Coord &pos, const T &value, int len, void *data)) {

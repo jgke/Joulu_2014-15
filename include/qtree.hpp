@@ -235,7 +235,8 @@ template <class T> Qtree<T>::~Qtree() {
     delete this->child;
 }
 
-template <class T> QtreeNode<T>::QtreeNode(const Coord &coord, int size) {
+template <class T> QtreeNode<T>::QtreeNode(const Coord &coord, int size):
+        coord(coord), size(size) {
 #ifdef DEBUG
     if(size == 0)
         throw std::invalid_argument("Tried to create a QtreeNode with size 0");
@@ -249,7 +250,8 @@ template <class T> QtreeNode<T>::QtreeNode(const Coord &coord, int size) {
     this->value_set = false;
 }
 
-template <class T> QtreeNode<T>::QtreeNode(const QtreeNode &node):coord(node.coord), size(node.size) {
+template <class T> QtreeNode<T>::QtreeNode(const QtreeNode &node):
+        coord(node.coord), size(node.size) {
     for(int i = 0; i < 4; i++) {
         this->content[i] = NULL;
     }
@@ -262,7 +264,8 @@ template <class T> QtreeNode<T>::QtreeNode(const QtreeNode &node):coord(node.coo
             this->content[i] = new QtreeNode(*node.content[i]);
 }
 
-template <class T> QtreeNode<T> &QtreeNode<T>::operator= (const QtreeNode<T> &node) {
+template <class T> QtreeNode<T> &QtreeNode<T>::operator= (
+        const QtreeNode<T> &node) {
     this->size = node.size;
     this->coord = node.coord;
     for(int i = 0; i < 4; i++) {
@@ -366,7 +369,8 @@ template <class T> int QtreeNode<T>::get_id(const Coord &coord) const {
     return 3;
 }
 
-template <class T> void QtreeNode<T>::render(T **target, int minx, int miny) const {
+template <class T> void QtreeNode<T>::render(T **target, int minx,
+        int miny) const {
     if(size == 1 && this->value_set)
         target[this->coord.y - miny][this->coord.x - minx] = this->value;
     else if(size > 1 && this->content[0] != NULL)

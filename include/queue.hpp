@@ -1,3 +1,8 @@
+/**
+ * \file queue.hpp
+ * Queue.
+ */
+
 #ifndef QUEUE_HPP
 #define QUEUE_HPP
 
@@ -7,26 +12,68 @@
 
 template <class T> class QueueNode;
 
+/**
+ * Queue.
+ */
 template <class T> class Queue {
     public:
+        /**
+         * Constructor for Queue.
+         */
         Queue();
+        /**
+         * Copy constructor for Queue.
+         */
         Queue(const Queue<T> &queue);
+        /**
+         * Assignment operator for Queue.
+         */
         Queue &operator= (const Queue<T> &queue);
+        /**
+         * Add a value to this queue.
+         */
         void add(const T &value);
-        bool hasNext();
-        const T &peek();
+        /**
+         * Returns true if there is a next member.
+         */
+        bool hasNext() const;
+        /**
+         * Returns the next member.
+         */
+        const T &peek() const;
+        /**
+         * Returns the next member and removes it from the queue.
+         */
         const T &pop();
+        /**
+         * Destructor for queue.
+         */
         ~Queue();
     private:
        QueueNode<T> *root; 
        QueueNode<T> *tail; 
 };
 
+/**
+ * Single node in a queue.
+ */
 template <class T> class QueueNode {
     public:
+        /**
+         * Constructor for QueueNode.
+         */
         QueueNode(QueueNode<T> *prev, const T &value);
+        /**
+         * Previous node.
+         */
         QueueNode<T> *prev;
+        /**
+         * Next node.
+         */
         QueueNode<T> *next;
+        /**
+         * Value of this node.
+         */
         T value;
 };
 
@@ -65,11 +112,11 @@ template <class T> void Queue<T>::add(const T &value) {
         root = tail;
 }
 
-template <class T> bool Queue<T>::hasNext() {
+template <class T> bool Queue<T>::hasNext() const {
     return root != NULL;
 }
 
-template <class T> const T &Queue<T>::peek() {
+template <class T> const T &Queue<T>::peek() const {
     return root->value;
 }
 

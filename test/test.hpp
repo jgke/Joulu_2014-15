@@ -11,6 +11,9 @@
 #include <string>
 #include <sstream>
 
+/**
+ * Defining will use alternative rendering and enables exceptions.
+ */
 #define DEBUG //so that classes throw
 
 /**

@@ -8,9 +8,13 @@
 
 #include <stdexcept>
 
+/**
+ * Defining will use alternative rendering and enables exceptions.
+ */
 //#define DEBUG
 
-#if (defined(unix) || defined(__unix__) || defined(__unix) || defined(__APPLE__) && defined(__MACH__))
+#if (defined(unix) || defined(__unix__) || defined(__unix) || \
+        defined(__APPLE__) && defined(__MACH__))
 /**
  * Defined if running in a sensible OS.
  */

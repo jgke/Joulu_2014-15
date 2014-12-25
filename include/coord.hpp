@@ -1,3 +1,8 @@
+/**
+ * \file coord.hpp
+ * Coordinate class.
+ */
+
 #ifndef COORD_H
 #define COORD_H
 
@@ -70,16 +75,11 @@ template <class T> class _Coord {
         T y;
 };
 
-template <class T> _Coord<T>::_Coord() {
-    x = y = 0;
-}
+template <class T> _Coord<T>::_Coord(): x(0), y(0) {}
 
 template <class T> _Coord<T>::_Coord(const T &x, const T &y): x(x), y(y) {}
 
-template <class T> _Coord<T>::_Coord(const _Coord<T> &c) {
-    x = c.x;
-    y = c.y;
-}
+template <class T> _Coord<T>::_Coord(const _Coord<T> &c): x(c.x), y(c.y) {}
 
 template <class T> T _Coord<T>::length() const {
     return ABS(this->x) + ABS(this->y);
@@ -91,6 +91,9 @@ template <class T> _Coord<T> &_Coord<T>::operator=(const _Coord<T> &c) {
     return *this;
 }
 
+/**
+ * Sum two coords.
+ */
 template <class T> _Coord<T> operator+(const _Coord<T> &a, const _Coord<T> &b) {
     return _Coord<T>(a.x+b.x, a.y+b.y);
 }
@@ -101,6 +104,9 @@ template <class T> _Coord<T> _Coord<T>::operator+=(const _Coord<T> &coord) {
     return *this;
 }
 
+/**
+ * Subtract two coords.
+ */
 template <class T> _Coord<T> operator-(const _Coord<T> &a, const _Coord<T> &b) {
     return _Coord<T>(a.x-b.x, a.y-b.y);
 }
@@ -111,6 +117,9 @@ template <class T> _Coord<T> _Coord<T>::operator-=(const _Coord<T> &coord) {
     return *this;
 }
 
+/**
+ * Multiply two coords.
+ */
 template <class T> _Coord<T> operator*(const _Coord<T> &a, const _Coord<T> &b) {
     return _Coord<T>(a.x*b.x, a.y*b.y);
 }
@@ -121,6 +130,9 @@ template <class T> _Coord<T> _Coord<T>::operator*=(const _Coord<T> &coord) {
     return *this;
 }
 
+/**
+ * Divide two coords.
+ */
 template <class T> _Coord<T> operator/(const _Coord<T> &a, const _Coord<T> &b) {
     return _Coord<T>(a.x/b.x, a.y/b.y);
 }
@@ -150,9 +162,17 @@ template <class T> T _Coord<T>::operator[](const int &i) const {
     }
 }
 
-template <class T> std::ostream &operator<<(std::ostream &stream, const _Coord<T> &a) {
+/**
+ * Output coord to stream.
+ */
+template <class T> std::ostream &operator<<(std::ostream &stream,
+        const _Coord<T> &a) {
     return stream << a.x << ", " << a.y << "]";
 }
+
+/**
+ * Swap two coords.
+ */
 template <class T> void swap(T &a, T &b) {
     std::swap(a.x, b.x);
     std::swap(a.y, b.y);
@@ -163,7 +183,9 @@ template <class T> void swap(T &a, T &b) {
  */
 #define COORDTYPE int
 
-//bypassing linker errors and letting compiler inline operators
+/**
+ * Coord used for coordinates.
+ */
 typedef _Coord<COORDTYPE> Coord;
 
 #endif
