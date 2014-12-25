@@ -11,7 +11,7 @@ OPTIMIZE_OUTPUT_FOR_C  = YES
 
 QUIET                  = YES
 
-INPUT                  = ../include ../src/generators ../test/test.hpp
+INPUT                  = mainpage.dox ../include ../src/generators ../test/test.hpp
 FILE_PATTERNS          = *.hpp
 RECURSIVE              = YES
 
