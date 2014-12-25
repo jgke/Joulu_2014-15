@@ -242,7 +242,12 @@ int main() {
     bool localvision = false;
     srand((unsigned)time(NULL));
     init_handle();
-    generate(Coord(0, 0));
+
+    {
+        List<Coord> start;
+        start.add(Coord(0, 0));
+        empty_generator(data, start, 10);
+    }
 
     init_ncurses();
 
