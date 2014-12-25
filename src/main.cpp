@@ -28,7 +28,7 @@ WINDOW *win;
 Qtree<char> data;
 Qtree<bool> visible;
 bool hax = false;
-//#define DEBUG
+std::string status;
 
 #ifdef SENSIBLE_OS
 void handle(int sig, siginfo_t *siginfo, void *context) {
@@ -116,8 +116,8 @@ void fov(const Coord &coord) {
 }
 
 void drawchar(int x, int y, char c) {
-    mvaddch(y, x*2, c);
-    mvaddch(y, x*2+1, ' ');
+    mvaddch(y+1, x*2, c);
+    mvaddch(y+1, x*2+1, ' ');
 }
 
 //render screen
@@ -126,7 +126,8 @@ void render(const Coord &coord) {
     int mx, my;
     int hx, hy;
     getmaxyx(win, my, mx);
-    mx/=2;
+    mx /= 2;
+    my -= 1;
     hx = mx/2;
     hy = my/2;
     for(int y = coord.y-hy; y < coord.y+hy; y++) {
@@ -139,7 +140,8 @@ void render(const Coord &coord) {
                 drawchar(x-(coord.x-hx), y-(coord.y-hy), ' ');
     }
     drawchar(coord.x-(coord.x-hx), coord.y-(coord.y-hy), '%');
-    move(coord.y-(coord.y-hy), 2*(coord.x-(coord.x-hx)));
+    mvaddstr(0, 0, status.c_str());
+    move(coord.y-(coord.y-hy)+1, 2*(coord.x-(coord.x-hx)));
 #else
     std::cout << coord.x << " " << coord.y << std::endl;
 #endif
@@ -284,18 +286,28 @@ int main() {
                 case 'q':
                     goto end;
                 case 'g':
+                    status = "Finding a path...";
                     Queue<Coord> tmp;
                     path(tmp, plr, Coord(0, 0));
                     set_timeout(30);
-                    while(tmp.hasNext()) {
-                        read_char();
-                        newpos = tmp.pop();
-                        fov(newpos);
-                        render(newpos);
+                    {
+                        int max = tmp.size();
+                        int progress = 1;
+                        while(tmp.hasNext()) {
+                            std::stringstream stream;
+                            stream << "Finding a path... (" << progress++ <<
+                                " / " << max << ")";
+                            status = stream.str();
+                            read_char();
+                            newpos = tmp.pop();
+                            fov(newpos);
+                            render(newpos);
+                        }
                     }
                     plr = newpos;
                     set_timeout(-1);
                     break;
+                    status = "";
             }
             if(data.contains(newpos) && data.get(newpos) == '.')
                 plr = newpos;
