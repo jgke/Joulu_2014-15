@@ -63,6 +63,10 @@ template <class T> class Qtree {
          */
         int height() const;
         /**
+         * Call cb for each value with value and position.
+         */
+        void map(void *data, void (*cb)(const T &value, const Coord &pos, void *data));
+        /**
          * Render this quadtree.
          * @returns new-allocated Array containing all elements as a 2d array.
          */
@@ -122,6 +126,10 @@ template <class T> class QtreeNode {
          * O(log n).
          */
         T get(const Coord &coord) const;
+        /**
+         * Call cb for each value with value and position.
+         */
+        void map(void *data, void (*cb)(const T &value, const Coord &pos, void *data));
         /** Render this QtreeNode to target.
          * Applies transformation pos -= (minx, miny).
          * @param target Array to render to.
@@ -217,6 +225,11 @@ template <class T> T Qtree<T>::get(const Coord &coord, T value) const {
 
 template <class T> int Qtree<T>::height() const {
     return this->maxy - this->miny+1;
+}
+
+template <class T> void Qtree<T>::map(void *data, void (*cb)(const T &value,
+            const Coord &pos, void *data)) {
+    this->child->map(data, cb);
 }
 
 template <class T> T **Qtree<T>::render() const {
@@ -367,6 +380,15 @@ template <class T> int QtreeNode<T>::get_id(const Coord &coord) const {
     else if(this->coord.y + this->size/2 > coord.y)
         return 1;
     return 3;
+}
+
+template <class T> void QtreeNode<T>::map(void *data,
+        void (*cb)(const T &value, const Coord &pos, void *data)) {
+    if(size == 1 && this->value_set)
+        cb(this->value, this->coord, data);
+    else if(size > 1 && this->content[0] != NULL)
+        for(int i = 0; i < 4; i++)
+            this->content[i]->map(data, cb);
 }
 
 template <class T> void QtreeNode<T>::render(T **target, int minx,
