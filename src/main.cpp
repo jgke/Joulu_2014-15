@@ -3,6 +3,7 @@
 #include <iostream>
 #include <limits.h>
 #include <setjmp.h>
+#include <sstream>
 
 #define GENDISTANCE 30
 #define VIEWDISTANCE 15
@@ -69,10 +70,13 @@ void generate(const Coord &coord) {
 }
 
 // make a tile visible
-void visible_tile(const Coord &coord) {
+int visible_tile(const Coord &coord) {
+    int ret = 0;
+    ret += visible.get(coord, false) ? 1 : 0;
     visible.add(true, coord);
     if(!data.contains(coord))
         generate(coord);
+    return ret;
 }
 
 bool visible_line(const Coord &_a, const Coord &_b) {
@@ -103,16 +107,18 @@ bool visible_line(const Coord &_a, const Coord &_b) {
     return true;
 }
 
-void slow_vision(const Coord &coord) {
+int slow_vision(const Coord &coord) {
+    int ret = 0;
     for(int y = coord.y - VIEWDISTANCE; y <= coord.y + VIEWDISTANCE; y++)
         for(int x = coord.x - VIEWDISTANCE; x <= coord.x + VIEWDISTANCE; x++)
             if((x-coord.x)*(x-coord.x) + (y-coord.y)*(y-coord.y) < VIEWDISTANCE*VIEWDISTANCE)
                 if(visible_line(coord, Coord(x, y)))
-                    visible_tile(Coord(x, y));
+                    ret += visible_tile(Coord(x, y));
+    return ret;
 }
 
-void fov(const Coord &coord) {
-    slow_vision(coord);
+int fov(const Coord &coord) {
+    return slow_vision(coord);
 }
 
 void drawchar(int x, int y, char c) {
@@ -241,22 +247,24 @@ void clean_ncurses() {
 
 
 int main() {
-    bool localvision = false;
-    srand((unsigned)time(NULL));
-    init_handle();
-
-    {
-        List<Coord> start;
-        start.add(Coord(0, 0));
-        empty_generator(data, start, 10);
-    }
-
-    init_ncurses();
-
-    mw = data.width();
-    mh = data.height();
-    Coord plr;
     if(!setjmp(env)) {
+        bool localvision = false;
+        srand((unsigned)time(NULL));
+        init_handle();
+
+        {
+            List<Coord> start;
+            start.add(Coord(0, 0));
+            empty_generator(data, start, 10);
+        }
+
+        init_ncurses();
+
+        mw = data.width();
+        mh = data.height();
+        Coord plr;
+        //fixes some vision bugs at start
+        while(fov(plr));
         while(true) {
             if(localvision)
                 visible = Qtree<bool>();
