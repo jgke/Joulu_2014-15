@@ -43,11 +43,9 @@ template <class T> class List {
          * Destructor for list.
          */
         ~List();
-    public:
+    private:
         std::vector<T> *arr;
 };
-
-#include <vector>
 
 template <class T> List<T>::List() {
     this->arr = new std::vector<T>();
