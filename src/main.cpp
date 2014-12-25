@@ -5,6 +5,7 @@
 #include <setjmp.h>
 
 #define GENDISTANCE 30
+#define VIEWDISTANCE 15
 
 #include "common.hpp"
 #include "coord.hpp"
@@ -82,31 +83,44 @@ void visible_tile(const Coord &coord) {
         generate(coord);
 }
 
-// make visible around a block
-void visible_block(const Coord &coord) {
-    visible_tile(coord + Coord(0, -1));
-    visible_tile(coord + Coord(-1, 0));
-    visible_tile(coord + Coord(0, 0));
-    visible_tile(coord + Coord(1, 0));
-    visible_tile(coord + Coord(0, 1));
+bool visible_line(const Coord &_a, const Coord &_b) {
+    Coord a(_a);
+    Coord b(_b);
+    bool steep = ABS(b.y-a.y) > ABS(b.x-a.x);
+    if(steep) {
+        std::swap(a.x, a.y);
+        std::swap(b.x, b.y);
+    }
+    if(a.x > b.x)
+        std::swap(a, b);
+    int dx = b.x - a.x;
+    int dy = ABS(b.y - a.y);
+    int err = dx / 2;
+    int step = a.y < b.y ? 1 : -1;
+    int y = a.y;
+    for(int x = a.x; x <= b.x; x++) {
+        Coord cur = steep ? Coord(y, x) : Coord(x, y);
+        if((x != a.x && x != b.x) && data.get(cur, '#') == '#')
+            return false;
+        err -= dy;
+        if(err < 0) {
+            y += step;
+            err += dx;
+        }
+    }
+    return true;
 }
 
-// make things visible in a straight line
-void visible_line(const Coord &coord) {
-    Coord cur = Coord(coord);
-    for(; coord.x - cur.x < GENDISTANCE && data.contains(cur) &&
-            data.get(cur) == '.'; cur += Coord(-1, 0));
-    cur += Coord(1, 0);
-    for(; cur.x - coord.x < GENDISTANCE && data.contains(cur) &&
-            data.get(cur) == '.'; cur += Coord(1, 0))
-        visible_block(cur);
-    cur = Coord(coord);
-    for(; coord.y - cur.y < GENDISTANCE && data.contains(cur) &&
-            data.get(cur) == '.'; cur += Coord(0, -1));
-    cur += Coord(0, 1);
-    for(; cur.y - coord.y < GENDISTANCE && data.contains(cur) &&
-            data.get(cur) == '.'; cur += Coord(0, 1))
-        visible_block(cur);
+void slow_vision(const Coord &coord) {
+    for(int y = coord.y - VIEWDISTANCE; y <= coord.y + VIEWDISTANCE; y++)
+        for(int x = coord.x - VIEWDISTANCE; x <= coord.x + VIEWDISTANCE; x++)
+            if((x-coord.x)*(x-coord.x) + (y-coord.y)*(y-coord.y) < VIEWDISTANCE*VIEWDISTANCE)
+                if(visible_line(coord, Coord(x, y)))
+                    visible_tile(Coord(x, y));
+}
+
+void fov(const Coord &coord) {
+    slow_vision(coord);
 }
 
 void drawchar(int x, int y, char c) {
@@ -247,7 +261,7 @@ int main() {
         while(true) {
             if(localvision)
                 visible = Qtree<bool>();
-            visible_line(plr);
+            fov(plr);
             render(plr);
             int input = read_char();
             Coord newpos = plr;
