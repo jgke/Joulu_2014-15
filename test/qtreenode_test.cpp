@@ -1,3 +1,4 @@
+#define DEBUG //for throws
 #include "qtree.hpp"
 
 #include "common.hpp"
