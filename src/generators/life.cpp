@@ -20,13 +20,10 @@ int nbor(const Qtree<char> &data, const Coord &coord) {
 struct life_data {
     Qtree<char> *data;
     Qtree<char> *newdata;
-    int dist;
 };
 
 bool life_cb(const Coord &pos, const char &value, int len, void *data) {
     struct life_data *ldata = (struct life_data *)data;
-    if(len >= ldata->dist)
-        return false;
     if(ldata->data->contains(pos))
         return false;
     if(ldata->newdata->contains(pos))
@@ -40,8 +37,7 @@ void life_generate(Qtree<char> &data, const List<Coord> &points, int dist) {
     struct life_data cbdata;
     cbdata.data = &data;
     cbdata.newdata = &newdata;
-    cbdata.dist = dist;
-    bfs(data, points.get(0), '.', &cbdata, &life_cb);
+    bfs(data, points.get(0), '.', dist, &cbdata, &life_cb);
 
     Coord corner = newdata.corner();
     int width = newdata.width();

@@ -11,6 +11,7 @@
 #include "qtree.hpp"
 #include "list.hpp"
 #include "queue.hpp"
+#include "generators/empty.hpp"
 #include "generators/prim.hpp"
 #include "generators/life.hpp"
 
@@ -65,10 +66,13 @@ bool isVisible(const Coord &coord) {
 void generate(const Coord &coord) {
     List<Coord> points;
     points.add(coord);
-    if(rand()%2)
+    int randnum = rand()%3;
+    if(randnum == 0)
         prim_generate(data, points, GENDISTANCE);
-    else
+    else if(randnum == 1)
         life_generate(data, points, GENDISTANCE);
+    else
+        empty_generate(data, points, GENDISTANCE);
 }
 
 // make a tile visible
