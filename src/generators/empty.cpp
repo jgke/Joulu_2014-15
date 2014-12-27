@@ -7,6 +7,6 @@ bool empty_cb(const Coord &pos, const char &value, int len, void *data) {
     return true;
 }
 
-void empty_generator(Qtree<char> &data, const List<Coord> &points, int dist) {
-    bfs(data, points.get(0), '.', dist, &data, &empty_cb);
+void empty_generator(Qtree<char> &newdata, const Coord &start) {
+    bfs(newdata, start, '@', &newdata, &empty_cb);
 }

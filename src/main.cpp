@@ -63,19 +63,13 @@ bool isVisible(const Coord &coord) {
     return visible.contains(coord) && visible.get(coord);
 }
 
-void generate(const Coord &coord) {
-    List<Coord> points;
-    points.add(coord);
-    get_generator()(data, points, GENDISTANCE);
-}
-
 // make a tile visible
 int visible_tile(const Coord &coord) {
     int ret = 0;
     ret += visible.get(coord, false) ? 1 : 0;
     visible.add(true, coord);
     if(!data.contains(coord))
-        generate(coord);
+        generate(data, coord, GENDISTANCE);
     return ret;
 }
 
@@ -252,11 +246,7 @@ int main() {
         srand((unsigned)time(NULL));
         init_handle();
 
-        {
-            List<Coord> start;
-            start.add(Coord(0, 0));
-            empty_generator(data, start, 10);
-        }
+        generate(data, Coord(0, 0), 10);
 
         init_ncurses();
 

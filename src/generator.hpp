@@ -7,9 +7,8 @@
 #include "generators/life.hpp"
 #include "generators/prim.hpp"
 
-typedef void (*Generator)(Qtree<char> &data, const List<Coord> &points,
-        int dist);
+typedef void (*Generator)(Qtree<char> &newdata, const Coord &start);
 
-Generator get_generator();
+void generate(Qtree<char> &data, const Coord &start, int dist);
 
 #endif

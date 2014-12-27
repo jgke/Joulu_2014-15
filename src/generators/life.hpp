@@ -14,6 +14,6 @@
 /**
  * Generator for natural-like caves.
  */
-void life_generator(Qtree<char> &data, const List<Coord> &points, int dist);
+void life_generator(Qtree<char> &newdata, const Coord &start);
 
 #endif

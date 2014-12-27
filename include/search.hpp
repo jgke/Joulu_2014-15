@@ -35,13 +35,15 @@ class BFS_entry {
  * @param data data to walk through
  * @param start coordinate to start from
  * @param allowed value that can be traversed
- * @param dist maximum distance from start
  * @param cbdata data to be passed to callback
  * @param cb callback to be called with current position, value and length
+ * @param dist maximum distance from start
+ * @param allowEmpty should nonexistant values be traversed, default false
  */
-template <class T> void bfs(Qtree<T> data, const Coord &start, const T &allowed,
-        int dist, void *cbdata,
-        bool (*cb)(const Coord &pos, const T &value, int len, void *data)) {
+template <class T> void bfs(Qtree<T> &data, const Coord &start,
+        const T &allowed, void *cbdata,
+        bool (*cb)(const Coord &pos, const T &value, int len, void *data),
+        int dist=10000, bool allowEmpty=false) {
     Qtree<bool> visited;
     Queue<BFS_entry> queue;
     queue.add(BFS_entry(start, 0));
@@ -49,6 +51,9 @@ template <class T> void bfs(Qtree<T> data, const Coord &start, const T &allowed,
         BFS_entry c = queue.pop();
         if(c.len >= dist)
             continue;
+        if(!allowEmpty)
+            if(!data.contains(c.a))
+                continue;
         const T &val = data.get(c.a, allowed);
         if(val != allowed)
             continue;

@@ -12,6 +12,6 @@
 /**
  * Generator for empty space.
  */
-void empty_generator(Qtree<char> &data, const List<Coord> &points, int dist);
+void empty_generator(Qtree<char> &newdata, const Coord &start);
 
 #endif
