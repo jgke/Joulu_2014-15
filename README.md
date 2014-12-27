@@ -6,7 +6,7 @@ putkijuoksu is a dynamic dungeon generator.
 compiling
 =========
 
-        $ make
+        $ make -j4
 
 depends on:
 * ncurses
@@ -34,5 +34,10 @@ depends on:
 
 usage
 =====
-
-Arrow keys to move around, q to quit.
+| Key        | Action                   |
+|------------|--------------------------|
+| Arrow keys | move around              |
+| q          | quit                     |
+| h          | turn full vision on/off  |
+| l          | turn local vision on/off |
+| g          | go to start              |
