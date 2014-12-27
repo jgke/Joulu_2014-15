@@ -1,19 +1,23 @@
 include config.mk
 
-.PHONY: putkijuoksu doc test
+.PHONY: doc lib putkijuoksu test
 
-all: putkijuoksu test
+all: lib putkijuoksu test
 
 clean:
-	cd src; make clean
-	cd doc; make clean
-	cd test; make clean
-
-putkijuoksu:
-	cd src; make
+	cd doc; ${MAKE} clean
+	cd lib; ${MAKE} clean
+	cd src; ${MAKE} clean
+	cd test; ${MAKE} clean
 
 doc:
-	cd doc; make
+	cd doc; ${MAKE}
 
-test:
-	cd test; make
+lib:
+	cd lib; ${MAKE}
+
+putkijuoksu: lib
+	cd src; ${MAKE}
+
+test: lib
+	cd test; ${MAKE}

@@ -1,60 +1,36 @@
 #include <iostream>
+#include <cstdio>
 
-#include "test.hpp"
-
-#include "common.hpp" //SENSIBLE_OS
+#include "common.hpp"
 
 #ifdef SENSIBLE_OS
-//sigsegv handling
 #include <execinfo.h>
-#include <signal.h>
-#include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
 #include <unistd.h>
 #endif
 
+#include "handle.hpp"
+
+#include "test.hpp"
+
 int success_count = 0;
 int failure_count = 0;
 
+void handler(int sig) {
 #ifdef SENSIBLE_OS
-void handle(int sig, siginfo_t *siginfo, void *context) {
     void *trace[10];
     size_t len = backtrace(trace, sizeof(trace)/sizeof(trace[0]));
     fprintf(stderr, "Signal %d(%s) while testing\n", sig, strsignal(sig));
     backtrace_symbols_fd(trace, len, STDERR_FILENO);
-    exit(1);
-}
 #else
-void handle(int sig) {
-    fprintf(stderr, "Signal %d(%s) while testing\n", sig, strsignal(sig));
+    fprintf(stderr, "Signal %d while testing\n", sig);
+#endif
     exit(1);
 }
-#endif
 
 void init_tests() {
-#ifdef SENSIBLE_OS
-    struct sigaction act = {};
-    act.sa_sigaction = &handle;
-    act.sa_flags = SA_SIGINFO;
-    if(sigaction(SIGSEGV, &act, NULL)) {
-        std::cerr << "Failed to handle sigsegv." << std::endl;
-        exit(1);
-    }
-    if(sigaction(SIGABRT, &act, NULL)) {
-        std::cerr << "Failed to handle sigabrt." << std::endl;
-        exit(1);
-    }
-#else
-    if(signal(SIGSEGV, handle)) {
-        std::cerr << "Failed to handle sigsegv." << std::endl;
-        exit(1);
-    }
-    if(signal(SIGABRT, handle)) {
-        std::cerr << "Failed to handle sigabrt." << std::endl;
-        exit(1);
-    }
-#endif
+    handle_signals(&handler);
 }
 
 void test_success(const char *name) {

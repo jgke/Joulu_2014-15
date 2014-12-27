@@ -5,10 +5,10 @@ OBJECTS=main.o generator.o generators/prim.o generators/life.o generators/empty.
 LIBS=-lncurses
 
 %.o : %.cpp ${HEADERS}
-	${CC} -c ${CCFLAGS} $< -o $@
+	${CXX} -c ${CXXFLAGS} $< -o $@
 
 ${TARGET}: ${OBJECTS}
-	${CC} ${CCFLAGS} ${OBJECTS} ${LIBS} -o ${TARGET}
+	${CXX} ${CXXFLAGS} ${OBJECTS} ${LOBJECTS} ${LIBS} -o ${TARGET}
 
 all: ${TARGET}
 

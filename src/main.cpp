@@ -10,9 +10,11 @@
 
 #include "common.hpp"
 #include "coord.hpp"
-#include "qtree.hpp"
+#include "handle.hpp"
 #include "list.hpp"
+#include "qtree.hpp"
 #include "queue.hpp"
+
 #include "generator.hpp"
 
 //sigsegv handling
@@ -31,30 +33,8 @@ Qtree<bool> visible;
 bool hax = false;
 std::string status;
 
-#ifdef SENSIBLE_OS
-void handle(int sig, siginfo_t *siginfo, void *context) {
-#else
-void handle(int sig) {
-#endif
+void handler(int sig) {
     longjmp(env, 1);
-}
-
-void init_handle() {
-#ifdef SENSIBLE_OS
-    struct sigaction act = {};
-    act.sa_sigaction = &handle;
-    act.sa_flags = SA_SIGINFO;
-    if(sigaction(SIGSEGV, &act, NULL)) {
-        std::cerr << "Failed to handle sigsegv." << std::endl;
-        exit(1);
-    }
-    if(sigaction(SIGABRT, &act, NULL)) {
-        std::cerr << "Failed to handle sigabrt." << std::endl;
-        exit(1);
-    }
-#else
-    signal(SIGSEGV, handle);
-#endif
 }
 
 bool isVisible(const Coord &coord) {
@@ -244,9 +224,9 @@ int main() {
     if(!setjmp(env)) {
         bool localvision = false;
         srand((unsigned)time(NULL));
-        init_handle();
+        handle_signals(&handler);
 
-        generate(data, Coord(0, 0), 10);
+        generate(data, Coord(0, 0), 10, 0);
 
         init_ncurses();
 

@@ -253,7 +253,7 @@ template <class T> void Qtree<T>::map(void *data, void (*cb)(const T &value,
 }
 
 template <class T> Coord Qtree<T>::random() const {
-    return this->child->get_pos(rand()%this->child->memberCount);
+    return this->child->get(rand()%this->child->memberCount);
 }
 
 template <class T> T **Qtree<T>::render() const {
