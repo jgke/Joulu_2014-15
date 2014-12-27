@@ -72,6 +72,10 @@ template <class T> class Qtree {
          */
         T **render() const;
         /**
+         * Get amount of members in this quadtree.
+         */
+        int size() const;
+        /**
          * Get the width of this quadtree.
          */
         int width() const;
@@ -107,8 +111,9 @@ template <class T> class QtreeNode {
          * O(log n).
          * @param t element to add
          * @param coord position of the element
+         * @returns true if a new value was created
          * */
-        void add(const T &t, const Coord &coord);
+        bool add(const T &t, const Coord &coord);
         /** Add an QtreeNode to this QtreeNode.
          * O(log n).
          * @param node QtreeNode to add
@@ -145,6 +150,10 @@ template <class T> class QtreeNode {
          * Position of the QtreeNode.
          */
         Coord coord;
+        /**
+         * Amount of members in this quadtree.
+         */
+        int memberCount;
         /**
          * Size of the QtreeNode.
          */
@@ -240,6 +249,10 @@ template <class T> T **Qtree<T>::render() const {
     return target;
 }
 
+template <class T> int Qtree<T>::size() const {
+    return this->child->memberCount;
+}
+
 template <class T> int Qtree<T>::width() const {
     return this->maxx - this->minx+1;
 }
@@ -261,10 +274,12 @@ template <class T> QtreeNode<T>::QtreeNode(const Coord &coord, int size):
     this->coord = coord;
     this->size = size;
     this->value_set = false;
+    this->memberCount = 0;
 }
 
 template <class T> QtreeNode<T>::QtreeNode(const QtreeNode &node):
         coord(node.coord), size(node.size) {
+    this->memberCount = node.memberCount;
     for(int i = 0; i < 4; i++) {
         this->content[i] = NULL;
     }
@@ -281,6 +296,7 @@ template <class T> QtreeNode<T> &QtreeNode<T>::operator= (
         const QtreeNode<T> &node) {
     this->size = node.size;
     this->coord = node.coord;
+    this->memberCount = node.memberCount;
     for(int i = 0; i < 4; i++) {
         this->content[i] = NULL;
     }
@@ -307,20 +323,27 @@ template <class T> void QtreeNode<T>::fill_content() {
         this->content[3] = new QtreeNode<T>(this->coord + Coord(hs, hs), hs);
 }
 
-template <class T> void QtreeNode<T>::add(const T &t, const Coord &coord) {
+template <class T> bool QtreeNode<T>::add(const T &t, const Coord &coord) {
 #ifdef DEBUG
     if(!this->contains(coord))
         throw std::out_of_range("tried to add an out of range value to QtreeNode");
 #endif
     if(this->size == 1) {
+        bool ret = !this->value_set;
         this->value = t;
         this->value_set = true;
-        return;
+        this->memberCount = 1;
+        return ret;
     }
     fill_content();
     for(int i = 0; i < 4; i++)
-        if(this->content[i]->contains(coord))
-            this->content[i]->add(t, coord);
+        if(this->content[i]->contains(coord)) {
+            bool ret = this->content[i]->add(t, coord);
+            if(ret)
+                this->memberCount++;
+            return ret;
+        }
+    return false;
 }
 
 template <class T> void QtreeNode<T>::add(QtreeNode *node) {
@@ -331,8 +354,10 @@ template <class T> void QtreeNode<T>::add(QtreeNode *node) {
     int id = get_id(node->coord);
     fill_content();
     if(this->size == node->size*2) {
+        this->memberCount -= this->content[id]->memberCount;
         delete this->content[id];
         this->content[id] = node;
+        this->memberCount += this->content[id]->memberCount;
     }
     else
         this->content[id]->add(node);
