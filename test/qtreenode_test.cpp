@@ -27,6 +27,8 @@ void qtreenode_test() {
     test_false("QtreeNode doesn't contain value at 0, 1",
             curnode.containsValue(Coord(0, 1)));
     test_true("QtreeNode contains space at 0, 1", curnode.contains(Coord(0, 1)));
+    test_equal("Can get an item by index from QtreeNode", Coord(0, 0),
+            curnode.get(0));
     DEATH_TEST("QtreeNode crashes on invalid size constructor", {
         QtreeNode<int>(Coord(0, 0), 0);
     });
