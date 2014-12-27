@@ -7,6 +7,7 @@
 #define QTREE_HPP
 
 #include <iostream>
+#include <cstdlib> //rand
 
 #include "common.hpp"
 #include "coord.hpp"
@@ -67,7 +68,12 @@ template <class T> class Qtree {
          */
         void map(void *data, void (*cb)(const T &value, const Coord &pos, void *data));
         /**
+         * Return a random coord that this qtree contains.
+         */
+        Coord random() const;
+        /**
          * Render this quadtree.
+         * O(log n).
          * @returns new-allocated Array containing all elements as a 2d array.
          */
         T **render() const;
@@ -131,6 +137,11 @@ template <class T> class QtreeNode {
          * O(log n).
          */
         T get(const Coord &coord) const;
+        /**
+         * Return a coordinate by an index.
+         * O(log n).
+         */
+        const Coord &get(int index) const;
         /**
          * Call cb for each value with value and position.
          */
@@ -239,6 +250,10 @@ template <class T> int Qtree<T>::height() const {
 template <class T> void Qtree<T>::map(void *data, void (*cb)(const T &value,
             const Coord &pos, void *data)) {
     this->child->map(data, cb);
+}
+
+template <class T> Coord Qtree<T>::random() const {
+    return this->child->get_pos(rand()%this->child->memberCount);
 }
 
 template <class T> T **Qtree<T>::render() const {
@@ -389,6 +404,17 @@ template <class T> T QtreeNode<T>::get(const Coord &coord) const {
         if(this->content[i]->contains(coord))
             return this->content[i]->get(coord);
     throw std::out_of_range("tried to add an out of range QtreeNode");
+}
+
+template <class T> const Coord &QtreeNode<T>::get(int index) const {
+    if(this->size == 1)
+        return this->coord;
+    for(int i = 0; i < 4; i++) {
+        if(index < this->content[i]->memberCount)
+            return this->content[i]->get(index);
+        index -= this->content[i]->memberCount;
+    }
+    throw std::out_of_range("tried to get an out of range index");
 }
 
 //get the index to this->content where (x, y) is
