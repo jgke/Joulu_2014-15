@@ -255,7 +255,7 @@ int main() {
                 case KEY_RIGHT:
                     newpos += Coord(1, 0);
                     break;
-                case 'p':
+                case 'h':
                     hax = !hax;
                     break;
                 case 'l':
