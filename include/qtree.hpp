@@ -253,6 +253,8 @@ template <class T> void Qtree<T>::map(void *data, void (*cb)(const T &value,
 }
 
 template <class T> Coord Qtree<T>::random() const {
+    if(this->child->memberCount == 0)
+        return Coord(0, 0);
     return this->child->get(rand()%this->child->memberCount);
 }
 
@@ -358,7 +360,8 @@ template <class T> bool QtreeNode<T>::add(const T &t, const Coord &coord) {
                 this->memberCount++;
             return ret;
         }
-    return false;
+    //never reached
+    throw std::out_of_range("tried to add an out of range value to QtreeNode");
 }
 
 template <class T> void QtreeNode<T>::add(QtreeNode *node) {

@@ -46,14 +46,6 @@ template <class T> class _Coord {
          */
         _Coord operator-=(const _Coord &coord);
         /**
-         * Multiply two _Coords, (a,b) * (c, d) = (a*c, b*d).
-         */
-        _Coord operator*=(const _Coord &coord);
-        /**
-         * Divide two _Coords, (a,b) / (c, d) = (a/c, b/d).
-         */
-        _Coord operator/=(const _Coord &coord);
-        /**
          * True if _Coords are equal, (a,b) == (c, d) = a==c && b==d.
          */
         bool operator==(const _Coord &coord) const;
@@ -61,10 +53,6 @@ template <class T> class _Coord {
          * True if _Coords are not equal, (a,b) != (c, d) = a!=c || b!=d.
          */
         bool operator!=(const _Coord &coord) const;
-        /**
-         * Return ith coordinant, x = coord[0], y = coord[1].
-         */
-        T operator[](const int &i) const;
         /**
          * The x-coordinate.
          */
@@ -117,49 +105,12 @@ template <class T> _Coord<T> _Coord<T>::operator-=(const _Coord<T> &coord) {
     return *this;
 }
 
-/**
- * Multiply two coords.
- */
-template <class T> _Coord<T> operator*(const _Coord<T> &a, const _Coord<T> &b) {
-    return _Coord<T>(a.x*b.x, a.y*b.y);
-}
-
-template <class T> _Coord<T> _Coord<T>::operator*=(const _Coord<T> &coord) {
-    this->x *= coord.x;
-    this->y *= coord.y;
-    return *this;
-}
-
-/**
- * Divide two coords.
- */
-template <class T> _Coord<T> operator/(const _Coord<T> &a, const _Coord<T> &b) {
-    return _Coord<T>(a.x/b.x, a.y/b.y);
-}
-
-template <class T> _Coord<T> _Coord<T>::operator/=(const _Coord<T> &coord) {
-    this->x /= coord.x;
-    this->y /= coord.y;
-    return *this;
-}
-
 template <class T> bool _Coord<T>::operator== (const _Coord<T> &coord) const {
     return this->x == coord.x && this->y == coord.y;
 }
 
 template <class T> bool _Coord<T>::operator!=(const _Coord<T> &coord) const {
     return this->x != coord.x || this->y != coord.y;
-}
-
-template <class T> T _Coord<T>::operator[](const int &i) const {
-    switch(i) {
-    case 0:
-        return this->x;
-    case 1:
-        return this->y;
-    default:
-        throw std::out_of_range("tried to get out of range index from _Coord");
-    }
 }
 
 /**
@@ -170,12 +121,14 @@ template <class T> std::ostream &operator<<(std::ostream &stream,
     return stream << a.x << ", " << a.y << "]";
 }
 
-/**
- * Swap two coords.
- */
-template <class T> void swap(T &a, T &b) {
-    std::swap(a.x, b.x);
-    std::swap(a.y, b.y);
+namespace std {
+    /**
+     * Swap two coords.
+     */
+    template <class T> void swap(_Coord<T> &a, _Coord<T> &b) {
+        std::swap(a.x, b.x);
+        std::swap(a.y, b.y);
+    }
 }
 
 /**

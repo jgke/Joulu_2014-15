@@ -1,5 +1,8 @@
 #include "test.hpp"
 
+#include <sstream>
+#include <algorithm>
+
 #include "coord.hpp"
 
 #include "coord_test.hpp"
@@ -34,4 +37,29 @@ void coord_test() {
     curb.y = 6;
     test_equal("x-coordinate doesn't change on variable change", 1, cur.x);
     test_equal("y-coordinate doesn't change on variable change", 2, cur.y);
+    test_true("operator== works on equal", Coord(1, 2) == Coord(1, 2));
+    test_false("operator== works on differing x", Coord(1, 2) == Coord(3, 2));
+    test_false("operator== works on differing y", Coord(1, 2) == Coord(1, 5));
+    test_false("operator== works on both", Coord(1, 2) == Coord(3, 4));
+    test_false("operator!= works on equal", Coord(1, 2) != Coord(1, 2));
+    test_true("operator!= works on differing x", Coord(1, 3) != Coord(2, 3));
+    test_true("operator!= works on differing y", Coord(1, 5) != Coord(1, 2));
+    test_true("operator!= works on both", Coord(0, 3) != Coord(1, 2));
+    test_equal("operator+ works", Coord(1, 2), Coord(0, 1) + Coord(1, 1));
+    test_equal("operator- works", Coord(2, 1), Coord(3, 2) - Coord(1, 1));
+    NO_DEATH_TEST("can output coord to stream", {
+        std::stringstream strm;
+        strm << Coord(1, 2);
+    });
+    cur = Coord(0, 0);
+    cur += Coord(1, 2);
+    test_equal("operator+= works", Coord(1, 2), cur);
+    cur -= Coord(2, 3);
+    test_equal("operator-= works", Coord(-1, -1), cur);
+    test_equal("length() works", 3, Coord(-2, 1).length());
+    cur = Coord(0, 1);
+    curb = Coord(2, 3);
+    std::swap(cur, curb);
+    test_equal("swap works on first argument", Coord(2, 3), cur);
+    test_equal("swap works on second argument", Coord(0, 1), curb);
 }
