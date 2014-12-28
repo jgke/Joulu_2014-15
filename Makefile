@@ -10,8 +10,9 @@ clean:
 	cd src; ${MAKE} clean
 	cd test; ${MAKE} clean
 
-doc:
+doc: lib
 	cd doc; ${MAKE}
+	cd test; ${MAKE} coverage
 
 lib:
 	cd lib; ${MAKE}

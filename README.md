@@ -25,12 +25,15 @@ documentation
 
         $ make doc
 
-After compilation, documentation is located at doc/*.pdf, and doxygen output
-is located at doc/html/index.html.
+After compilation, documentation is located at doc/*.pdf. Doxygen output is
+located at doc/doxygen/index.html, and test coverage reports are at
+doc/coverage/index.html.
 
 depends on:
 * texi2pdf
 * doxygen
+* gcov
+* lcov
 
 usage
 =====

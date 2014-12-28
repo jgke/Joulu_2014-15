@@ -4,6 +4,7 @@ PROJECT_NUMBER         =
 PROJECT_BRIEF          = Dynamic dungeon generator.
 PROJECT_LOGO           =
 OUTPUT_DIRECTORY       = 
+HTML_OUTPUT            = doxygen
 OUTPUT_LANGUAGE        = Finnish
 FULL_PATH_NAMES        = NO
 JAVADOC_AUTOBRIEF      = YES

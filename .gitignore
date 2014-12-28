@@ -1,5 +1,10 @@
 putkijuoksu
 libtest
-doc/html
+doc/doxygen
 *.o
 *.pdf
+*.gcda
+*.gcno
+*.gcov
+coverage-out
+doc/coverage

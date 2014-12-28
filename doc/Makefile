@@ -15,4 +15,4 @@ doxygen:
 	doxygen Doxyfile
 
 clean:
-	rm -rf *.pdf html
+	rm -rf *.pdf doxygen coverage
