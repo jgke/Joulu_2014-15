@@ -1,4 +1,5 @@
 #include <iostream>
+#include <stdio.h>
 #include <signal.h>
 #include <string.h>
 
@@ -15,6 +16,7 @@ void handle(int sig, siginfo_t *siginfo, void *context) {
 #else
 void handle(int sig) {
 #endif
+    fprintf(stderr, "Caught signal %d.\n", sig);
     handler(sig);
 }
 
