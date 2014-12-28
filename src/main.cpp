@@ -5,7 +5,7 @@
 #include <setjmp.h>
 #include <sstream>
 
-#define GENDISTANCE 30
+#define GENDISTANCE 45
 #define VIEWDISTANCE 15
 
 #include "common.hpp"
