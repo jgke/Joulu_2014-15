@@ -60,7 +60,7 @@ bool visible_line(Qtree<char> &world, const Coord &_a, const Coord &_b) {
     int y = a.y;
     for(int x = a.x; x <= b.x; x++) {
         Coord cur = steep ? Coord(y, x) : Coord(x, y);
-        if((x != a.x && x != b.x) && world.get(cur, '#') == '#')
+        if((x != a.x && x != b.x) && world.get(cur, '.') == '#')
             return false;
         err -= dy;
         if(err < 0) {
