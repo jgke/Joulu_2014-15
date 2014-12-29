@@ -42,6 +42,7 @@ void prim_generator(Qtree<char> &data, const Coord &_start) {
     Qtree<bool> visited;
     Qtree<char> newdata;
     Qpair sdata(&data, &newdata);
+    /* shrink the Qtree by one */
     data.map(&sdata, &prim_map_shrink);
     Coord start = newdata.random();
     
@@ -52,18 +53,29 @@ void prim_generator(Qtree<char> &data, const Coord &_start) {
 
     while(list.size()) {
         Cpair cur = list.remove(rand()%list.size());
-        if(!newdata.contains(cur.a) || !newdata.contains(cur.b))
+        /* if this fails the hole would be out of bounds */
+        if(!newdata.contains(cur.a))
             continue;
+        /* if this fails the wall is inside bounds but the end point isn't
+         * so the wall can be dug for more exits */
+        if(!newdata.contains(cur.b)) {
+            newdata.add('.', cur.a);
+            continue;
+        }
         if(visited.contains(cur.b))
             continue;
+        /* the end point hasn't been touched yet, so dig to it */
         newdata.add('.', cur.a);
         visited.add(true, cur.b);
         newdata.add('.', cur.b);
+        /* and add all neighbors to the list */
         list.add(Cpair(cur.b + Coord(-1, 0), cur.b + Coord(-2, 0)));
         list.add(Cpair(cur.b + Coord(1, 0), cur.b + Coord(2, 0)));
         list.add(Cpair(cur.b + Coord(0, -1), cur.b + Coord(0, -2)));
         list.add(Cpair(cur.b + Coord(0, 1), cur.b + Coord(0, 2)));
     }
+    /* now just add things back to the original data Qtree, and dig some
+     * entrances */
     List<Coord> walls;
     Pair<List<Coord> *, Qpair> pair(&walls, Qpair(&data, &newdata));
     data.map(&pair, &prim_map_cb);

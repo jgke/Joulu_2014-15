@@ -6,7 +6,7 @@
 #include "life.hpp"
 #include "search.hpp"
 
-int nbor(const Qtree<char> &data, const Coord &coord) {
+int neighborCount(const Qtree<char> &data, const Coord &coord) {
     int ret = 0;
     for(int y = -1; y <= 1; y++)
         for(int x = -1; x <= 1; x++)
@@ -35,7 +35,7 @@ void life_generator(Qtree<char> &newdata, const Coord &start) {
                 Coord curpos(x, y);
                 if(newdata.contains(curpos)) {
                     char cur = newdata.get(curpos);
-                    int nborc = nbor(newdata, curpos);
+                    int nborc = neighborCount(newdata, curpos);
                     if(cur == '.')
                         /* B5678 */
                         if(nborc >= 5)
