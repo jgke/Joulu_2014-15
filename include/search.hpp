@@ -48,7 +48,7 @@ template <class T> void bfs(Qtree<T> &data, const Coord &start,
     Queue<BFS_entry> queue;
     queue.add(BFS_entry(start, 0));
     while(queue.hasNext()) {
-        BFS_entry c = queue.pop();
+        const BFS_entry &c = queue.pop();
         if(c.len >= dist)
             continue;
         if(!allowEmpty)

@@ -44,7 +44,7 @@ template <class T> class Queue {
         /**
          * Returns the next member and removes it from the queue.
          */
-        const T &pop();
+        T pop();
         /**
          * Returns the amount of members in this queue.
          */
@@ -100,6 +100,8 @@ template <class T> Queue<T>::Queue(const Queue<T> &queue) {
 }
 
 template <class T> Queue<T> &Queue<T>::operator=(const Queue<T> &queue) {
+    while(this->hasNext())
+        this->pop();
     this->membercount = 0;
     this->root = NULL;
     this->tail = NULL;
@@ -129,13 +131,13 @@ template <class T> const T &Queue<T>::peek() const {
     return root->value;
 }
 
-template <class T> const T &Queue<T>::pop() {
+template <class T> T Queue<T>::pop() {
     this->membercount--;
     QueueNode<T> *retnode = root;
     root = root->next;
     if(root == NULL)
         tail = NULL;
-    const T &retvalue = retnode->value;
+    T retvalue = retnode->value;
     delete retnode;
     return retvalue;
     

@@ -193,6 +193,7 @@ template <class T> Qtree<T>::Qtree(const Qtree &qtree) {
 }
 
 template <class T> Qtree<T> &Qtree<T>::operator= (const Qtree<T> &qtree) {
+    delete this->child;
     this->child = new QtreeNode<T>(*qtree.child);
     this->minx = qtree.minx;
     this->maxx = qtree.maxx;
