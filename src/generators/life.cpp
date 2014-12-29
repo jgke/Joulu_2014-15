@@ -23,7 +23,7 @@ bool life_cb(const Coord &pos, const char &value, int len, void *data) {
 }
 
 void life_generator(Qtree<char> &newdata, const Coord &start) {
-    bfs(newdata, start, '@', &newdata, &life_cb);
+    bfs(newdata, start, '%', &newdata, &life_cb);
 
     Coord corner = newdata.corner();
     int width = newdata.width();

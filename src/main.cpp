@@ -119,7 +119,7 @@ void render(const Coord &coord) {
             else
                 drawchar(x-(coord.x-hx), y-(coord.y-hy), ' ');
     }
-    drawchar(coord.x-(coord.x-hx), coord.y-(coord.y-hy), '%');
+    drawchar(coord.x-(coord.x-hx), coord.y-(coord.y-hy), '@');
     mvaddstr(0, 0, status.c_str());
     move(coord.y-(coord.y-hy)+1, 2*(coord.x-(coord.x-hx)));
 #else

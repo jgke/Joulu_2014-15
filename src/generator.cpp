@@ -13,7 +13,7 @@ const Generator generators[3] = {
 const int generatoramount = sizeof(generators)/sizeof(generators[0]);
 
 bool generate_cb(const Coord &pos, const char &value, int len, void *data) {
-    ((Qtree<char> *)data)->add('@', pos);
+    ((Qtree<char> *)data)->add('%', pos);
     return true;
 }
 
@@ -31,10 +31,10 @@ void generate(Qtree<char> &data, const Coord &start, int dist, int num) {
     switch(rand()%generatoramount) {
         case 2:
             //prim needs a bit more space to look good
-            bfs(data, start, '@', &newdata, &generate_cb, dist*2, true);
+            bfs(data, start, '%', &newdata, &generate_cb, dist*2, true);
             break;
         default:
-            bfs(data, start, '@', &newdata, &generate_cb, dist, true);
+            bfs(data, start, '%', &newdata, &generate_cb, dist, true);
             break;
     }
     if(num >= 0)
