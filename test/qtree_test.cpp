@@ -29,6 +29,7 @@ void qtree_test() {
     test_false("Qtree doesn't contain element at (-1, 0)", cur.contains(Coord(-1, 0)));
     test_false("Qtree doesn't contain element at (0, 1)", cur.contains(Coord(0, 1)));
     test_false("Qtree doesn't contain element at (0, -1)", cur.contains(Coord(0, -1)));
+    test_equal("Can get size from Qtree", 1, cur.size());
     test_equal("Can get nonexisting element from Qtree", -1, cur.get(Coord(1, 0), -1));
     test_true("Can get random contained coordinate Qtree", cur.contains(cur.random()));
     cur.add(3, Coord(1, 0));
