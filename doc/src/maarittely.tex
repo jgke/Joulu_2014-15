@@ -2,6 +2,7 @@
 \usepackage[finnish]{babel}
 \usepackage[utf8]{inputenc}
 \usepackage{color, colortbl}
+\usepackage[margin=1.5cm]{geometry}
 \definecolor{Gray}{gray}{0.9}
 \author{Jaakko Hannikainen}
 
@@ -17,36 +18,36 @@ koko lähenee ääretöntä.
 Tietorakenteet:
 
 \begin{table}[h]
-\begin{tabular}{| l | l |}
+\begin{tabular}{| l | l | l | l |}
 \hline
 \rowcolor{Gray}
-Tietorakenne tai algoritmi & Mihin tarkoitukseen      \\ \hline
-Quadtree                   & Luolaston säilyttämiseen \\ \hline
-Dynaaminen lista           & Primin prioriteettijono  \\ \hline
-BFS                        & Reitin hakemiseen        \\ \hline
-DFS                        & Reitin hakemiseen        \\ \hline
+Tietorakenne tai algoritmi & Mihin tarkoitukseen      & Aikavaatimus                    & Tilavaatimus  \\ \hline
+Quadtree                   & Luolaston säilyttämiseen & $O(\log n)$    $O(n)$           & $O(n)$        \\ \hline
+Dynaaminen lista           & Primin prioriteettijono  & $O(1)$ add/get, $O(n)$ remove)  & $O(n)$        \\ \hline
+BFS                        & Reitin hakemiseen        & $O(|E| + |V|)$                  & $O(|V|)$      \\ \hline
+DFS                        & Reitin hakemiseen        & $O(|E| + |V|)$                  & $O(|V|)$      \\ \hline
 \end{tabular}
 \end{table}
 
 \noindent
 Luolaston luomiseen tarkoitetut algoritmit:
 \begin{table}[h]
-\begin{tabular}{| l | p{6.5cm} | l |}
+\begin{tabular}{| l | p{6.0cm} | l | l | l |}
 \hline
 \rowcolor{Gray}
-Algoritmi   & Kuvaus                                & Ominaisuudet              \\ \hline
-Prim        & Ota jonosta satunnainen piste, lisää  & Puumainen, helppo löytää  \\
-            & jonoon nykyisen pisteen naapurit      & alkupiste                 \\ \hline
-Kruskal     & Lisää kaikki pisteet joukkoon, ota    & Kaikki sokkelot yhtä      \\
-            & satunnainen piste joukosta            & todennäköisiä             \\ \hline
-Recursive   & Ota huone, jaa neljään osaan, leikkaa & Suorakulmiomaisia         \\ 
-division    & kolmeen seinään neljästä aukko        & sokkeloita                \\ \hline
-Random room & Sijoita suorakulmioita kartalle,      & Perinteinen roguelike-    \\ 
-placement   & muodosta polkuja huoneiden välille    & generaattori              \\ \hline
-Cellular    & Satunnainen alkutila, aja muutama     & Luonnollisen näköisiä     \\ 
-automata    & generaatio B5678/S45678-automataa     & luolia                    \\ \hline
-Depth-first & Ota päälimmäinen piste pinosta, lisää & Pitkiä käytäviä           \\ 
-            & naapurit satunnaisessa järjestyksessä &                           \\ \hline
+Algoritmi   & Kuvaus                                & Ominaisuudet              & Aikavaatimus & Muistivaatimus \\ \hline
+Prim        & Ota jonosta satunnainen piste, lisää  & Puumainen, helppo löytää  & $O(|E|^2)$   & $O(|E|)$       \\
+            & jonoon nykyisen pisteen naapurit      & alkupiste                 &              &                \\ \hline
+Kruskal     & Lisää kaikki pisteet joukkoon, ota    & Kaikki sokkelot yhtä      & $O(|E|^2)$   & $O(|E|)$       \\
+            & satunnainen piste joukosta            & todennäköisiä             &              &                \\ \hline
+Recursive   & Ota huone, jaa neljään osaan, leikkaa & Suorakulmiomaisia         & $O(|V|)$     & $O(\log |V|)$  \\
+division    & kolmeen seinään neljästä aukko        & sokkeloita                &              &                \\ \hline
+Random room & Sijoita suorakulmioita kartalle,      & Perinteinen roguelike-    & $O(|V|)$     & $O(|V|)$       \\
+placement   & muodosta polkuja huoneiden välille    & generaattori              &              &                \\ \hline
+Cellular    & Satunnainen alkutila, aja muutama     & Luonnollisen näköisiä     & $O(|V|)$     & $O(|V|)$       \\
+automata    & generaatio B5678/S45678-automataa     & luolia                    &              &                \\ \hline
+Depth-first & Ota päälimmäinen piste pinosta, lisää & Pitkiä käytäviä           & $O(|V|)$     & $O(|V|)$       \\
+            & naapurit satunnaisessa järjestyksessä &                           &              &                \\ \hline
 \end{tabular}
 \end{table}
 
