@@ -37,10 +37,11 @@ depends on:
 
 usage
 =====
-| Key        | Action                   |
-|------------|--------------------------|
-| Arrow keys | move around              |
-| q          | quit                     |
-| h          | turn full vision on/off  |
-| l          | turn local vision on/off |
-| g          | go to start              |
+| Key        | Action               |
+|------------|----------------------|
+| Arrow keys | move around          |
+| q          | quit                 |
+| f          | turn full vision on  |
+| l          | turn local vision on |
+| k          | turn known vision on |
+| g          | go to start          |
