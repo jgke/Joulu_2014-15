@@ -5,25 +5,26 @@
 #include <sstream>
 
 #include "common.hpp"
-#include "ui.hpp"
 #include "coord.hpp"
 #include "handle.hpp"
 #include "list.hpp"
 #include "qtree.hpp"
 #include "queue.hpp"
 
+#include "level.hpp"
+#include "ui.hpp"
+
 #define GENDISTANCE 45
 #define VIEWDISTANCE 15
 #include "generator.hpp"
 
 jmp_buf env;
-Qtree<char> data;
 
 void handler(int sig) {
     longjmp(env, 1);
 }
 
-void path(Queue<Coord> &target, const Coord &a, const Coord &b) {
+void path(Qtree<char> data, Queue<Coord> &target, const Coord &a, const Coord &b) {
     if(a == b)
         return;
     Queue<std::pair<Coord, Coord> > queue;
@@ -74,10 +75,11 @@ void init() {
 int main() {
     if(!setjmp(env)) {
         init();
-        generate(data, Coord(0, 0), 10, 0);
+        Level level;
+        generate(level.data, Coord(0, 0), 10, 0);
         Coord plr;
         while(true) {
-            render(data, plr);
+            render(level, plr);
             int input = read_char();
             Coord newpos = plr;
             switch(input) {
@@ -93,24 +95,43 @@ int main() {
                 case KEY_RIGHT:
                     newpos += Coord(1, 0);
                     break;
+                case 'l':
+                    level.status = "Setting local vision.";
+                    level.visionType = LOCAL_VISION;
+                    break;
+                case 'k':
+                    level.status = "Setting known vision.";
+                    level.visionType = KNOWN_VISION;
+                    break;
+                case 'f':
+                    level.status = "Setting full vision.";
+                    level.visionType = FULL_VISION;
+                    break;
                 case 'q':
                     goto end;
                 case 'g':
+                    level.status = "Finding a path...";
                     Queue<Coord> tmp;
-                    path(tmp, plr, Coord(0, 0));
+                    path(level.data, tmp, plr, Coord(0, 0));
                     set_timeout(30);
                     {
+                        int max = tmp.size();
+                        int progress = 1;
                         while(tmp.hasNext()) {
+                            std::stringstream stream;
+                            stream << "Finding a path... (" << progress++
+                                << " / " << max << ")";
                             read_char();
                             newpos = tmp.pop();
-                            render(data, newpos);
+                            render(level, newpos);
                         }
                     }
+                    level.status = "";
                     plr = newpos;
                     set_timeout(-1);
                     break;
             }
-            if(data.contains(newpos) && data.get(newpos) == '.')
+            if(level.data.contains(newpos) && level.data.get(newpos) == '.')
                 plr = newpos;
         }
     }
