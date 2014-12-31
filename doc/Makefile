@@ -1,6 +1,6 @@
 include ../config.mk
 
-TARGETS=maarittely.pdf vk1.pdf
+TARGETS=maarittely.pdf vk1.pdf vk2.pdf
 
 .PHONY: latex doxygen
 
