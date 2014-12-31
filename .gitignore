@@ -1,10 +1,14 @@
 putkijuoksu
 libtest
+performance-test
+coverage-out
 doc/doxygen
+doc/coverage
+fit.log
 *.o
 *.pdf
 *.gcda
 *.gcno
 *.gcov
-coverage-out
-doc/coverage
+*.png
+*.dat
