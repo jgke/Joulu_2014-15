@@ -3,10 +3,10 @@ reset
 set terminal png
 set xlabel "n"
 set ylabel "time (milliseconds)"
-set title "Qtree get"
+set title "Qtree contains"
 
 set logscale x
 f(x) = a*log(x)+abs(b)
-fit [1:] f(x) 'qtree-get.dat' via a,b
+fit [1:] f(x) 'qtree-contains.dat' via a,b
 plot [1:] f(x) title "time taken", \
- 'qtree-get.dat' with points title ""
+ 'qtree-contains.dat' with points title ""

@@ -3,7 +3,7 @@ include ../../config.mk
 TARGET=performance-test
 OBJECTS=main.o
 CXXFLAGS+= -I../../include
-IMAGES=qtree-add.png qtree-get.png
+IMAGES=qtree-add.png qtree-contains.png qtree-get.png qtree-map.png
 
 %.o : %.cpp ${HEADERS}
 	${CXX} -c ${CXXFLAGS} $< -o $@
