@@ -1,10 +1,7 @@
 #!/usr/bin/gnuplot
-reset
-set terminal png
-set xlabel "n"
-set ylabel "time (milliseconds)"
-set title "Qtree add"
+load "performance.gp"
 
+set title "Qtree add"
 set logscale x
 f(x) = a*log(x)+abs(b)
 fit [1:] f(x) 'qtree-add.dat' via a,b
