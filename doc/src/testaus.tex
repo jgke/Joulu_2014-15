@@ -1,0 +1,44 @@
+\documentclass{article}
+\usepackage[finnish]{babel}
+\usepackage[utf8]{inputenc}
+\usepackage{geometry}
+\author{Jaakko Hannikainen}
+
+\title{Tietorakenteiden ja algoritmien harjoitustyö - Testausdokumentti}
+\begin{document}
+\maketitle
+
+\section{Testatut tietorakenteet}
+\begin{itemize}
+    \item Qtree - quadtree
+    \item QtreeNode - quadtreen noodi eli solmu tai lehti
+    \item List - dynaaminen lista
+    \item Queue - jono
+\end{itemize}
+Testaus on toteutettu siten, että jokainen testatun luokan rivi on suoritettu
+testien ajon jälkeen. Lisäksi Qtree-luokkaa on testattu tehokkuuden puolesta,
+ajaen add, contains, get ja map-metodeita suurilla syötteillä.
+
+\section{Testauksen toistaminen}
+\subsection{Virhetestaus}
+\begin{enumerate}
+    \item Käännä testit \\
+        \texttt{\$ make test -j4} 
+    \item Aja testit \\
+        \texttt{\$ ./libtest}
+\end{enumerate}
+Testit tulostavat SUCCESS jokaisen onnistuneen testin vieressä, ja FAILURE
+jokaisen epäonnistuneen testin vieressä. Testaus tulostaa lopuksi koosteen
+testien onnistumisesta.
+
+\subsection{Tehotestaus}
+Tehotestauksen toistaminen vaatii gnuplot-nimisen ohjelman olemassaolon. Testien
+suorittaminen kestää noin puoli minuuttia.
+\begin{enumerate}
+    \item Käännä ja suorita testit \\
+        \texttt{\$ cd test/performance; make }
+\end{enumerate}
+Tehotestaus luo png-muotoisia graafeja testauksesta, jotka löytyvät samasta
+kansiosta.
+
+\end{document}
