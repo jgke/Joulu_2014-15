@@ -1,9 +1,9 @@
 include ../config.mk
 
 TARGET=../putkijuoksu
-OBJECTS=main.o generator.o ui.o generators/prim.o generators/life.o \
+OBJECTS=main.o cube.o generator.o ui.o generators/prim.o generators/life.o \
 	generators/empty.o
-LIBS=-lncurses
+LIBS=-lm -lSDL2 -lGL -lGLU
 
 %.o : %.cpp ${HEADERS}
 	${CXX} -c ${CXXFLAGS} $< -o $@

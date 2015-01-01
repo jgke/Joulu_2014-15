@@ -9,7 +9,8 @@ compiling
         $ make -j4
 
 depends on:
-* ncurses
+* gl
+* glu
 * c++ compiler
 
 running
@@ -37,11 +38,7 @@ depends on:
 
 usage
 =====
-| Key        | Action               |
-|------------|----------------------|
-| Arrow keys | move around          |
-| q          | quit                 |
-| f          | turn full vision on  |
-| l          | turn local vision on |
-| k          | turn known vision on |
-| g          | go to start          |
+| Key   | Action      |
+|-------|-------------|
+| wasd  | move around |
+| mouse | look around |
