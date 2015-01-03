@@ -1,105 +1,77 @@
+#define GL_GLEXT_PROTOTYPES
 #include <GL/gl.h>
+#include <GL/glext.h>
 
 #include "glcoord.hpp"
 
 #include "cube.hpp"
+#include "resource.hpp"
 
 Cube::Cube() {}
 
 Cube::Cube(const GLCoord &pos): pos(pos) {}
 
+GLubyte cubeIndices[] = {
+    0,1,2, 2,3,0,       // front
+    4,5,6, 6,7,4,       // right
+    8,9,10, 10,11,8,    // top
+    12,13,14, 14,15,12, // left
+    16,17,18, 18,19,16, // bottom
+    20,21,22, 22,23,20  // back
+};
+
+GLfloat cubeVertices[] = {
+    0,0,0,  0,-1,0,  0,1, //front
+    1,0,0,  0,-1,0,  1,1,
+    1,0,1,  0,-1,0,  1,0,
+    0,0,1,  0,-1,0,  0,0,
+
+    1,1,1,  0,1,0,  0,0, //back
+    1,1,0,  0,1,0,  0,1,
+    0,1,0,  0,1,0,  1,1,
+    0,1,1,  0,1,0,  1,0,
+
+    0,1,1, -1,0,0,  0,0, //left
+    0,1,0, -1,0,0,  0,1,
+    0,0,0, -1,0,0,  1,1,
+    0,0,1, -1,0,0,  1,0,
+
+    1,1,1,  1,0,0,  1,0, //right
+    1,0,1,  1,0,0,  0,0,
+    1,0,0,  1,0,0,  0,1,
+    1,1,0,  1,0,0,  1,1,
+
+    1,1,1,  0,0,1,  1,0,  //top
+    0,1,1,  0,0,1,  0,0,
+    0,0,1,  0,0,1,  0,1,
+    1,0,1,  0,0,1,  1,1,
+
+    1,0,0,  0,0,-1,  1,0, //bottom
+    0,0,0,  0,0,-1,  0,0,
+    0,1,0,  0,0,-1,  0,1,
+    1,1,0,  0,0,-1,  1,1,
+};
+
 void Cube::draw() {
-    glTranslated(pos.x, pos.y, pos.z);
-    glBegin(GL_TRIANGLES);
-        //front
-        glNormal3f(0,0,1);
-        glColor3f(1,1,1);
-        glVertex3f(1,1,1);
-        glColor3f(1,1,0);
-        glVertex3f(0,1,1);
-        glColor3f(1,0,0);
-        glVertex3f(0,0,1);
-        glColor3f(1,0,0);
-        glVertex3f(0,0,1);
-        glColor3f(1,0,1);
-        glVertex3f(1,0,1);
-        glColor3f(1,1,1);
-        glVertex3f(1,1,1);
+    glEnableClientState(GL_NORMAL_ARRAY);
+    glEnableClientState(GL_TEXTURE_COORD_ARRAY);
+    glEnableClientState(GL_VERTEX_ARRAY);
+    glEnable(GL_TEXTURE_2D);
 
-        //right
-        glNormal3f(1,0,0);
-        glColor3f(1,1,1);
-        glVertex3f(1,1,1);
-        glColor3f(1,0,1);
-        glVertex3f(1,0,1);
-        glColor3f(0,0,1);
-        glVertex3f(1,0,0);
-        glColor3f(0,0,1);
-        glVertex3f(1,0,0);
-        glColor3f(0,1,1);
-        glVertex3f(1,1,0);
-        glColor3f(1,1,1);
-        glVertex3f(1,1,1);
+    glBindTexture(GL_TEXTURE_2D, wallTexture);
+    glNormalPointer(GL_FLOAT, 8 * sizeof(GLfloat), cubeVertices + 3);
+    glTexCoordPointer(2, GL_FLOAT, 8 * sizeof(GLfloat), cubeVertices + 6);
+    glVertexPointer(3, GL_FLOAT, 8 * sizeof(GLfloat), cubeVertices);
 
-        //top
-        glNormal3f(0,1,0);
-        glColor3f(1,1,1);
-        glVertex3f(1,1,1);
-        glColor3f(0,1,1);
-        glVertex3f(1,1,0);
-        glColor3f(0,1,0);
-        glVertex3f(0,1,0);
-        glColor3f(0,1,0);
-        glVertex3f(0,1,0);
-        glColor3f(1,1,0);
-        glVertex3f(0,1,1);
-        glColor3f(1,1,1);
-        glVertex3f(1,1,1);
+    glPushMatrix();
+    glTranslatef(pos.x, pos.y, pos.z);
 
-        //left
-        glNormal3f(-1,0,0);
-        glColor3f(1,1,0);
-        glVertex3f(0,1,1);
-        glColor3f(0,1,0);
-        glVertex3f(0,1,0);
-        glColor3f(0,0,0);
-        glVertex3f(0,0,0);
-        glColor3f(0,0,0);
-        glVertex3f(0,0,0);
-        glColor3f(1,0,0);
-        glVertex3f(0,0,1);
-        glColor3f(1,1,0);
-        glVertex3f(0,1,1);
+    glDrawElements(GL_TRIANGLES, 36, GL_UNSIGNED_BYTE, cubeIndices);
 
-        //bottom
-        glNormal3f(0,-1,0);
-        glColor3f(0,0,0);
-        glVertex3f(0,0,0);
-        glColor3f(0,0,1);
-        glVertex3f(1,0,0);
-        glColor3f(1,0,1);
-        glVertex3f(1,0,1);
-        glColor3f(1,0,1);
-        glVertex3f(1,0,1);
-        glColor3f(1,0,0);
-        glVertex3f(0,0,1);
-        glColor3f(0,0,0);
-        glVertex3f(0,0,0);
+    glPopMatrix();
 
-        //back
-        glNormal3f(0,0,-1);
-        glColor3f(0,0,1);
-        glVertex3f(1,0,0);
-        glColor3f(0,0,0);
-        glVertex3f(0,0,0);
-        glColor3f(0,1,0);
-        glVertex3f(0,1,0);
-        glColor3f(0,1,0);
-        glVertex3f(0,1,0);
-        glColor3f(0,1,1);
-        glVertex3f(1,1,0);
-        glColor3f(0,0,1);
-        glVertex3f(1,0,0);
-    glEnd();
-    glTranslated(-pos.x, -pos.y, -pos.z);
+    glDisable(GL_TEXTURE_2D);
+    glDisableClientState(GL_VERTEX_ARRAY);
+    glDisableClientState(GL_TEXTURE_COORD_ARRAY);
+    glDisableClientState(GL_NORMAL_ARRAY);
 }

@@ -13,6 +13,7 @@
 #include "generator.hpp"
 #include "ui.hpp"
 #include "cube.hpp"
+#include "resource.hpp"
 
 SDL_Window *screen;
 int width = 640, height = 480;
@@ -35,7 +36,7 @@ void init_ui() {
     glViewport(0, 0, width, height);
     glMatrixMode(GL_PROJECTION);
     glLoadIdentity();
-    gluPerspective(80, (double)width/(double)height, 0.1, 100);
+    gluPerspective(40, (double)width/(double)height, 0.1, 100);
     glMatrixMode(GL_MODELVIEW);
     glClearColor(0, 1, 1, 1);
     glEnable(GL_DEPTH_TEST);
@@ -50,6 +51,7 @@ void init_ui() {
     glFogf(GL_FOG_START, VIEWDISTANCE-5);
     glFogf(GL_FOG_END, VIEWDISTANCE+5);
     glEnable(GL_FOG);
+    init_resources();
 }
 
 GLCoord lookat(const GLCoord &cur, const GLCoord &dir) {
