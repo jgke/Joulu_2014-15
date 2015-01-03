@@ -201,33 +201,24 @@ void input(Level &level, Player &player) {
     if(player.cameraDirection.z >= 360)
         player.cameraDirection.z -= 360;
     if(player.collisions) {
-        for(double y = -HITBOX; y <= HITBOX; y += HITBOX)
-            for(double x = -HITBOX; x <= HITBOX; x += HITBOX) {
-                Coord pos(floor(newpos.x + x), floor(newpos.y+y));
-                if(level.data.get(pos, '#') != '.')
-                    goto checkx;
+        struct { //c++ before 11 disallows local functions...
+            bool operator()(const Level &level, GLCoord &newpos) {
+                for(double y = -HITBOX; y <= HITBOX; y += HITBOX)
+                    for(double x = -HITBOX; x <= HITBOX; x += HITBOX) {
+                        Coord pos(floor(newpos.x + x), floor(newpos.y+y));
+                        if(level.data.get(pos, '#') != '.')
+                            return true;
+                    }
+                return false;
             }
-        player.pos = newpos;
-        goto inputloop;
-checkx:
-        for(double y = -HITBOX; y <= HITBOX; y += HITBOX)
-            for(double x = -HITBOX; x <= HITBOX; x += HITBOX) {
-                Coord pos(floor(newpos.x + x), floor(player.pos.y + y));
-                if(level.data.get(pos, '#') != '.')
-                    goto checky;
-            }
-        player.pos.x = newpos.x;
-        goto inputloop;
-checky:
-        for(double y = -HITBOX; y <= HITBOX; y += HITBOX)
-            for(double x = -HITBOX; x <= HITBOX; x += HITBOX) {
-                Coord pos(floor(player.pos.x + x), floor(newpos.y + y));
-                if(level.data.get(pos, '#') != '.')
-                    goto inputloop;
-            }
-        player.pos.y = newpos.y;
+        } check_collision;
+        if(check_collision(level, newpos)) {
+            newpos.x = player.pos.x;
+            if(check_collision(level, newpos))
+                newpos.y = player.pos.y;
+        }
     }
-inputloop:
+    player.pos = newpos;
     while(SDL_PollEvent(&ev)) {
         switch(ev.type) {
             case SDL_KEYDOWN:
