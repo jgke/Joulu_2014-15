@@ -58,8 +58,8 @@ GLCoord lookat(const GLCoord &cur, const GLCoord &dir) {
     GLCoord ret;
     ret.x = sin(dir.z/180*M_PI);
     ret.y = cos(dir.z/180*M_PI);
-    ret.z = 0.5;
     ret += cur;
+    ret.z = 0.5;
 
     return ret;
 }
@@ -75,8 +75,7 @@ void move(GLCoord &cur, const GLCoord &force, const GLCoord &dir) {
 void render(Level &level, Player &plr) {
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
     glLoadIdentity();
-    plr.pos.z = 0.5;
-    plr.cameraTarget = lookat(GLCoord(plr.pos.x, plr.pos.y, 0.0d),
+    plr.cameraTarget = lookat(GLCoord(plr.pos.x, plr.pos.y, plr.pos.z),
             plr.cameraDirection);
     gluLookAt(plr.pos.x, plr.pos.y, plr.pos.z,
             plr.cameraTarget.x, plr.cameraTarget.y, plr.cameraTarget.z,
@@ -115,6 +114,13 @@ inputloop:
             case SDLK_d:
                 move(newpos, GLCoord(0.1, 0, 0), player.cameraDirection);
                 break;
+            case SDLK_c:
+                if(player.collisions)
+                    newpos.z = 50;
+                else
+                    newpos.z = 0.5;
+                player.collisions = !player.collisions;
+                break;
             case SDLK_q:
                 clean_ui();
                 exit(0);
@@ -135,12 +141,14 @@ inputloop:
             //player.cameraDirection.x = -(double)(ev.motion.y-height/2)/(double)height * 360;
             break;
         }
-        for(double y = -HITBOX; y <= HITBOX; y += HITBOX)
-            for(double x = -HITBOX; x <= HITBOX; x += HITBOX) {
-                Coord pos(floor(newpos.x+x), floor(newpos.y+y));
-                if(level.data.get(pos, '#') != '.')
-                    goto inputloop;
-            }
+        if(player.collisions) {
+            for(double y = -HITBOX; y <= HITBOX; y += HITBOX)
+                for(double x = -HITBOX; x <= HITBOX; x += HITBOX) {
+                    Coord pos(floor(newpos.x+x), floor(newpos.y+y));
+                    if(level.data.get(pos, '#') != '.')
+                        goto inputloop;
+                }
+        }
         player.pos = newpos;
     }
 }

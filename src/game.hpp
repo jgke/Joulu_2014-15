@@ -16,9 +16,11 @@ class Level {
 
 class Player {
     public:
-        Player() {}
+        Player(): pos(0, 0, 0.5), cameraTarget(0, 1, 0.5),
+                cameraDirection(0, 1, 0), collisions(true) {}
         GLCoord pos;
         GLCoord cameraTarget;
         GLCoord cameraDirection;
+        bool collisions;
 };
 #endif

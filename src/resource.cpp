@@ -25,7 +25,7 @@ void init_resources() {
         for(int x = 0; x < texx; x++) {
             char c = buffer.get(Coord(x, y));
             for(int i = 0; i < components; i++) {
-                float val = c == '.' ? 0.3 : 0.32;
+                float val = c == '.' ? 0.1 : 0.12;
                 val += float(rand()%10 + 50)/255.0;
                 pixels[y*texx*components + x * components + i] = val;
             }
