@@ -201,16 +201,21 @@ void input(Level &level, Player &player) {
     if(player.cameraDirection.z >= 360)
         player.cameraDirection.z -= 360;
     if(player.collisions) {
-        for(double y = -HITBOX; y <= HITBOX; y += HITBOX)
-            for(double x = -HITBOX; x <= HITBOX; x += HITBOX) {
-                Coord pos(floor(newpos.x+x), floor(newpos.y+y));
-                if(level.data.get(pos, '#') != '.') {
-                    newpos = player.pos;
-                    goto inputloop;
-                }
+        for(double y = -HITBOX; y <= HITBOX; y += HITBOX) {
+            Coord pos(floor(player.pos.x), floor(newpos.y+y));
+            if(level.data.get(pos, '#') != '.') {
+                newpos.y = player.pos.y;
+                break;
             }
+        }
+        for(double x = -HITBOX; x <= HITBOX; x += HITBOX) {
+            Coord pos(floor(newpos.x+x), floor(newpos.y));
+            if(level.data.get(pos, '#') != '.') {
+                newpos.x = player.pos.x;
+                break;
+            }
+        }
     }
-inputloop:
     while(SDL_PollEvent(&ev)) {
         switch(ev.type) {
         case SDL_KEYDOWN:
