@@ -45,7 +45,8 @@ void init_ui() {
 
     glClearColor(0.5f,0.5f,0.5f,1.0f);
     glFogi(GL_FOG_MODE, GL_LINEAR);
-    glFogf(GL_FOG_COLOR, 0.5);
+    GLfloat fog_color[] = {0.5, 0.5, 0.5, 1};
+    glFogfv(GL_FOG_COLOR, fog_color);
     glFogf(GL_FOG_DENSITY, 0.35f);
     glHint(GL_FOG_HINT, GL_DONT_CARE);
     glFogf(GL_FOG_START, VIEWDISTANCE-5);
