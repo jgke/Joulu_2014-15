@@ -1,3 +1,4 @@
+#include <SDL2/SDL.h>
 #include <cstdlib> //srand
 #include <setjmp.h>
 
@@ -7,6 +8,8 @@
 #include "game.hpp"
 #include "generator.hpp"
 #include "ui.hpp"
+
+#define TICKS_PER_FRAME 1000/60
 
 jmp_buf env;
 
@@ -26,9 +29,16 @@ int main() {
         Level level;
         Player player;
         generate(level.data, Coord(0, 0), 10, 0);
+        long ticks = SDL_GetTicks();
+        long newTicks;
         while(true) {
             input(level, player);
             render(level, player);
+            newTicks = SDL_GetTicks();
+            if(newTicks - ticks < TICKS_PER_FRAME) {
+                SDL_Delay(TICKS_PER_FRAME - (newTicks - ticks));
+                ticks = SDL_GetTicks();
+            }
         }
     }
     clean_ui();
