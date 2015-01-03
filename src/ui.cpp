@@ -200,8 +200,10 @@ void input(Level &level, Player &player) {
         for(double y = -HITBOX; y <= HITBOX; y += HITBOX)
             for(double x = -HITBOX; x <= HITBOX; x += HITBOX) {
                 Coord pos(floor(newpos.x+x), floor(newpos.y+y));
-                if(level.data.get(pos, '#') != '.')
+                if(level.data.get(pos, '#') != '.') {
+                    newpos = player.pos;
                     goto inputloop;
+                }
             }
     }
 inputloop:
