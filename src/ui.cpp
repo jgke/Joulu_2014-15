@@ -174,23 +174,42 @@ void render(Level &level, Player &plr) {
 void input(Level &level, Player &player) {
     SDL_Event ev;
     GLCoord newpos(player.pos);
+    const Uint8 *keystate = SDL_GetKeyboardState(NULL);
+    float speed = 0.1;
+    if(keystate[SDL_SCANCODE_LSHIFT] || keystate[SDL_SCANCODE_RSHIFT])
+        speed = 0.5;
+
+    if(keystate[SDL_SCANCODE_W])
+        move(newpos, GLCoord(0, speed, 0), player.cameraDirection);
+    if(keystate[SDL_SCANCODE_A])
+        move(newpos, GLCoord(-speed, 0, 0), player.cameraDirection);
+    if(keystate[SDL_SCANCODE_S])
+        move(newpos, GLCoord(0, -speed, 0), player.cameraDirection);
+    if(keystate[SDL_SCANCODE_D])
+        move(newpos, GLCoord(speed, 0, 0), player.cameraDirection);
+
+    if(keystate[SDL_SCANCODE_LEFT])
+        player.cameraDirection -= GLCoord(0, 0, 5);
+    if(keystate[SDL_SCANCODE_RIGHT])
+        player.cameraDirection += GLCoord(0, 0, 5);
+    if(player.cameraDirection.z < 0)
+        player.cameraDirection.z += 360;
+    if(player.cameraDirection.z >= 360)
+        player.cameraDirection.z -= 360;
+    if(player.collisions) {
+        for(double y = -HITBOX; y <= HITBOX; y += HITBOX)
+            for(double x = -HITBOX; x <= HITBOX; x += HITBOX) {
+                Coord pos(floor(newpos.x+x), floor(newpos.y+y));
+                if(level.data.get(pos, '#') != '.')
+                    goto inputloop;
+            }
+    }
+    player.pos = newpos;
 inputloop:
     while(SDL_PollEvent(&ev)) {
         switch(ev.type) {
         case SDL_KEYDOWN:
             switch(ev.key.keysym.sym) {
-            case SDLK_w:
-                move(newpos, GLCoord(0, 0.1, 0), player.cameraDirection);
-                break;
-            case SDLK_a:
-                move(newpos, GLCoord(-0.1, 0, 0), player.cameraDirection);
-                break;
-            case SDLK_s:
-                move(newpos, GLCoord(0, -0.1, 0), player.cameraDirection);
-                break;
-            case SDLK_d:
-                move(newpos, GLCoord(0.1, 0, 0), player.cameraDirection);
-                break;
             case SDLK_c:
                 if(player.collisions)
                     newpos.z = 50;
@@ -203,30 +222,7 @@ inputloop:
                 exit(0);
             }
             break;
-        case SDL_MOUSEMOTION:
-            if(ev.motion.y > height)
-                break;
-            if(ev.motion.y < 1)
-                ev.motion.y = 1;
-            if(ev.motion.y > height - 1)
-                ev.motion.y = height - 1;
-            player.cameraDirection.z += (double)ev.motion.xrel/(double)width * 360 ;
-            while(player.cameraDirection.z > 0)
-                player.cameraDirection.z -= 360;
-            while(player.cameraDirection.z < 0)
-                player.cameraDirection.z += 360;
-            //player.cameraDirection.x = -(double)(ev.motion.y-height/2)/(double)height * 360;
-            break;
         }
-        if(player.collisions) {
-            for(double y = -HITBOX; y <= HITBOX; y += HITBOX)
-                for(double x = -HITBOX; x <= HITBOX; x += HITBOX) {
-                    Coord pos(floor(newpos.x+x), floor(newpos.y+y));
-                    if(level.data.get(pos, '#') != '.')
-                        goto inputloop;
-                }
-        }
-        player.pos = newpos;
     }
 }
 
