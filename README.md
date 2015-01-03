@@ -44,3 +44,4 @@ usage
 | left arrow / right arrow | look around          |
 | c                        | toggle flying vision |
 | q                        | quit                 |
+| shift                    | move faster          |
