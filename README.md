@@ -38,7 +38,9 @@ depends on:
 
 usage
 =====
-| Key   | Action      |
-|-------|-------------|
-| wasd  | move around |
-| mouse | look around |
+| Key                      | Action               |
+|--------------------------|----------------------|
+| wasd                     | move around          |
+| left arrow / right arrow | look around          |
+| c                        | toggle flying vision |
+| q                        | quit                 |
