@@ -5,11 +5,8 @@
 #include "glcoord.hpp"
 
 #include "cube.hpp"
-#include "resource.hpp"
 
-Cube::Cube() {}
-
-Cube::Cube(const GLCoord &pos): pos(pos) {}
+Cube::Cube(const GLCoord &pos, GLuint texture): pos(pos), texture(texture) {}
 
 GLubyte cubeIndices[] = {
     0,1,2, 2,3,0,       // front
@@ -58,7 +55,7 @@ void Cube::draw() {
     glEnableClientState(GL_VERTEX_ARRAY);
     glEnable(GL_TEXTURE_2D);
 
-    glBindTexture(GL_TEXTURE_2D, wallTexture);
+    glBindTexture(GL_TEXTURE_2D, texture);
     glNormalPointer(GL_FLOAT, 8 * sizeof(GLfloat), cubeVertices + 3);
     glTexCoordPointer(2, GL_FLOAT, 8 * sizeof(GLfloat), cubeVertices + 6);
     glVertexPointer(3, GL_FLOAT, 8 * sizeof(GLfloat), cubeVertices);

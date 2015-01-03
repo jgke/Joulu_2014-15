@@ -72,6 +72,80 @@ void move(GLCoord &cur, const GLCoord &force, const GLCoord &dir) {
     cur.y += -sz * force.x + cz * force.y;
 }
 
+void draw_floor(GLCoord &pos) {
+    float vd = VIEWDISTANCE;
+    const GLfloat vertices[] = {
+        -vd,-vd, 0,0,1, 0,vd*2,
+        vd,-vd, 0,0,1, vd*2,vd*2,
+        vd,vd, 0,0,1, vd*2,0,
+        -vd,vd, 0,0,1, 0,0,
+        0,0, 0,0,1, vd, vd
+    };
+    const GLbyte indices[] = {
+        0,1,4, 1,2,4,
+        2,3,4, 3,0,4
+    };
+
+    glEnableClientState(GL_NORMAL_ARRAY);
+    glEnableClientState(GL_TEXTURE_COORD_ARRAY);
+    glEnableClientState(GL_VERTEX_ARRAY);
+    glEnable(GL_TEXTURE_2D);
+
+    glBindTexture(GL_TEXTURE_2D, groundTexture);
+    glNormalPointer(GL_FLOAT, 7 * sizeof(GLfloat), vertices + 2);
+    glTexCoordPointer(2, GL_FLOAT, 7 * sizeof(GLfloat), vertices + 5);
+    glVertexPointer(2, GL_FLOAT, 7 * sizeof(GLfloat), vertices);
+
+    glPushMatrix();
+    glTranslatef((int)pos.x, (int)pos.y, 0);
+
+    glDrawElements(GL_TRIANGLES, 12, GL_UNSIGNED_BYTE, indices);
+
+    glPopMatrix();
+
+    glDisable(GL_TEXTURE_2D);
+    glDisableClientState(GL_VERTEX_ARRAY);
+    glDisableClientState(GL_TEXTURE_COORD_ARRAY);
+    glDisableClientState(GL_NORMAL_ARRAY);
+}
+
+void draw_ceiling(GLCoord &pos) {
+    float vd = VIEWDISTANCE;
+    const GLfloat vertices[] = {
+        -vd,-vd, 0,0,1, 0,vd*2,
+        vd,-vd, 0,0,1, vd*2,vd*2,
+        vd,vd, 0,0,1, vd*2,0,
+        -vd,vd, 0,0,1, 0,0,
+        0,0, 0,0,1, vd, vd
+    };
+    const GLbyte indices[] = {
+        4,1,0, 4,2,1,
+        4,3,2, 4,0,3
+    };
+
+    glEnableClientState(GL_NORMAL_ARRAY);
+    glEnableClientState(GL_TEXTURE_COORD_ARRAY);
+    glEnableClientState(GL_VERTEX_ARRAY);
+    glEnable(GL_TEXTURE_2D);
+
+    glBindTexture(GL_TEXTURE_2D, ceilingTexture);
+    glNormalPointer(GL_FLOAT, 7 * sizeof(GLfloat), vertices + 2);
+    glTexCoordPointer(2, GL_FLOAT, 7 * sizeof(GLfloat), vertices + 5);
+    glVertexPointer(2, GL_FLOAT, 7 * sizeof(GLfloat), vertices);
+
+    glPushMatrix();
+    glTranslatef((int)pos.x, (int)pos.y, 1);
+
+    glDrawElements(GL_TRIANGLES, 12, GL_UNSIGNED_BYTE, indices);
+
+    glPopMatrix();
+
+    glDisable(GL_TEXTURE_2D);
+    glDisableClientState(GL_VERTEX_ARRAY);
+    glDisableClientState(GL_TEXTURE_COORD_ARRAY);
+    glDisableClientState(GL_NORMAL_ARRAY);
+}
+
 //render screen
 void render(Level &level, Player &plr) {
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
@@ -81,6 +155,8 @@ void render(Level &level, Player &plr) {
     gluLookAt(plr.pos.x, plr.pos.y, plr.pos.z,
             plr.cameraTarget.x, plr.cameraTarget.y, plr.cameraTarget.z,
             0,  0, 1);
+    draw_floor(plr.pos);
+    draw_ceiling(plr.pos);
     for(int y = -VIEWDISTANCE; y < VIEWDISTANCE; y++) {
         for(int x = -VIEWDISTANCE; x < VIEWDISTANCE; x++) {
             Coord curpos = Coord((int)plr.pos.x, (int)plr.pos.y) + Coord(x, y);
@@ -89,7 +165,7 @@ void render(Level &level, Player &plr) {
             char data = '.';
             data = level.data.get(curpos, '.');
             if(data != '.')
-                Cube(GLCoord(curpos.x, curpos.y, 0)).draw();
+                Cube(GLCoord(curpos.x, curpos.y, 0), wallTexture).draw();
         }
     }
     SDL_GL_SwapWindow(screen);

@@ -5,10 +5,10 @@
 
 class Cube {
     public:
-        Cube();
-        Cube(const GLCoord &pos);
+        Cube(const GLCoord &pos, GLuint texture);
         void draw();
         GLCoord pos;
+        GLuint texture;
 };
 
 #endif
