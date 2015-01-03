@@ -20,6 +20,8 @@ int width = 640, height = 480;
 
 void init_ui() {
     SDL_Init(SDL_INIT_EVERYTHING);
+    SDL_GL_SetAttribute(SDL_GL_MULTISAMPLEBUFFERS, 1);
+    SDL_GL_SetAttribute(SDL_GL_MULTISAMPLESAMPLES, 2);
     screen = SDL_CreateWindow("kuutiokamera",
                           SDL_WINDOWPOS_UNDEFINED,
                           SDL_WINDOWPOS_UNDEFINED,
@@ -33,6 +35,7 @@ void init_ui() {
     SDL_GL_CreateContext(screen);
     SDL_SetRelativeMouseMode(SDL_TRUE);
     SDL_SetCursor(SDL_CreateSystemCursor(SDL_SYSTEM_CURSOR_ARROW));
+
     glViewport(0, 0, width, height);
     glMatrixMode(GL_PROJECTION);
     glLoadIdentity();
@@ -42,6 +45,7 @@ void init_ui() {
     glEnable(GL_DEPTH_TEST);
     glEnable(GL_CULL_FACE);
     glCullFace(GL_BACK);
+    glEnable(GL_MULTISAMPLE);
 
     glClearColor(0.5f,0.5f,0.5f,1.0f);
     glFogi(GL_FOG_MODE, GL_LINEAR);
