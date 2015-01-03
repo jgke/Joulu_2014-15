@@ -201,30 +201,42 @@ void input(Level &level, Player &player) {
     if(player.cameraDirection.z >= 360)
         player.cameraDirection.z -= 360;
     if(player.collisions) {
-        for(double y = -HITBOX; y <= HITBOX; y += HITBOX) {
-            Coord pos(floor(player.pos.x), floor(newpos.y+y));
-            if(level.data.get(pos, '#') != '.') {
-                newpos.y = player.pos.y;
-                break;
+        for(double y = -HITBOX; y <= HITBOX; y += HITBOX)
+            for(double x = -HITBOX; x <= HITBOX; x += HITBOX) {
+                Coord pos(floor(newpos.x + x), floor(newpos.y+y));
+                if(level.data.get(pos, '#') != '.')
+                    goto checkx;
             }
-        }
-        for(double x = -HITBOX; x <= HITBOX; x += HITBOX) {
-            Coord pos(floor(newpos.x+x), floor(newpos.y));
-            if(level.data.get(pos, '#') != '.') {
-                newpos.x = player.pos.x;
-                break;
+        player.pos = newpos;
+        goto inputloop;
+checkx:
+        for(double y = -HITBOX; y <= HITBOX; y += HITBOX)
+            for(double x = -HITBOX; x <= HITBOX; x += HITBOX) {
+                Coord pos(floor(newpos.x + x), floor(player.pos.y + y));
+                if(level.data.get(pos, '#') != '.')
+                    goto checky;
             }
-        }
+        player.pos.x = newpos.x;
+        goto inputloop;
+checky:
+        for(double y = -HITBOX; y <= HITBOX; y += HITBOX)
+            for(double x = -HITBOX; x <= HITBOX; x += HITBOX) {
+                Coord pos(floor(player.pos.x + x), floor(newpos.y + y));
+                if(level.data.get(pos, '#') != '.')
+                    goto inputloop;
+            }
+        player.pos.y = newpos.y;
     }
+inputloop:
     while(SDL_PollEvent(&ev)) {
         switch(ev.type) {
-        case SDL_KEYDOWN:
-            switch(ev.key.keysym.sym) {
-            case SDLK_c:
+            case SDL_KEYDOWN:
+                switch(ev.key.keysym.sym) {
+                    case SDLK_c:
                 if(player.collisions)
-                    newpos.z = 50;
+                    player.pos.z = 50;
                 else
-                    newpos.z = 0.5;
+                    player.pos.z = 0.5;
                 player.collisions = !player.collisions;
                 break;
             case SDLK_q:
@@ -234,7 +246,6 @@ void input(Level &level, Player &player) {
             break;
         }
     }
-    player.pos = newpos;
 }
 
 void clean_ui() {
