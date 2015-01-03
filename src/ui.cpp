@@ -204,7 +204,6 @@ void input(Level &level, Player &player) {
                     goto inputloop;
             }
     }
-    player.pos = newpos;
 inputloop:
     while(SDL_PollEvent(&ev)) {
         switch(ev.type) {
@@ -224,6 +223,7 @@ inputloop:
             break;
         }
     }
+    player.pos = newpos;
 }
 
 void clean_ui() {
