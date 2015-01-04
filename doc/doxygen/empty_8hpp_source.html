@@ -1,0 +1,115 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=9"/>
+<meta name="generator" content="Doxygen 1.8.9"/>
+<title>putkijuoksu: empty.hpp lähdekooditiedosto</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<script type="text/javascript">
+  $(document).ready(function() { init_search(); });
+</script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr style="height: 56px;">
+  <td style="padding-left: 0.5em;">
+   <div id="projectname">putkijuoksu
+   </div>
+   <div id="projectbrief">Dynamic dungeon generator.</div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Generoinut Doxygen 1.8.9 -->
+<script type="text/javascript">
+var searchBox = new SearchBox("searchBox", "search",false,'Etsi');
+</script>
+  <div id="navrow1" class="tabs">
+    <ul class="tablist">
+      <li><a href="index.html"><span>Pääsivu</span></a></li>
+      <li><a href="annotated.html"><span>Tietueet</span></a></li>
+      <li class="current"><a href="files.html"><span>Tiedostot</span></a></li>
+      <li>
+        <div id="MSearchBox" class="MSearchBoxInactive">
+        <span class="left">
+          <img id="MSearchSelect" src="search/mag_sel.png"
+               onmouseover="return searchBox.OnSearchSelectShow()"
+               onmouseout="return searchBox.OnSearchSelectHide()"
+               alt=""/>
+          <input type="text" id="MSearchField" value="Etsi" accesskey="S"
+               onfocus="searchBox.OnSearchFieldFocus(true)" 
+               onblur="searchBox.OnSearchFieldFocus(false)" 
+               onkeyup="searchBox.OnSearchFieldChange(event)"/>
+          </span><span class="right">
+            <a id="MSearchClose" href="javascript:searchBox.CloseResultsWindow()"><img id="MSearchCloseImg" border="0" src="search/close.png" alt=""/></a>
+          </span>
+        </div>
+      </li>
+    </ul>
+  </div>
+  <div id="navrow2" class="tabs2">
+    <ul class="tablist">
+      <li><a href="files.html"><span>Tiedostolista</span></a></li>
+      <li><a href="globals.html"><span>Globaalit</span></a></li>
+    </ul>
+  </div>
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<iframe src="javascript:void(0)" frameborder="0" 
+        name="MSearchResults" id="MSearchResults">
+</iframe>
+</div>
+
+<div id="nav-path" class="navpath">
+  <ul>
+<li class="navelem"><a class="el" href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="dir_481ff30a04be567a95a44689a1b1c394.html">generators</a></li>  </ul>
+</div>
+</div><!-- top -->
+<div class="header">
+  <div class="headertitle">
+<div class="title">empty.hpp</div>  </div>
+</div><!--header-->
+<div class="contents">
+<a href="empty_8hpp.html">Siirry tämän tiedoston dokumentaatioon.</a><div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;</div>
+<div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;<span class="preprocessor">#ifndef EMPTY_HPP</span></div>
+<div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;<span class="preprocessor">#define EMPTY_HPP</span></div>
+<div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;</div>
+<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="qtree_8hpp.html">qtree.hpp</a>&quot;</span></div>
+<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="list_8hpp.html">list.hpp</a>&quot;</span></div>
+<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;</div>
+<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;<span class="keywordtype">void</span> <a class="code" href="empty_8hpp.html#a5298fd74026af414a89a9ea3ea7c79a9">empty_generator</a>(<a class="code" href="classQtree.html">Qtree&lt;char&gt;</a> &amp;newdata, <span class="keyword">const</span> <a class="code" href="class__Coord.html">Coord</a> &amp;start);</div>
+<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;</div>
+<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;<span class="preprocessor">#endif</span></div>
+<div class="ttc" id="list_8hpp_html"><div class="ttname"><a href="list_8hpp.html">list.hpp</a></div><div class="ttdoc">Dynamic list. </div></div>
+<div class="ttc" id="qtree_8hpp_html"><div class="ttname"><a href="qtree_8hpp.html">qtree.hpp</a></div><div class="ttdoc">Quadtree implementation. </div></div>
+<div class="ttc" id="class__Coord_html"><div class="ttname"><a href="class__Coord.html">_Coord</a></div><div class="ttdoc">Class for a coordinate. </div><div class="ttdef"><b>Definition:</b> <a href="coord_8hpp_source.html#l00017">coord.hpp:17</a></div></div>
+<div class="ttc" id="classQtree_html"><div class="ttname"><a href="classQtree.html">Qtree</a></div><div class="ttdoc">Quadtree implementation. </div><div class="ttdef"><b>Definition:</b> <a href="qtree_8hpp_source.html#l00020">qtree.hpp:20</a></div></div>
+<div class="ttc" id="empty_8hpp_html_a5298fd74026af414a89a9ea3ea7c79a9"><div class="ttname"><a href="empty_8hpp.html#a5298fd74026af414a89a9ea3ea7c79a9">empty_generator</a></div><div class="ttdeci">void empty_generator(Qtree&lt; char &gt; &amp;newdata, const Coord &amp;start)</div><div class="ttdoc">Generator for empty space. </div></div>
+</div><!-- fragment --></div><!-- contents -->
+<!-- start footer part -->
+<hr class="footer"/><address class="footer"><small>
+Generoinut projektille putkijuoksu Sun Jan 4 2015 15:01:11  &#160;<a href="http://www.doxygen.org/index.html">
+<img class="footer" src="doxygen.png" alt="doxygen"/>
+</a> 1.8.9
+</small></address>
+</body>
+</html>

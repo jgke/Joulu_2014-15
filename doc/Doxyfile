@@ -14,6 +14,7 @@ QUIET                  = YES
 
 INPUT                  = mainpage.dox ../include ../src/generators ../test/test.hpp
 FILE_PATTERNS          = *.hpp
+IMAGE_PATH             = .
 RECURSIVE              = YES
 
 SOURCE_BROWSER         = YES
@@ -23,3 +24,4 @@ ALPHABETICAL_INDEX     = NO
 GENERATE_HTML          = YES
 
 GENERATE_LATEX         = NO
+

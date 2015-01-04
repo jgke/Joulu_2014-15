@@ -1,0 +1,206 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=9"/>
+<meta name="generator" content="Doxygen 1.8.9"/>
+<title>putkijuoksu: glcoord.hpp lähdekooditiedosto</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<script type="text/javascript">
+  $(document).ready(function() { init_search(); });
+</script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr style="height: 56px;">
+  <td style="padding-left: 0.5em;">
+   <div id="projectname">putkijuoksu
+   </div>
+   <div id="projectbrief">Dynamic dungeon generator.</div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Generoinut Doxygen 1.8.9 -->
+<script type="text/javascript">
+var searchBox = new SearchBox("searchBox", "search",false,'Etsi');
+</script>
+  <div id="navrow1" class="tabs">
+    <ul class="tablist">
+      <li><a href="index.html"><span>Pääsivu</span></a></li>
+      <li><a href="annotated.html"><span>Tietueet</span></a></li>
+      <li class="current"><a href="files.html"><span>Tiedostot</span></a></li>
+      <li>
+        <div id="MSearchBox" class="MSearchBoxInactive">
+        <span class="left">
+          <img id="MSearchSelect" src="search/mag_sel.png"
+               onmouseover="return searchBox.OnSearchSelectShow()"
+               onmouseout="return searchBox.OnSearchSelectHide()"
+               alt=""/>
+          <input type="text" id="MSearchField" value="Etsi" accesskey="S"
+               onfocus="searchBox.OnSearchFieldFocus(true)" 
+               onblur="searchBox.OnSearchFieldFocus(false)" 
+               onkeyup="searchBox.OnSearchFieldChange(event)"/>
+          </span><span class="right">
+            <a id="MSearchClose" href="javascript:searchBox.CloseResultsWindow()"><img id="MSearchCloseImg" border="0" src="search/close.png" alt=""/></a>
+          </span>
+        </div>
+      </li>
+    </ul>
+  </div>
+  <div id="navrow2" class="tabs2">
+    <ul class="tablist">
+      <li><a href="files.html"><span>Tiedostolista</span></a></li>
+      <li><a href="globals.html"><span>Globaalit</span></a></li>
+    </ul>
+  </div>
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<iframe src="javascript:void(0)" frameborder="0" 
+        name="MSearchResults" id="MSearchResults">
+</iframe>
+</div>
+
+<div id="nav-path" class="navpath">
+  <ul>
+<li class="navelem"><a class="el" href="dir_d44c64559bbebec7f509842c48db8b23.html">include</a></li>  </ul>
+</div>
+</div><!-- top -->
+<div class="header">
+  <div class="headertitle">
+<div class="title">glcoord.hpp</div>  </div>
+</div><!--header-->
+<div class="contents">
+<a href="glcoord_8hpp.html">Siirry tämän tiedoston dokumentaatioon.</a><div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;</div>
+<div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;<span class="preprocessor">#ifndef GLCOORD_H</span></div>
+<div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;<span class="preprocessor">#define GLCOORD_H</span></div>
+<div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;</div>
+<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;<span class="preprocessor">#include &lt;algorithm&gt;</span></div>
+<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;<span class="preprocessor">#include &lt;stdexcept&gt;</span></div>
+<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;</div>
+<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="common_8hpp.html">common.hpp</a>&quot;</span></div>
+<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;</div>
+<div class="line"><a name="l00017"></a><span class="lineno"><a class="line" href="class__GLCoord.html">   17</a></span>&#160;<span class="keyword">template</span> &lt;<span class="keyword">class</span> T&gt; <span class="keyword">class </span><a class="code" href="class__GLCoord.html">_GLCoord</a> {</div>
+<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;    <span class="keyword">public</span>:</div>
+<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;        <a class="code" href="class__GLCoord.html#af80a946d63448fcf8771dfcb46d30e23">_GLCoord</a>();</div>
+<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;        <a class="code" href="class__GLCoord.html#af80a946d63448fcf8771dfcb46d30e23">_GLCoord</a>(<span class="keyword">const</span> T &amp;<a class="code" href="class__GLCoord.html#a34d1cb247c16f147caab867c02bc3a58">x</a>, <span class="keyword">const</span> T &amp;<a class="code" href="class__GLCoord.html#aa401299efc8cc5711ab0f48816334302">y</a>, <span class="keyword">const</span> T &amp;<a class="code" href="class__GLCoord.html#a0bf87832aaa1094b0c1ef5da0a15c7de">z</a>);</div>
+<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;        <a class="code" href="class__GLCoord.html#af80a946d63448fcf8771dfcb46d30e23">_GLCoord</a>(<span class="keyword">const</span> <a class="code" href="class__GLCoord.html">_GLCoord&lt;T&gt;</a> &amp;c);</div>
+<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;        T <a class="code" href="class__GLCoord.html#a616dde9cc1689f5571333a7314611f97">length</a>() <span class="keyword">const</span>;</div>
+<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;        <a class="code" href="class__GLCoord.html">_GLCoord</a> &amp;<a class="code" href="class__GLCoord.html#a1f724bb6ae9d5ed321280bb00c35eaf5">operator=</a>(<span class="keyword">const</span> <a class="code" href="class__GLCoord.html">_GLCoord&lt;T&gt;</a> &amp;c);</div>
+<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;        <a class="code" href="class__GLCoord.html">_GLCoord</a> <a class="code" href="class__GLCoord.html#a9bb73ee4cdf007d2e28859c58d9bcd32">operator+=</a>(<span class="keyword">const</span> <a class="code" href="class__GLCoord.html">_GLCoord</a> &amp;<a class="code" href="class__GLCoord.html">_GLCoord</a>);</div>
+<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;        _GLCoord <a class="code" href="class__GLCoord.html#a01d9c02a63b2177070b29bab1747fe76">operator-=</a>(<span class="keyword">const</span> _GLCoord &amp;_GLCoord);</div>
+<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;        <span class="keywordtype">bool</span> <a class="code" href="class__GLCoord.html#a27d27e51db0e17a0e4517b418c4a99f0">operator==</a>(<span class="keyword">const</span> _GLCoord &amp;_GLCoord) <span class="keyword">const</span>;</div>
+<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;        <span class="keywordtype">bool</span> <a class="code" href="class__GLCoord.html#a30940ad6ed05ec9c3d29922c07ea5a9a">operator!=</a>(<span class="keyword">const</span> _GLCoord &amp;_GLCoord) <span class="keyword">const</span>;</div>
+<div class="line"><a name="l00059"></a><span class="lineno"><a class="line" href="class__GLCoord.html#a34d1cb247c16f147caab867c02bc3a58">   59</a></span>&#160;        T <a class="code" href="class__GLCoord.html#a34d1cb247c16f147caab867c02bc3a58">x</a>;</div>
+<div class="line"><a name="l00063"></a><span class="lineno"><a class="line" href="class__GLCoord.html#aa401299efc8cc5711ab0f48816334302">   63</a></span>&#160;        T <a class="code" href="class__GLCoord.html#aa401299efc8cc5711ab0f48816334302">y</a>;</div>
+<div class="line"><a name="l00067"></a><span class="lineno"><a class="line" href="class__GLCoord.html#a0bf87832aaa1094b0c1ef5da0a15c7de">   67</a></span>&#160;        T <a class="code" href="class__GLCoord.html#a0bf87832aaa1094b0c1ef5da0a15c7de">z</a>;</div>
+<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;};</div>
+<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;</div>
+<div class="line"><a name="l00070"></a><span class="lineno"><a class="line" href="class__GLCoord.html#af80a946d63448fcf8771dfcb46d30e23">   70</a></span>&#160;<span class="keyword">template</span> &lt;<span class="keyword">class</span> T&gt; <a class="code" href="class__GLCoord.html#af80a946d63448fcf8771dfcb46d30e23">_GLCoord&lt;T&gt;::_GLCoord</a>(): x(0), y(0), z(0) {}</div>
+<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;</div>
+<div class="line"><a name="l00072"></a><span class="lineno"><a class="line" href="class__GLCoord.html#aa9c9d06eb70abb9d89d10c460cbb698d">   72</a></span>&#160;<span class="keyword">template</span> &lt;<span class="keyword">class</span> T&gt; <a class="code" href="class__GLCoord.html#af80a946d63448fcf8771dfcb46d30e23">_GLCoord&lt;T&gt;::_GLCoord</a>(<span class="keyword">const</span> T &amp;x, <span class="keyword">const</span> T &amp;y, <span class="keyword">const</span> T &amp;z): x(x), y(y), z(z) {}</div>
+<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;</div>
+<div class="line"><a name="l00074"></a><span class="lineno"><a class="line" href="class__GLCoord.html#ad1182b1ab5c9d1f8a87db37eca242f5c">   74</a></span>&#160;<span class="keyword">template</span> &lt;<span class="keyword">class</span> T&gt; <a class="code" href="class__GLCoord.html#af80a946d63448fcf8771dfcb46d30e23">_GLCoord&lt;T&gt;::_GLCoord</a>(<span class="keyword">const</span> <a class="code" href="class__GLCoord.html">_GLCoord&lt;T&gt;</a> &amp;c): x(c.x), y(c.y), z(c.z) {}</div>
+<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;</div>
+<div class="line"><a name="l00076"></a><span class="lineno"><a class="line" href="class__GLCoord.html#a616dde9cc1689f5571333a7314611f97">   76</a></span>&#160;<span class="keyword">template</span> &lt;<span class="keyword">class</span> T&gt; T <a class="code" href="class__GLCoord.html#a616dde9cc1689f5571333a7314611f97">_GLCoord&lt;T&gt;::length</a>()<span class="keyword"> const </span>{</div>
+<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;    <span class="keywordflow">return</span> <a class="code" href="common_8hpp.html#ae2f08dc603ae93c402abd918ba4e23e1">ABS</a>(this-&gt;x) + <a class="code" href="common_8hpp.html#ae2f08dc603ae93c402abd918ba4e23e1">ABS</a>(this-&gt;y) + <a class="code" href="common_8hpp.html#ae2f08dc603ae93c402abd918ba4e23e1">ABS</a>(this-&gt;z);</div>
+<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;}</div>
+<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;</div>
+<div class="line"><a name="l00080"></a><span class="lineno"><a class="line" href="class__GLCoord.html#a1f724bb6ae9d5ed321280bb00c35eaf5">   80</a></span>&#160;<span class="keyword">template</span> &lt;<span class="keyword">class</span> T&gt; <a class="code" href="class__GLCoord.html">_GLCoord&lt;T&gt;</a> &amp;<a class="code" href="class__GLCoord.html#a1f724bb6ae9d5ed321280bb00c35eaf5">_GLCoord&lt;T&gt;::operator=</a>(<span class="keyword">const</span> <a class="code" href="class__GLCoord.html">_GLCoord&lt;T&gt;</a> &amp;c) {</div>
+<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;    x = c.<a class="code" href="class__GLCoord.html#a34d1cb247c16f147caab867c02bc3a58">x</a>;</div>
+<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;    y = c.<a class="code" href="class__GLCoord.html#aa401299efc8cc5711ab0f48816334302">y</a>;</div>
+<div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;    z = c.<a class="code" href="class__GLCoord.html#a0bf87832aaa1094b0c1ef5da0a15c7de">z</a>;</div>
+<div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;    <span class="keywordflow">return</span> *<span class="keyword">this</span>;</div>
+<div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160;}</div>
+<div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160;</div>
+<div class="line"><a name="l00090"></a><span class="lineno"><a class="line" href="glcoord_8hpp.html#a8d4a7a47aeac89f7bdd05abac475403c">   90</a></span>&#160;<span class="keyword">template</span> &lt;<span class="keyword">class</span> T&gt; <a class="code" href="class__GLCoord.html">_GLCoord&lt;T&gt;</a> <a class="code" href="glcoord_8hpp.html#a8d4a7a47aeac89f7bdd05abac475403c">operator+</a>(<span class="keyword">const</span> <a class="code" href="class__GLCoord.html">_GLCoord&lt;T&gt;</a> &amp;a, <span class="keyword">const</span> <a class="code" href="class__GLCoord.html">_GLCoord&lt;T&gt;</a> &amp;b) {</div>
+<div class="line"><a name="l00091"></a><span class="lineno">   91</span>&#160;    <span class="keywordflow">return</span> <a class="code" href="class__GLCoord.html">_GLCoord&lt;T&gt;</a>(a.<a class="code" href="class__GLCoord.html#a34d1cb247c16f147caab867c02bc3a58">x</a>+b.<a class="code" href="class__GLCoord.html#a34d1cb247c16f147caab867c02bc3a58">x</a>, a.<a class="code" href="class__GLCoord.html#aa401299efc8cc5711ab0f48816334302">y</a>+b.<a class="code" href="class__GLCoord.html#aa401299efc8cc5711ab0f48816334302">y</a>, a.<a class="code" href="class__GLCoord.html#a0bf87832aaa1094b0c1ef5da0a15c7de">z</a>+b.<a class="code" href="class__GLCoord.html#a0bf87832aaa1094b0c1ef5da0a15c7de">z</a>);</div>
+<div class="line"><a name="l00092"></a><span class="lineno">   92</span>&#160;}</div>
+<div class="line"><a name="l00093"></a><span class="lineno">   93</span>&#160;</div>
+<div class="line"><a name="l00094"></a><span class="lineno"><a class="line" href="class__GLCoord.html#a9bb73ee4cdf007d2e28859c58d9bcd32">   94</a></span>&#160;<span class="keyword">template</span> &lt;<span class="keyword">class</span> T&gt; <a class="code" href="class__GLCoord.html">_GLCoord&lt;T&gt;</a> <a class="code" href="class__GLCoord.html#a9bb73ee4cdf007d2e28859c58d9bcd32">_GLCoord&lt;T&gt;::operator+=</a>(<span class="keyword">const</span> <a class="code" href="class__GLCoord.html">_GLCoord&lt;T&gt;</a> &amp;<a class="code" href="class__GLCoord.html">_GLCoord</a>) {</div>
+<div class="line"><a name="l00095"></a><span class="lineno">   95</span>&#160;    this-&gt;x += _GLCoord.<a class="code" href="class__GLCoord.html#a34d1cb247c16f147caab867c02bc3a58">x</a>;</div>
+<div class="line"><a name="l00096"></a><span class="lineno">   96</span>&#160;    this-&gt;y += _GLCoord.<a class="code" href="class__GLCoord.html#aa401299efc8cc5711ab0f48816334302">y</a>;</div>
+<div class="line"><a name="l00097"></a><span class="lineno">   97</span>&#160;    this-&gt;z += _GLCoord.<a class="code" href="class__GLCoord.html#a0bf87832aaa1094b0c1ef5da0a15c7de">z</a>;</div>
+<div class="line"><a name="l00098"></a><span class="lineno">   98</span>&#160;    <span class="keywordflow">return</span> *<span class="keyword">this</span>;</div>
+<div class="line"><a name="l00099"></a><span class="lineno">   99</span>&#160;}</div>
+<div class="line"><a name="l00100"></a><span class="lineno">  100</span>&#160;</div>
+<div class="line"><a name="l00104"></a><span class="lineno"><a class="line" href="glcoord_8hpp.html#a02343fbd03247c3e08f348bb64d5cd89">  104</a></span>&#160;<span class="keyword">template</span> &lt;<span class="keyword">class</span> T&gt; <a class="code" href="class__GLCoord.html">_GLCoord&lt;T&gt;</a> <a class="code" href="glcoord_8hpp.html#a02343fbd03247c3e08f348bb64d5cd89">operator-</a>(<span class="keyword">const</span> <a class="code" href="class__GLCoord.html">_GLCoord&lt;T&gt;</a> &amp;a, <span class="keyword">const</span> <a class="code" href="class__GLCoord.html">_GLCoord&lt;T&gt;</a> &amp;b) {</div>
+<div class="line"><a name="l00105"></a><span class="lineno">  105</span>&#160;    <span class="keywordflow">return</span> <a class="code" href="class__GLCoord.html">_GLCoord&lt;T&gt;</a>(a.<a class="code" href="class__GLCoord.html#a34d1cb247c16f147caab867c02bc3a58">x</a>-b.<a class="code" href="class__GLCoord.html#a34d1cb247c16f147caab867c02bc3a58">x</a>, a.<a class="code" href="class__GLCoord.html#aa401299efc8cc5711ab0f48816334302">y</a>-b.<a class="code" href="class__GLCoord.html#aa401299efc8cc5711ab0f48816334302">y</a>, a.<a class="code" href="class__GLCoord.html#a0bf87832aaa1094b0c1ef5da0a15c7de">z</a>-b.<a class="code" href="class__GLCoord.html#a0bf87832aaa1094b0c1ef5da0a15c7de">z</a>);</div>
+<div class="line"><a name="l00106"></a><span class="lineno">  106</span>&#160;}</div>
+<div class="line"><a name="l00107"></a><span class="lineno">  107</span>&#160;</div>
+<div class="line"><a name="l00108"></a><span class="lineno"><a class="line" href="class__GLCoord.html#a01d9c02a63b2177070b29bab1747fe76">  108</a></span>&#160;<span class="keyword">template</span> &lt;<span class="keyword">class</span> T&gt; <a class="code" href="class__GLCoord.html">_GLCoord&lt;T&gt;</a> <a class="code" href="class__GLCoord.html#a01d9c02a63b2177070b29bab1747fe76">_GLCoord&lt;T&gt;::operator-=</a>(<span class="keyword">const</span> <a class="code" href="class__GLCoord.html">_GLCoord&lt;T&gt;</a> &amp;<a class="code" href="class__GLCoord.html">_GLCoord</a>) {</div>
+<div class="line"><a name="l00109"></a><span class="lineno">  109</span>&#160;    this-&gt;x -= _GLCoord.<a class="code" href="class__GLCoord.html#a34d1cb247c16f147caab867c02bc3a58">x</a>;</div>
+<div class="line"><a name="l00110"></a><span class="lineno">  110</span>&#160;    this-&gt;y -= _GLCoord.<a class="code" href="class__GLCoord.html#aa401299efc8cc5711ab0f48816334302">y</a>;</div>
+<div class="line"><a name="l00111"></a><span class="lineno">  111</span>&#160;    this-&gt;z -= _GLCoord.<a class="code" href="class__GLCoord.html#a0bf87832aaa1094b0c1ef5da0a15c7de">z</a>;</div>
+<div class="line"><a name="l00112"></a><span class="lineno">  112</span>&#160;    <span class="keywordflow">return</span> *<span class="keyword">this</span>;</div>
+<div class="line"><a name="l00113"></a><span class="lineno">  113</span>&#160;}</div>
+<div class="line"><a name="l00114"></a><span class="lineno">  114</span>&#160;</div>
+<div class="line"><a name="l00115"></a><span class="lineno"><a class="line" href="class__GLCoord.html#a27d27e51db0e17a0e4517b418c4a99f0">  115</a></span>&#160;<span class="keyword">template</span> &lt;<span class="keyword">class</span> T&gt; <span class="keywordtype">bool</span> <a class="code" href="class__GLCoord.html#a27d27e51db0e17a0e4517b418c4a99f0">_GLCoord&lt;T&gt;::operator== </a>(<span class="keyword">const</span> <a class="code" href="class__GLCoord.html">_GLCoord&lt;T&gt;</a> &amp;<a class="code" href="class__GLCoord.html">_GLCoord</a>)<span class="keyword"> const </span>{</div>
+<div class="line"><a name="l00116"></a><span class="lineno">  116</span>&#160;    <span class="keywordflow">return</span> this-&gt;x == _GLCoord.<a class="code" href="class__GLCoord.html#a34d1cb247c16f147caab867c02bc3a58">x</a> &amp;&amp; this-&gt;y == _GLCoord.<a class="code" href="class__GLCoord.html#aa401299efc8cc5711ab0f48816334302">y</a> &amp;&amp; this-&gt;z == _GLCoord.<a class="code" href="class__GLCoord.html#a0bf87832aaa1094b0c1ef5da0a15c7de">z</a>;</div>
+<div class="line"><a name="l00117"></a><span class="lineno">  117</span>&#160;}</div>
+<div class="line"><a name="l00118"></a><span class="lineno">  118</span>&#160;</div>
+<div class="line"><a name="l00119"></a><span class="lineno"><a class="line" href="class__GLCoord.html#a30940ad6ed05ec9c3d29922c07ea5a9a">  119</a></span>&#160;<span class="keyword">template</span> &lt;<span class="keyword">class</span> T&gt; <span class="keywordtype">bool</span> <a class="code" href="class__GLCoord.html#a30940ad6ed05ec9c3d29922c07ea5a9a">_GLCoord&lt;T&gt;::operator!=</a>(<span class="keyword">const</span> <a class="code" href="class__GLCoord.html">_GLCoord&lt;T&gt;</a> &amp;<a class="code" href="class__GLCoord.html">_GLCoord</a>)<span class="keyword"> const </span>{</div>
+<div class="line"><a name="l00120"></a><span class="lineno">  120</span>&#160;    <span class="keywordflow">return</span> this-&gt;x != _GLCoord.<a class="code" href="class__GLCoord.html#a34d1cb247c16f147caab867c02bc3a58">x</a> || this-&gt;y != _GLCoord.<a class="code" href="class__GLCoord.html#aa401299efc8cc5711ab0f48816334302">y</a> || this-&gt;z != _GLCoord.<a class="code" href="class__GLCoord.html#a0bf87832aaa1094b0c1ef5da0a15c7de">z</a>;</div>
+<div class="line"><a name="l00121"></a><span class="lineno">  121</span>&#160;}</div>
+<div class="line"><a name="l00122"></a><span class="lineno">  122</span>&#160;</div>
+<div class="line"><a name="l00126"></a><span class="lineno"><a class="line" href="glcoord_8hpp.html#a28884e53db703fa029d7a96fe93a1d27">  126</a></span>&#160;<span class="keyword">template</span> &lt;<span class="keyword">class</span> T&gt; std::ostream &amp;<a class="code" href="glcoord_8hpp.html#a28884e53db703fa029d7a96fe93a1d27">operator&lt;&lt;</a>(std::ostream &amp;stream,</div>
+<div class="line"><a name="l00127"></a><span class="lineno">  127</span>&#160;        <span class="keyword">const</span> <a class="code" href="class__GLCoord.html">_GLCoord&lt;T&gt;</a> &amp;a) {</div>
+<div class="line"><a name="l00128"></a><span class="lineno">  128</span>&#160;    <span class="keywordflow">return</span> stream &lt;&lt; a.<a class="code" href="class__GLCoord.html#a34d1cb247c16f147caab867c02bc3a58">x</a> &lt;&lt; <span class="stringliteral">&quot;, &quot;</span> &lt;&lt; a.<a class="code" href="class__GLCoord.html#aa401299efc8cc5711ab0f48816334302">y</a> &lt;&lt; <span class="stringliteral">&quot;, &quot;</span> &lt;&lt; a.<a class="code" href="class__GLCoord.html#a0bf87832aaa1094b0c1ef5da0a15c7de">z</a> &lt;&lt; <span class="stringliteral">&quot;]&quot;</span>;</div>
+<div class="line"><a name="l00129"></a><span class="lineno">  129</span>&#160;}</div>
+<div class="line"><a name="l00130"></a><span class="lineno">  130</span>&#160;</div>
+<div class="line"><a name="l00131"></a><span class="lineno">  131</span>&#160;<span class="keyword">namespace </span><a class="code" href="namespacestd.html">std</a> {</div>
+<div class="line"><a name="l00135"></a><span class="lineno">  135</span>&#160;    <span class="keyword">template</span> &lt;<span class="keyword">class</span> T&gt; <span class="keywordtype">void</span> swap(<a class="code" href="class__GLCoord.html">_GLCoord&lt;T&gt;</a> &amp;a, <a class="code" href="class__GLCoord.html">_GLCoord&lt;T&gt;</a> &amp;b) {</div>
+<div class="line"><a name="l00136"></a><span class="lineno">  136</span>&#160;        std::swap(a.<a class="code" href="class__GLCoord.html#a34d1cb247c16f147caab867c02bc3a58">x</a>, b.<a class="code" href="class__GLCoord.html#a34d1cb247c16f147caab867c02bc3a58">x</a>);</div>
+<div class="line"><a name="l00137"></a><span class="lineno">  137</span>&#160;        std::swap(a.<a class="code" href="class__GLCoord.html#aa401299efc8cc5711ab0f48816334302">y</a>, b.<a class="code" href="class__GLCoord.html#aa401299efc8cc5711ab0f48816334302">y</a>);</div>
+<div class="line"><a name="l00138"></a><span class="lineno">  138</span>&#160;        std::swap(a.<a class="code" href="class__GLCoord.html#a0bf87832aaa1094b0c1ef5da0a15c7de">z</a>, b.<a class="code" href="class__GLCoord.html#a0bf87832aaa1094b0c1ef5da0a15c7de">z</a>);</div>
+<div class="line"><a name="l00139"></a><span class="lineno">  139</span>&#160;    }</div>
+<div class="line"><a name="l00140"></a><span class="lineno">  140</span>&#160;}</div>
+<div class="line"><a name="l00141"></a><span class="lineno">  141</span>&#160;</div>
+<div class="line"><a name="l00145"></a><span class="lineno"><a class="line" href="glcoord_8hpp.html#aaaac8428f70fcd5dce6137392a8bff70">  145</a></span>&#160;<span class="keyword">typedef</span> <a class="code" href="class__GLCoord.html">_GLCoord&lt;double&gt;</a> <a class="code" href="glcoord_8hpp.html#aaaac8428f70fcd5dce6137392a8bff70">GLCoord</a>;</div>
+<div class="line"><a name="l00146"></a><span class="lineno">  146</span>&#160;</div>
+<div class="line"><a name="l00147"></a><span class="lineno">  147</span>&#160;<span class="preprocessor">#endif</span></div>
+<div class="ttc" id="glcoord_8hpp_html_a8d4a7a47aeac89f7bdd05abac475403c"><div class="ttname"><a href="glcoord_8hpp.html#a8d4a7a47aeac89f7bdd05abac475403c">operator+</a></div><div class="ttdeci">_GLCoord&lt; T &gt; operator+(const _GLCoord&lt; T &gt; &amp;a, const _GLCoord&lt; T &gt; &amp;b)</div><div class="ttdoc">Sum two _GLCoords. </div><div class="ttdef"><b>Definition:</b> <a href="glcoord_8hpp_source.html#l00090">glcoord.hpp:90</a></div></div>
+<div class="ttc" id="class__GLCoord_html_a9bb73ee4cdf007d2e28859c58d9bcd32"><div class="ttname"><a href="class__GLCoord.html#a9bb73ee4cdf007d2e28859c58d9bcd32">_GLCoord::operator+=</a></div><div class="ttdeci">_GLCoord operator+=(const _GLCoord &amp;_GLCoord)</div><div class="ttdoc">Sum two _GLCoords. </div><div class="ttdef"><b>Definition:</b> <a href="glcoord_8hpp_source.html#l00094">glcoord.hpp:94</a></div></div>
+<div class="ttc" id="class__GLCoord_html_af80a946d63448fcf8771dfcb46d30e23"><div class="ttname"><a href="class__GLCoord.html#af80a946d63448fcf8771dfcb46d30e23">_GLCoord::_GLCoord</a></div><div class="ttdeci">_GLCoord()</div><div class="ttdoc">Constructor for _GLCoord. </div><div class="ttdef"><b>Definition:</b> <a href="glcoord_8hpp_source.html#l00070">glcoord.hpp:70</a></div></div>
+<div class="ttc" id="glcoord_8hpp_html_aaaac8428f70fcd5dce6137392a8bff70"><div class="ttname"><a href="glcoord_8hpp.html#aaaac8428f70fcd5dce6137392a8bff70">GLCoord</a></div><div class="ttdeci">_GLCoord&lt; double &gt; GLCoord</div><div class="ttdoc">GLCoord used for gl coordinates. </div><div class="ttdef"><b>Definition:</b> <a href="glcoord_8hpp_source.html#l00145">glcoord.hpp:145</a></div></div>
+<div class="ttc" id="class__GLCoord_html_a01d9c02a63b2177070b29bab1747fe76"><div class="ttname"><a href="class__GLCoord.html#a01d9c02a63b2177070b29bab1747fe76">_GLCoord::operator-=</a></div><div class="ttdeci">_GLCoord operator-=(const _GLCoord &amp;_GLCoord)</div><div class="ttdoc">Subtract two _GLCoords. </div><div class="ttdef"><b>Definition:</b> <a href="glcoord_8hpp_source.html#l00108">glcoord.hpp:108</a></div></div>
+<div class="ttc" id="namespacestd_html"><div class="ttname"><a href="namespacestd.html">std</a></div><div class="ttdef"><b>Definition:</b> <a href="coord_8hpp_source.html#l00124">coord.hpp:124</a></div></div>
+<div class="ttc" id="class__GLCoord_html_a34d1cb247c16f147caab867c02bc3a58"><div class="ttname"><a href="class__GLCoord.html#a34d1cb247c16f147caab867c02bc3a58">_GLCoord::x</a></div><div class="ttdeci">T x</div><div class="ttdoc">The x-coordinate. </div><div class="ttdef"><b>Definition:</b> <a href="glcoord_8hpp_source.html#l00059">glcoord.hpp:59</a></div></div>
+<div class="ttc" id="class__GLCoord_html_a27d27e51db0e17a0e4517b418c4a99f0"><div class="ttname"><a href="class__GLCoord.html#a27d27e51db0e17a0e4517b418c4a99f0">_GLCoord::operator==</a></div><div class="ttdeci">bool operator==(const _GLCoord &amp;_GLCoord) const </div><div class="ttdoc">True if _GLCoords are equal. </div><div class="ttdef"><b>Definition:</b> <a href="glcoord_8hpp_source.html#l00115">glcoord.hpp:115</a></div></div>
+<div class="ttc" id="class__GLCoord_html_a30940ad6ed05ec9c3d29922c07ea5a9a"><div class="ttname"><a href="class__GLCoord.html#a30940ad6ed05ec9c3d29922c07ea5a9a">_GLCoord::operator!=</a></div><div class="ttdeci">bool operator!=(const _GLCoord &amp;_GLCoord) const </div><div class="ttdoc">True if _GLCoords are not equal. </div><div class="ttdef"><b>Definition:</b> <a href="glcoord_8hpp_source.html#l00119">glcoord.hpp:119</a></div></div>
+<div class="ttc" id="common_8hpp_html"><div class="ttname"><a href="common_8hpp.html">common.hpp</a></div><div class="ttdoc">Utility macros. </div></div>
+<div class="ttc" id="class__GLCoord_html_a1f724bb6ae9d5ed321280bb00c35eaf5"><div class="ttname"><a href="class__GLCoord.html#a1f724bb6ae9d5ed321280bb00c35eaf5">_GLCoord::operator=</a></div><div class="ttdeci">_GLCoord &amp; operator=(const _GLCoord&lt; T &gt; &amp;c)</div><div class="ttdoc">Assignment operator for _GLCoord. </div><div class="ttdef"><b>Definition:</b> <a href="glcoord_8hpp_source.html#l00080">glcoord.hpp:80</a></div></div>
+<div class="ttc" id="class__GLCoord_html"><div class="ttname"><a href="class__GLCoord.html">_GLCoord</a></div><div class="ttdoc">Class for a coordinate. </div><div class="ttdef"><b>Definition:</b> <a href="glcoord_8hpp_source.html#l00017">glcoord.hpp:17</a></div></div>
+<div class="ttc" id="glcoord_8hpp_html_a28884e53db703fa029d7a96fe93a1d27"><div class="ttname"><a href="glcoord_8hpp.html#a28884e53db703fa029d7a96fe93a1d27">operator&lt;&lt;</a></div><div class="ttdeci">std::ostream &amp; operator&lt;&lt;(std::ostream &amp;stream, const _GLCoord&lt; T &gt; &amp;a)</div><div class="ttdoc">Output _GLCoord to stream. </div><div class="ttdef"><b>Definition:</b> <a href="glcoord_8hpp_source.html#l00126">glcoord.hpp:126</a></div></div>
+<div class="ttc" id="class__GLCoord_html_aa401299efc8cc5711ab0f48816334302"><div class="ttname"><a href="class__GLCoord.html#aa401299efc8cc5711ab0f48816334302">_GLCoord::y</a></div><div class="ttdeci">T y</div><div class="ttdoc">The y-coordinate. </div><div class="ttdef"><b>Definition:</b> <a href="glcoord_8hpp_source.html#l00063">glcoord.hpp:63</a></div></div>
+<div class="ttc" id="class__GLCoord_html_a0bf87832aaa1094b0c1ef5da0a15c7de"><div class="ttname"><a href="class__GLCoord.html#a0bf87832aaa1094b0c1ef5da0a15c7de">_GLCoord::z</a></div><div class="ttdeci">T z</div><div class="ttdoc">The z-coordinate. </div><div class="ttdef"><b>Definition:</b> <a href="glcoord_8hpp_source.html#l00067">glcoord.hpp:67</a></div></div>
+<div class="ttc" id="glcoord_8hpp_html_a02343fbd03247c3e08f348bb64d5cd89"><div class="ttname"><a href="glcoord_8hpp.html#a02343fbd03247c3e08f348bb64d5cd89">operator-</a></div><div class="ttdeci">_GLCoord&lt; T &gt; operator-(const _GLCoord&lt; T &gt; &amp;a, const _GLCoord&lt; T &gt; &amp;b)</div><div class="ttdoc">Subtract two _GLCoords. </div><div class="ttdef"><b>Definition:</b> <a href="glcoord_8hpp_source.html#l00104">glcoord.hpp:104</a></div></div>
+<div class="ttc" id="common_8hpp_html_ae2f08dc603ae93c402abd918ba4e23e1"><div class="ttname"><a href="common_8hpp.html#ae2f08dc603ae93c402abd918ba4e23e1">ABS</a></div><div class="ttdeci">#define ABS(a)</div><div class="ttdoc">Macro for absolute value of a. </div><div class="ttdef"><b>Definition:</b> <a href="common_8hpp_source.html#l00035">common.hpp:35</a></div></div>
+<div class="ttc" id="class__GLCoord_html_a616dde9cc1689f5571333a7314611f97"><div class="ttname"><a href="class__GLCoord.html#a616dde9cc1689f5571333a7314611f97">_GLCoord::length</a></div><div class="ttdeci">T length() const </div><div class="ttdoc">Length of this _GLCoord. </div><div class="ttdef"><b>Definition:</b> <a href="glcoord_8hpp_source.html#l00076">glcoord.hpp:76</a></div></div>
+</div><!-- fragment --></div><!-- contents -->
+<!-- start footer part -->
+<hr class="footer"/><address class="footer"><small>
+Generoinut projektille putkijuoksu Sun Jan 4 2015 15:01:11  &#160;<a href="http://www.doxygen.org/index.html">
+<img class="footer" src="doxygen.png" alt="doxygen"/>
+</a> 1.8.9
+</small></address>
+</body>
+</html>

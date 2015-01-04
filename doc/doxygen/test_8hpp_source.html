@@ -1,0 +1,159 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=9"/>
+<meta name="generator" content="Doxygen 1.8.9"/>
+<title>putkijuoksu: test.hpp lähdekooditiedosto</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<script type="text/javascript">
+  $(document).ready(function() { init_search(); });
+</script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr style="height: 56px;">
+  <td style="padding-left: 0.5em;">
+   <div id="projectname">putkijuoksu
+   </div>
+   <div id="projectbrief">Dynamic dungeon generator.</div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Generoinut Doxygen 1.8.9 -->
+<script type="text/javascript">
+var searchBox = new SearchBox("searchBox", "search",false,'Etsi');
+</script>
+  <div id="navrow1" class="tabs">
+    <ul class="tablist">
+      <li><a href="index.html"><span>Pääsivu</span></a></li>
+      <li><a href="annotated.html"><span>Tietueet</span></a></li>
+      <li class="current"><a href="files.html"><span>Tiedostot</span></a></li>
+      <li>
+        <div id="MSearchBox" class="MSearchBoxInactive">
+        <span class="left">
+          <img id="MSearchSelect" src="search/mag_sel.png"
+               onmouseover="return searchBox.OnSearchSelectShow()"
+               onmouseout="return searchBox.OnSearchSelectHide()"
+               alt=""/>
+          <input type="text" id="MSearchField" value="Etsi" accesskey="S"
+               onfocus="searchBox.OnSearchFieldFocus(true)" 
+               onblur="searchBox.OnSearchFieldFocus(false)" 
+               onkeyup="searchBox.OnSearchFieldChange(event)"/>
+          </span><span class="right">
+            <a id="MSearchClose" href="javascript:searchBox.CloseResultsWindow()"><img id="MSearchCloseImg" border="0" src="search/close.png" alt=""/></a>
+          </span>
+        </div>
+      </li>
+    </ul>
+  </div>
+  <div id="navrow2" class="tabs2">
+    <ul class="tablist">
+      <li><a href="files.html"><span>Tiedostolista</span></a></li>
+      <li><a href="globals.html"><span>Globaalit</span></a></li>
+    </ul>
+  </div>
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<iframe src="javascript:void(0)" frameborder="0" 
+        name="MSearchResults" id="MSearchResults">
+</iframe>
+</div>
+
+<div id="nav-path" class="navpath">
+  <ul>
+<li class="navelem"><a class="el" href="dir_13e138d54eb8818da29c3992edef070a.html">test</a></li>  </ul>
+</div>
+</div><!-- top -->
+<div class="header">
+  <div class="headertitle">
+<div class="title">test.hpp</div>  </div>
+</div><!--header-->
+<div class="contents">
+<a href="test_8hpp.html">Siirry tämän tiedoston dokumentaatioon.</a><div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;</div>
+<div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;<span class="preprocessor">#ifndef TEST_HPP</span></div>
+<div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;<span class="preprocessor">#define TEST_HPP</span></div>
+<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;</div>
+<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;<span class="preprocessor">#include &lt;iostream&gt;</span></div>
+<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;<span class="preprocessor">#include &lt;string&gt;</span></div>
+<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;<span class="preprocessor">#include &lt;sstream&gt;</span></div>
+<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;</div>
+<div class="line"><a name="l00017"></a><span class="lineno"><a class="line" href="test_8hpp.html#ad72dbcf6d0153db1b8d8a58001feed83">   17</a></span>&#160;<span class="preprocessor">#define DEBUG //so that classes throw</span></div>
+<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;</div>
+<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;<span class="keywordtype">void</span> <a class="code" href="test_8hpp.html#a0c38ed457f90e06f41a3238692c70397">init_tests</a>();</div>
+<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;<span class="keywordtype">void</span> <a class="code" href="test_8hpp.html#af937e64a7f5bd37618320eab9f5a5337">test_success</a>(<span class="keyword">const</span> <span class="keywordtype">char</span> *name);</div>
+<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;<span class="keywordtype">void</span> <a class="code" href="test_8hpp.html#a20f196c9f2ee1f4fa21f962a32efd24c">test_failure</a>(<span class="keyword">const</span> <span class="keywordtype">char</span> *name);</div>
+<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;<span class="keywordtype">void</span> <a class="code" href="test_8hpp.html#a20f196c9f2ee1f4fa21f962a32efd24c">test_failure</a>(<span class="keyword">const</span> <span class="keywordtype">char</span> *name, <span class="keyword">const</span> <span class="keywordtype">char</span> *reason);</div>
+<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;<span class="keywordtype">void</span> <a class="code" href="test_8hpp.html#a9cef2952046eb2c92b506fe685ec56bd">test_true</a>(<span class="keyword">const</span> <span class="keywordtype">char</span> *name, <span class="keywordtype">bool</span> value);</div>
+<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;<span class="keywordtype">void</span> <a class="code" href="test_8hpp.html#ad60bba633990bccf7e2b758f7122f1c4">test_false</a>(<span class="keyword">const</span> <span class="keywordtype">char</span> *name, <span class="keywordtype">bool</span> value);</div>
+<div class="line"><a name="l00057"></a><span class="lineno"><a class="line" href="test_8hpp.html#a39996f7247c105939544d7fa4acbd726">   57</a></span>&#160;<span class="keyword">template</span> &lt;<span class="keyword">class</span> T&gt; <span class="keywordtype">void</span> <a class="code" href="test_8hpp.html#a39996f7247c105939544d7fa4acbd726">test_equal</a>(<span class="keyword">const</span> <span class="keywordtype">char</span> *name, T a, T b) {</div>
+<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;    <span class="keywordflow">if</span>(a == b)</div>
+<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;        <a class="code" href="test_8hpp.html#af937e64a7f5bd37618320eab9f5a5337">test_success</a>(name);</div>
+<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;    <span class="keywordflow">else</span> {</div>
+<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;        std::stringstream sstream;</div>
+<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;        sstream &lt;&lt; <span class="stringliteral">&quot;expected &quot;</span>;</div>
+<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;        sstream &lt;&lt; a;</div>
+<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;        sstream &lt;&lt; <span class="stringliteral">&quot;, got &quot;</span>;</div>
+<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;        sstream &lt;&lt; b;</div>
+<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;        <a class="code" href="test_8hpp.html#a20f196c9f2ee1f4fa21f962a32efd24c">test_failure</a>(name, sstream.str().c_str());</div>
+<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;    }</div>
+<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;}</div>
+<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;</div>
+<div class="line"><a name="l00075"></a><span class="lineno"><a class="line" href="test_8hpp.html#a2a60860a6fae286f1b868fe4795d4310">   75</a></span>&#160;<span class="preprocessor">#define NO_DEATH_TEST(name, func) \</span></div>
+<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;<span class="preprocessor">    do { \</span></div>
+<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;<span class="preprocessor">        try { \</span></div>
+<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;<span class="preprocessor">            {func} \</span></div>
+<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;<span class="preprocessor">            test_success(name); \</span></div>
+<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;<span class="preprocessor">        } catch (...) { \</span></div>
+<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;<span class="preprocessor">            test_failure(name); \</span></div>
+<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;<span class="preprocessor">        } \</span></div>
+<div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;<span class="preprocessor">    } while(0) </span></div>
+<div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;</div>
+<div class="line"><a name="l00090"></a><span class="lineno"><a class="line" href="test_8hpp.html#a9ddf93fb2b0020d559ab97579bb8c81b">   90</a></span>&#160;<span class="preprocessor">#define DEATH_TEST(name, func) \</span></div>
+<div class="line"><a name="l00091"></a><span class="lineno">   91</span>&#160;<span class="preprocessor">    do { \</span></div>
+<div class="line"><a name="l00092"></a><span class="lineno">   92</span>&#160;<span class="preprocessor">        try { \</span></div>
+<div class="line"><a name="l00093"></a><span class="lineno">   93</span>&#160;<span class="preprocessor">            {func} \</span></div>
+<div class="line"><a name="l00094"></a><span class="lineno">   94</span>&#160;<span class="preprocessor">            test_failure(name); \</span></div>
+<div class="line"><a name="l00095"></a><span class="lineno">   95</span>&#160;<span class="preprocessor">        } catch (...) { \</span></div>
+<div class="line"><a name="l00096"></a><span class="lineno">   96</span>&#160;<span class="preprocessor">            test_success(name); \</span></div>
+<div class="line"><a name="l00097"></a><span class="lineno">   97</span>&#160;<span class="preprocessor">        } \</span></div>
+<div class="line"><a name="l00098"></a><span class="lineno">   98</span>&#160;<span class="preprocessor">    } while(0)</span></div>
+<div class="line"><a name="l00099"></a><span class="lineno">   99</span>&#160;</div>
+<div class="line"><a name="l00103"></a><span class="lineno">  103</span>&#160;<span class="keywordtype">void</span> <a class="code" href="test_8hpp.html#a651e79e65e3eff87c2424758087ff17a">print_test_status</a>();</div>
+<div class="line"><a name="l00104"></a><span class="lineno">  104</span>&#160;</div>
+<div class="line"><a name="l00105"></a><span class="lineno">  105</span>&#160;<span class="preprocessor">#endif</span></div>
+<div class="ttc" id="test_8hpp_html_a0c38ed457f90e06f41a3238692c70397"><div class="ttname"><a href="test_8hpp.html#a0c38ed457f90e06f41a3238692c70397">init_tests</a></div><div class="ttdeci">void init_tests()</div><div class="ttdoc">Initialize tests. </div></div>
+<div class="ttc" id="test_8hpp_html_a651e79e65e3eff87c2424758087ff17a"><div class="ttname"><a href="test_8hpp.html#a651e79e65e3eff87c2424758087ff17a">print_test_status</a></div><div class="ttdeci">void print_test_status()</div><div class="ttdoc">Print status of the tests. </div></div>
+<div class="ttc" id="test_8hpp_html_a39996f7247c105939544d7fa4acbd726"><div class="ttname"><a href="test_8hpp.html#a39996f7247c105939544d7fa4acbd726">test_equal</a></div><div class="ttdeci">void test_equal(const char *name, T a, T b)</div><div class="ttdoc">Test that are two values equal. </div><div class="ttdef"><b>Definition:</b> <a href="test_8hpp_source.html#l00057">test.hpp:57</a></div></div>
+<div class="ttc" id="test_8hpp_html_a20f196c9f2ee1f4fa21f962a32efd24c"><div class="ttname"><a href="test_8hpp.html#a20f196c9f2ee1f4fa21f962a32efd24c">test_failure</a></div><div class="ttdeci">void test_failure(const char *name)</div><div class="ttdoc">Print a failed test. </div></div>
+<div class="ttc" id="test_8hpp_html_a9cef2952046eb2c92b506fe685ec56bd"><div class="ttname"><a href="test_8hpp.html#a9cef2952046eb2c92b506fe685ec56bd">test_true</a></div><div class="ttdeci">void test_true(const char *name, bool value)</div><div class="ttdoc">Test that is the value true. </div></div>
+<div class="ttc" id="test_8hpp_html_af937e64a7f5bd37618320eab9f5a5337"><div class="ttname"><a href="test_8hpp.html#af937e64a7f5bd37618320eab9f5a5337">test_success</a></div><div class="ttdeci">void test_success(const char *name)</div><div class="ttdoc">Print a successful test. </div></div>
+<div class="ttc" id="test_8hpp_html_ad60bba633990bccf7e2b758f7122f1c4"><div class="ttname"><a href="test_8hpp.html#ad60bba633990bccf7e2b758f7122f1c4">test_false</a></div><div class="ttdeci">void test_false(const char *name, bool value)</div><div class="ttdoc">Test that is the value false. </div></div>
+</div><!-- fragment --></div><!-- contents -->
+<!-- start footer part -->
+<hr class="footer"/><address class="footer"><small>
+Generoinut projektille putkijuoksu Sun Jan 4 2015 15:01:11  &#160;<a href="http://www.doxygen.org/index.html">
+<img class="footer" src="doxygen.png" alt="doxygen"/>
+</a> 1.8.9
+</small></address>
+</body>
+</html>
