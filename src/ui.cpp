@@ -16,9 +16,9 @@
 #include "resource.hpp"
 
 SDL_Window *screen;
-int width = 640, height = 480;
 
 void init_ui() {
+    int width = 640, height = 480;
     SDL_Init(SDL_INIT_EVERYTHING);
     SDL_GL_SetAttribute(SDL_GL_MULTISAMPLEBUFFERS, 1);
     SDL_GL_SetAttribute(SDL_GL_MULTISAMPLESAMPLES, 2);
@@ -59,6 +59,8 @@ void init_ui() {
     init_resources();
 }
 
+/* returns a target point to pass to gluLookAt with the origin cur and 
+   the rotation dir to look towards */
 GLCoord lookat(const GLCoord &cur, const GLCoord &dir) {
     GLCoord ret;
     ret.x = sin(dir.z/180*M_PI);
@@ -69,6 +71,7 @@ GLCoord lookat(const GLCoord &cur, const GLCoord &dir) {
     return ret;
 }
 
+/* move from cur with force to the rotation dir */
 void move(GLCoord &cur, const GLCoord &force, const GLCoord &dir) {
     double sz = sin(dir.z/180*M_PI);
     double cz = cos(dir.z/180*M_PI);
@@ -76,6 +79,7 @@ void move(GLCoord &cur, const GLCoord &force, const GLCoord &dir) {
     cur.y += -sz * force.x + cz * force.y;
 }
 
+/* draw the floor */
 void draw_floor(GLCoord &pos) {
     float vd = VIEWDISTANCE;
     const GLfloat vertices[] = {
@@ -113,6 +117,7 @@ void draw_floor(GLCoord &pos) {
     glDisableClientState(GL_NORMAL_ARRAY);
 }
 
+/* draw the ceiling, totally not copy-paste code */
 void draw_ceiling(GLCoord &pos) {
     float vd = VIEWDISTANCE;
     const GLfloat vertices[] = {
@@ -175,6 +180,7 @@ void render(Level &level, Player &plr) {
     SDL_GL_SwapWindow(screen);
 }
 
+// handle input
 void input(Level &level, Player &player) {
     SDL_Event ev;
     GLCoord newpos(player.pos);

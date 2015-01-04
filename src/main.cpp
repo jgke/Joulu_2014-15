@@ -41,6 +41,8 @@ int main() {
             }
         }
     }
+    /* normally exit() is called from input, this means a segv or similar error
+       happened */
     clean_ui();
     return 0;
 }
