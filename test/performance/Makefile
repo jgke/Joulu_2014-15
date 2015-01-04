@@ -13,6 +13,7 @@ IMAGES=qtree-add.png qtree-contains.png qtree-get.png qtree-map.png
 
 .PRECIOUS: %.dat
 %.dat : ${TARGET}
+	mkdir -p ../../doc/performance
 	./${TARGET}
 
 all: ${TARGET} ${IMAGES}
