@@ -1,0 +1,114 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+
+<html lang="en">
+
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <title>LCOV - coverage-out - test/queue_test.cpp</title>
+  <link rel="stylesheet" type="text/css" href="../gcov.css">
+</head>
+
+<body>
+
+  <table width="100%" border=0 cellspacing=0 cellpadding=0>
+    <tr><td class="title">LCOV - code coverage report</td></tr>
+    <tr><td class="ruler"><img src="../glass.png" width=3 height=3 alt=""></td></tr>
+
+    <tr>
+      <td width="100%">
+        <table cellpadding=1 border=0 width="100%">
+          <tr>
+            <td width="10%" class="headerItem">Current view:</td>
+            <td width="35%" class="headerValue"><a href="../index.html">top level</a> - <a href="index.html">test</a> - queue_test.cpp<span style="font-size: 80%;"> (source / <a href="queue_test.cpp.func-sort-c.html">functions</a>)</span></td>
+            <td width="5%"></td>
+            <td width="15%"></td>
+            <td width="10%" class="headerCovTableHead">Hit</td>
+            <td width="10%" class="headerCovTableHead">Total</td>
+            <td width="15%" class="headerCovTableHead">Coverage</td>
+          </tr>
+          <tr>
+            <td class="headerItem">Test:</td>
+            <td class="headerValue">coverage-out</td>
+            <td></td>
+            <td class="headerItem">Lines:</td>
+            <td class="headerCovTableEntry">20</td>
+            <td class="headerCovTableEntry">20</td>
+            <td class="headerCovTableEntryHi">100.0 %</td>
+          </tr>
+          <tr>
+            <td class="headerItem">Date:</td>
+            <td class="headerValue">2015-01-04 14:53:34</td>
+            <td></td>
+            <td class="headerItem">Functions:</td>
+            <td class="headerCovTableEntry">3</td>
+            <td class="headerCovTableEntry">3</td>
+            <td class="headerCovTableEntryHi">100.0 %</td>
+          </tr>
+          <tr><td><img src="../glass.png" width=3 height=3 alt=""></td></tr>
+        </table>
+      </td>
+    </tr>
+
+    <tr><td class="ruler"><img src="../glass.png" width=3 height=3 alt=""></td></tr>
+  </table>
+
+  <table cellpadding=0 cellspacing=0 border=0>
+    <tr>
+      <td><br></td>
+    </tr>
+    <tr>
+      <td>
+<pre class="sourceHeading">          Line data    Source code</pre>
+<pre class="source">
+<a name="1"><span class="lineNum">       1 </span>            : #include &quot;test.hpp&quot;</a>
+<span class="lineNum">       2 </span>            : 
+<span class="lineNum">       3 </span>            : #include &quot;queue.hpp&quot;
+<span class="lineNum">       4 </span>            : 
+<a name="5"><span class="lineNum">       5 </span>            : #include &quot;queue_test.hpp&quot;</a>
+<span class="lineNum">       6 </span>            : 
+<span class="lineNum">       7 </span><span class="lineCov">          2 : void queue_test() {</span>
+<span class="lineNum">       8 </span><span class="lineCov">          2 :     NO_DEATH_TEST(&quot;Queue doesn't crash constructor/destructor is called&quot;, {</span>
+<span class="lineNum">       9 </span>            :         Queue&lt;int&gt; *tmp = new Queue&lt;int&gt;();
+<span class="lineNum">      10 </span>            :         delete tmp;
+<span class="lineNum">      11 </span>            :     });
+<span class="lineNum">      12 </span><span class="lineCov">          2 :     Queue&lt;int&gt; cur;</span>
+<span class="lineNum">      13 </span><span class="lineCov">          2 :     test_false(&quot;Empty queue has no next member&quot;, cur.hasNext());</span>
+<span class="lineNum">      14 </span><span class="lineCov">          2 :     NO_DEATH_TEST(&quot;Can add element to empty Queue&quot;, {</span>
+<span class="lineNum">      15 </span>            :         cur.add(1);
+<span class="lineNum">      16 </span>            :     });
+<span class="lineNum">      17 </span><span class="lineCov">          2 :     test_true(&quot;Queue has next member&quot;, cur.hasNext());</span>
+<span class="lineNum">      18 </span><span class="lineCov">          2 :     test_equal(&quot;Can peek element from Queue with one member&quot;, 1, cur.peek());</span>
+<span class="lineNum">      19 </span><span class="lineCov">          2 :     test_equal(&quot;Can pop element from Queue with one member&quot;, 1, cur.pop());</span>
+<span class="lineNum">      20 </span><span class="lineCov">          2 :     cur.add(1);</span>
+<span class="lineNum">      21 </span><span class="lineCov">          2 :     test_equal(&quot;Can peek element from Queue with one members&quot;, 1, cur.peek());</span>
+<span class="lineNum">      22 </span><span class="lineCov">          2 :     NO_DEATH_TEST(&quot;Can add element to Queue with one member&quot;, {</span>
+<span class="lineNum">      23 </span>            :         cur.add(2);
+<span class="lineNum">      24 </span>            :     });
+<span class="lineNum">      25 </span><span class="lineCov">          2 :     test_equal(&quot;Can peek element from Queue with two members&quot;, 1, cur.peek());</span>
+<span class="lineNum">      26 </span><span class="lineCov">          2 :     test_equal(&quot;Queue has size&quot;, 2, cur.size());</span>
+<span class="lineNum">      27 </span><span class="lineCov">          2 :     test_equal(&quot;Can pop element from Queue with two members&quot;, 1, cur.pop());</span>
+<span class="lineNum">      28 </span><span class="lineCov">          2 :     NO_DEATH_TEST(&quot;Queue doesn't crash when deleted with multiple members&quot;, {</span>
+<span class="lineNum">      29 </span>            :         Queue&lt;int&gt; tmp;
+<span class="lineNum">      30 </span>            :         tmp.add(1);
+<span class="lineNum">      31 </span>            :         tmp.add(2);
+<span class="lineNum">      32 </span>            :         tmp.add(3);
+<span class="lineNum">      33 </span>            :     });
+<span class="lineNum">      34 </span><span class="lineCov">          4 :     Queue&lt;int&gt; curb(cur);</span>
+<span class="lineNum">      35 </span><span class="lineCov">          2 :     test_equal(&quot;Queue deep copies&quot;, cur.peek(), curb.pop());</span>
+<a name="36"><span class="lineNum">      36 </span><span class="lineCov">          2 :     curb = cur;</span></a>
+<span class="lineNum">      37 </span><span class="lineCov">          4 :     test_equal(&quot;Queue assignment deep copies&quot;, cur.peek(), curb.pop());</span>
+<span class="lineNum">      38 </span><span class="lineCov">          8 : }</span>
+</pre>
+      </td>
+    </tr>
+  </table>
+  <br>
+
+  <table width="100%" border=0 cellspacing=0 cellpadding=0>
+    <tr><td class="ruler"><img src="../glass.png" width=3 height=3 alt=""></td></tr>
+    <tr><td class="versionInfo">Generated by: <a href="http://ltp.sourceforge.net/coverage/lcov.php" target="_parent">LCOV version 1.11</a></td></tr>
+  </table>
+  <br>
+
+</body>
+</html>
