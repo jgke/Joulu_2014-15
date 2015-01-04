@@ -221,9 +221,9 @@ void input(Level &level, Player &player) {
     player.pos = newpos;
     while(SDL_PollEvent(&ev)) {
         switch(ev.type) {
-            case SDL_KEYDOWN:
-                switch(ev.key.keysym.sym) {
-                    case SDLK_c:
+        case SDL_KEYDOWN:
+            switch(ev.key.keysym.sym) {
+            case SDLK_c:
                 if(player.collisions)
                     player.pos.z = 50;
                 else
