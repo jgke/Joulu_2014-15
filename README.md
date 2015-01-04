@@ -25,10 +25,11 @@ documentation
 =============
 
         $ make doc
+        $ make test
 
 After compilation, documentation is located at doc/*.pdf. Doxygen output is
-located at doc/doxygen/index.html, and test coverage reports are at
-doc/coverage/index.html.
+located at doc/doxygen/index.html. Test coverage reports are at
+doc/coverage/index.html. Performance reports are at doc/performance/*.png.
 
 depends on:
 * texi2pdf
