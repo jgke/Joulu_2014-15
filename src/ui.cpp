@@ -218,11 +218,17 @@ void input(Level &level, Player &player) {
                 return false;
             }
         } check_collision;
-        if(check_collision(level, newpos)) {
-            newpos.x = player.pos.x;
-            if(check_collision(level, newpos))
-                newpos.y = player.pos.y;
+        GLCoord collpos(newpos);
+        if(check_collision(level, collpos)) {
+            collpos.x = player.pos.x;
+            if(check_collision(level, collpos)) {
+                collpos.x = newpos.x;
+                collpos.y = player.pos.y;
+                if(check_collision(level, collpos))
+                    collpos = player.pos;
+            }
         }
+        newpos = collpos;
     }
     player.pos = newpos;
     while(SDL_PollEvent(&ev)) {
