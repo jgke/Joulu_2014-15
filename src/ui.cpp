@@ -180,6 +180,31 @@ void render(Level &level, Player &plr) {
     SDL_GL_SwapWindow(screen);
 }
 
+GLCoord check_collisions(const Level &level, const GLCoord &origpos, const GLCoord &newpos) {
+    struct { //c++ before 11 disallows local functions...
+        bool operator()(const Level &level, GLCoord &newpos) {
+            for(double y = -HITBOX; y <= HITBOX; y += HITBOX)
+                for(double x = -HITBOX; x <= HITBOX; x += HITBOX) {
+                    Coord pos(floor(newpos.x + x), floor(newpos.y+y));
+                    if(level.data.get(pos, '#') != '.')
+                        return true;
+                }
+            return false;
+        }
+    } check_collision;
+    GLCoord collpos(newpos);
+    if(check_collision(level, collpos)) {
+        collpos.x = origpos.x;
+        if(check_collision(level, collpos)) {
+            collpos.x = newpos.x;
+            collpos.y = origpos.y;
+            if(check_collision(level, collpos))
+                collpos = origpos;
+        }
+    }
+    return collpos;
+}
+
 // handle input
 void input(Level &level, Player &player) {
     SDL_Event ev;
@@ -207,28 +232,7 @@ void input(Level &level, Player &player) {
     if(player.cameraDirection.z >= 360)
         player.cameraDirection.z -= 360;
     if(player.collisions) {
-        struct { //c++ before 11 disallows local functions...
-            bool operator()(const Level &level, GLCoord &newpos) {
-                for(double y = -HITBOX; y <= HITBOX; y += HITBOX)
-                    for(double x = -HITBOX; x <= HITBOX; x += HITBOX) {
-                        Coord pos(floor(newpos.x + x), floor(newpos.y+y));
-                        if(level.data.get(pos, '#') != '.')
-                            return true;
-                    }
-                return false;
-            }
-        } check_collision;
-        GLCoord collpos(newpos);
-        if(check_collision(level, collpos)) {
-            collpos.x = player.pos.x;
-            if(check_collision(level, collpos)) {
-                collpos.x = newpos.x;
-                collpos.y = player.pos.y;
-                if(check_collision(level, collpos))
-                    collpos = player.pos;
-            }
-        }
-        newpos = collpos;
+        newpos = check_collisions(level, player.pos, newpos);
     }
     player.pos = newpos;
     while(SDL_PollEvent(&ev)) {
