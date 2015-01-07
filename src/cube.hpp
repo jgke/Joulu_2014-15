@@ -1,7 +1,7 @@
 #ifndef CUBE_HPP
 #define CUBE_HPP
 
-#include "glcoord.hpp"
+#include "coord.hpp"
 
 class Cube {
     public:

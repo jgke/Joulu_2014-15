@@ -27,7 +27,15 @@ template <class T> class _Coord {
         /**
          * Constructor for coord.
          */
+        _Coord(const T &x, const T &y, const T &z);
+        /**
+         * Constructor for coord.
+         */
         _Coord(const _Coord<T> &c);
+        /**
+         * Constructor for typecasted coord.
+         */
+        template <class V> _Coord(const _Coord<V> &c);
         /**
          * Length of this coord.
          * ABS(x) + ABS(y).
@@ -37,6 +45,10 @@ template <class T> class _Coord {
          * Assignment operator for coord.
          */
         _Coord &operator=(const _Coord<T> &c);
+        /**
+         * Assignment operator for typecasted coord.
+         */
+        template <class V> _Coord &operator=(const _Coord<V> &c);
         /**
          * Sum two _Coords, (a,b) + (c, d) = (a+c, b+d).
          */
@@ -61,21 +73,43 @@ template <class T> class _Coord {
          * The y-coordinate.
          */
         T y;
+        /**
+         * The z-coordinate.
+         */
+        T z;
 };
 
-template <class T> _Coord<T>::_Coord(): x(0), y(0) {}
+template <class T> _Coord<T>::_Coord(): x(0), y(0), z(0) {}
 
-template <class T> _Coord<T>::_Coord(const T &x, const T &y): x(x), y(y) {}
+template <class T> _Coord<T>::_Coord(const T &x, const T &y): x(x), y(y), z(0) {}
 
-template <class T> _Coord<T>::_Coord(const _Coord<T> &c): x(c.x), y(c.y) {}
+template <class T> _Coord<T>::_Coord(const T &x, const T &y, const T &z):
+    x(x), y(y), z(z) {}
+
+template <class T> _Coord<T>::_Coord(const _Coord<T> &c): x(c.x), y(c.y), z(c.z) {}
+
+template <class T>
+template <class V>
+_Coord<T>::_Coord(const _Coord<V> &c):
+    x(static_cast<T>(c.x)),
+    y(static_cast<T>(c.y)),
+    z(static_cast<T>(c.z)) {}
 
 template <class T> T _Coord<T>::length() const {
-    return ABS(this->x) + ABS(this->y);
+    return ABS(this->x) + ABS(this->y) + ABS(this->z);
 }
 
 template <class T> _Coord<T> &_Coord<T>::operator=(const _Coord<T> &c) {
     x = c.x;
     y = c.y;
+    z = c.z;
+    return *this;
+}
+
+template <class T> template <class V> _Coord<T> &_Coord<T>::operator=(const _Coord<V> &c) {
+    x = static_cast<T>(c.x);
+    y = static_cast<T>(c.y);
+    z = static_cast<T>(c.z);
     return *this;
 }
 
@@ -83,12 +117,13 @@ template <class T> _Coord<T> &_Coord<T>::operator=(const _Coord<T> &c) {
  * Sum two coords.
  */
 template <class T> _Coord<T> operator+(const _Coord<T> &a, const _Coord<T> &b) {
-    return _Coord<T>(a.x+b.x, a.y+b.y);
+    return _Coord<T>(a.x+b.x, a.y+b.y, a.z+b.z);
 }
 
 template <class T> _Coord<T> _Coord<T>::operator+=(const _Coord<T> &coord) {
     this->x += coord.x;
     this->y += coord.y;
+    this->z += coord.z;
     return *this;
 }
 
@@ -96,21 +131,22 @@ template <class T> _Coord<T> _Coord<T>::operator+=(const _Coord<T> &coord) {
  * Subtract two coords.
  */
 template <class T> _Coord<T> operator-(const _Coord<T> &a, const _Coord<T> &b) {
-    return _Coord<T>(a.x-b.x, a.y-b.y);
+    return _Coord<T>(a.x-b.x, a.y-b.y, a.z-b.z);
 }
 
 template <class T> _Coord<T> _Coord<T>::operator-=(const _Coord<T> &coord) {
     this->x -= coord.x;
     this->y -= coord.y;
+    this->z -= coord.z;
     return *this;
 }
 
 template <class T> bool _Coord<T>::operator== (const _Coord<T> &coord) const {
-    return this->x == coord.x && this->y == coord.y;
+    return this->x == coord.x && this->y == coord.y && this->z == coord.z;
 }
 
 template <class T> bool _Coord<T>::operator!=(const _Coord<T> &coord) const {
-    return this->x != coord.x || this->y != coord.y;
+    return this->x != coord.x || this->y != coord.y || this->z != coord.z;
 }
 
 /**
@@ -118,7 +154,7 @@ template <class T> bool _Coord<T>::operator!=(const _Coord<T> &coord) const {
  */
 template <class T> std::ostream &operator<<(std::ostream &stream,
         const _Coord<T> &a) {
-    return stream << a.x << ", " << a.y << "]";
+    return stream << a.x << ", " << a.y << ", " << a.z << "]";
 }
 
 namespace std {
@@ -128,17 +164,14 @@ namespace std {
     template <class T> void swap(_Coord<T> &a, _Coord<T> &b) {
         std::swap(a.x, b.x);
         std::swap(a.y, b.y);
+        std::swap(a.z, b.z);
     }
 }
 
 /**
- * Type of single coordinate.
- */
-#define COORDTYPE int
-
-/**
  * Coord used for coordinates.
  */
-typedef _Coord<COORDTYPE> Coord;
+typedef _Coord<int> Coord;
+typedef _Coord<double> GLCoord;
 
 #endif

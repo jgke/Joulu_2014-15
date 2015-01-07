@@ -6,7 +6,7 @@
 
 #include "common.hpp"
 #include "coord.hpp"
-#include "glcoord.hpp"
+#include "coord.hpp"
 #include "qtree.hpp"
 
 #include "game.hpp"

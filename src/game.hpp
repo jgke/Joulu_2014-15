@@ -2,7 +2,7 @@
 #define GAME_HPP
 
 #include "qtree.hpp"
-#include "glcoord.hpp"
+#include "coord.hpp"
 
 #define HITBOX 0.2
 

@@ -2,7 +2,7 @@
 #include <GL/gl.h>
 #include <GL/glext.h>
 
-#include "glcoord.hpp"
+#include "coord.hpp"
 
 #include "cube.hpp"
 
