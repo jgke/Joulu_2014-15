@@ -205,6 +205,16 @@ GLCoord check_collisions(const Level &level, const GLCoord &origpos, const GLCoo
     return collpos;
 }
 
+void dig(Level &level, const GLCoord &origin, const GLCoord &direction) {
+    const int digrange = 2;
+    double x = digrange * direction.x / direction.length() + origin.x;
+    double y = digrange * direction.y / direction.length() + origin.y;
+    Coord target = Coord(round(x), round(y));
+    std::cout << origin << std::endl;
+    std::cout << target << std::endl;
+    level.data.add('.', target);
+}
+
 // handle input
 void input(Level &level, Player &player) {
     SDL_Event ev;
@@ -245,6 +255,9 @@ void input(Level &level, Player &player) {
                 else
                     player.pos.z = 0.5;
                 player.collisions = !player.collisions;
+                break;
+            case SDLK_x:
+                dig(level, player.pos, player.cameraTarget - player.pos);
                 break;
             case SDLK_q:
                 clean_ui();
