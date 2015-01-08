@@ -14,6 +14,7 @@
 #include "ui.hpp"
 #include "cube.hpp"
 #include "resource.hpp"
+#include "physics.hpp"
 
 SDL_Window *screen;
 
@@ -166,6 +167,7 @@ void render(Level &level, Player &plr) {
             0,  0, 1);
     draw_floor(plr.pos);
     draw_ceiling(plr.pos);
+    Coord colorpos = color(level, plr.pos, plr.cameraTarget - plr.pos);
     for(int y = -VIEWDISTANCE; y < VIEWDISTANCE; y++) {
         for(int x = -VIEWDISTANCE; x < VIEWDISTANCE; x++) {
             Coord curpos = Coord((int)plr.pos.x, (int)plr.pos.y) + Coord(x, y);
@@ -173,10 +175,14 @@ void render(Level &level, Player &plr) {
                 generate(level.data, curpos, GENDISTANCE);
             char data = '.';
             data = level.data.get(curpos, '.');
-            if(data != '.')
+            if(data == '#')
                 Cube(GLCoord(curpos.x, curpos.y, 0), wallTexture).draw();
+            else if(data == '%')
+                Cube(GLCoord(curpos.x, curpos.y, 0), ceilingTexture).draw();
         }
     }
+    if(level.data.get(colorpos, '.') == '%')
+        level.data.add('#', colorpos);
     SDL_GL_SwapWindow(screen);
 }
 
@@ -203,49 +209,6 @@ GLCoord check_collisions(const Level &level, const GLCoord &origpos, const GLCoo
         }
     }
     return collpos;
-}
-
-void dig(Level &level, GLCoord origin, const GLCoord &direction) {
-    const int digrange = 4;
-    double tmp;
-    double dx = direction.x / direction.length();
-    double dy = direction.y / direction.length();
-    double nx, ny;
-    nx = ny = 1.0/0.0; // +inf
-    if(dx < 0)
-        nx = -ABS(modf(origin.x, &tmp));
-    else if(dx > 0)
-        nx = 1 - ABS(modf(origin.x, &tmp));
-    if(dy < 0)
-        ny = -ABS(modf(origin.y, &tmp));
-    else if(dy > 0)
-        ny = 1 - ABS(modf(origin.y, &tmp));
-    if(nx == 0)
-        nx = SIGN(dx);
-    if(ny == 0)
-        ny = SIGN(dy);
-    tmp = 0;
-    while(tmp <= digrange) {
-        Coord intpos(floor(origin.x), floor(origin.y));
-        if(level.data.get(intpos, '.') != '.') {
-            level.data.add('.', intpos);
-            return;
-        }
-        double nxdx = nx/dx;
-        double nydy = ny/dy;
-        if(nxdx < nydy) {
-            origin += GLCoord(nx, SIGN(dy) * ABS(dy*nxdx));
-            tmp += nx*nx + (nx*dy)*(nx*dy);
-            ny += SIGN(dy) * ABS(ny*(nxdx));
-            nx = SIGN(dx);
-        }
-        else {
-            origin += GLCoord(SIGN(dx) * ABS(dx*nydy), ny);
-            tmp += (ny*dx)*(ny*dx) + ny*ny;
-            nx += SIGN(dx) * ABS(nx*(nydy));
-            ny = SIGN(dy);
-        }
-    }
 }
 
 // handle input
