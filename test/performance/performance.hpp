@@ -29,6 +29,17 @@
         end.tv_sec /= (count); \
         end.tv_nsec /= (count); \
         fprintf((stream), "%d %ld.%09ld\n", (n), end.tv_sec, end.tv_nsec); \
+        printf("%d %ld.%09ld\n", (n), end.tv_sec, end.tv_nsec); \
+    } while(0)
+
+#define MTEST(name, n, count, init, func) \
+    do { \
+        printf("%s\n", name); \
+        fp = fopen(name ".dat", "w"); \
+        for(int currentn = 1; currentn <= (n); currentn*=10) { \
+            init; \
+            PTEST(fp, (name), currentn, count, func); \
+        } \
     } while(0)
 
 #endif
