@@ -8,7 +8,7 @@
 
 Cube::Cube(const GLCoord &pos, GLuint texture): pos(pos), texture(texture) {}
 
-GLubyte cubeIndices[] = {
+static const GLubyte cubeIndices[] = {
     0,1,2, 2,3,0,       // front
     4,5,6, 6,7,4,       // right
     8,9,10, 10,11,8,    // top
@@ -17,7 +17,7 @@ GLubyte cubeIndices[] = {
     20,21,22, 22,23,20  // back
 };
 
-GLfloat cubeVertices[] = {
+static const GLfloat cubeVertices[] = {
     0,0,0,  0,-1,0,  0,1, //front
     1,0,0,  0,-1,0,  1,1,
     1,0,1,  0,-1,0,  1,0,
