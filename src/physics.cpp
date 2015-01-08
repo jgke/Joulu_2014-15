@@ -62,16 +62,16 @@ void dig(Level &level, GLCoord origin, const GLCoord &direction) {
     raycast(level, origin, direction, 4, &level, cb);
 }
 
-Coord cpos;
 Coord color(Level &level, GLCoord origin, const GLCoord &direction) {
+    Pair<Level &, Coord> cbdata(level, Coord());
     auto cb = [](char value, const Coord &pos, void *cbdata) {
         if(value != '.') {
-            ((Level *)cbdata)->data.add('%', pos);
-            cpos = pos;
+            ((Pair<Level &, Coord> *)cbdata)->a.data.add('%', pos);
+            ((Pair<Level &, Coord> *)cbdata)->b = pos;
             return false;
         }
         return true;
     };
-    raycast(level, origin, direction, 4, &level, cb);
-    return cpos;
+    raycast(level, origin, direction, 4, &cbdata, cb);
+    return cbdata.b;
 }
