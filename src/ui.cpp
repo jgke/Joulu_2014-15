@@ -205,14 +205,53 @@ GLCoord check_collisions(const Level &level, const GLCoord &origpos, const GLCoo
     return collpos;
 }
 
-void dig(Level &level, const GLCoord &origin, const GLCoord &direction) {
-    const int digrange = 2;
-    double x = digrange * direction.x / direction.length() + origin.x;
-    double y = digrange * direction.y / direction.length() + origin.y;
-    Coord target = Coord(round(x), round(y));
+void dig(Level &level, GLCoord origin, const GLCoord &direction) {
+    const int digrange = 4;
+    double tmp;
+    double dx = direction.x / direction.length();
+    double dy = direction.y / direction.length();
+    double nx, ny;
     std::cout << origin << std::endl;
-    std::cout << target << std::endl;
-    level.data.add('.', target);
+    nx = ny = 1.0/0.0; // +inf
+    if(dx < 0)
+        nx = -ABS(modf(origin.x, &tmp));
+    else if(dx > 0)
+        nx = 1 - ABS(modf(origin.x, &tmp));
+    if(dy < 0)
+        ny = -ABS(modf(origin.y, &tmp));
+    else if(dy > 0)
+        ny = 1 - ABS(modf(origin.y, &tmp));
+    if(nx == 0)
+        nx = SIGN(dx);
+    if(ny == 0)
+        ny = SIGN(dy);
+    tmp = 0;
+    while(tmp <= digrange) {
+        Coord intpos(floor(origin.x), floor(origin.y));
+        std::cout << intpos << std::endl;
+        if(level.data.get(intpos, '.') != '.') {
+            level.data.add('.', intpos);
+            return;
+        }
+        double nxdx = nx/dx;
+        double nydy = ny/dy;
+        if(nxdx < nydy) {
+            std::cout << "branch nx" << std::endl;
+            origin += GLCoord(nx, SIGN(dy) * ABS(dy*nxdx));
+            tmp += nx*nx + (nx*dy)*(nx*dy);
+            ny += SIGN(dy) * ABS(ny*(nxdx));
+            nx = SIGN(dx);
+        }
+        else {
+            std::cout << "branch ny" << std::endl;
+            origin += GLCoord(SIGN(dx) * ABS(dx*nydy), ny);
+            tmp += (ny*dx)*(ny*dx) + ny*ny;
+            nx += SIGN(dx) * ABS(nx*(nydy));
+            ny = SIGN(dy);
+        }
+        std::cout << origin << std::endl;
+        std::cout << std::endl;
+    }
 }
 
 // handle input
