@@ -2,11 +2,10 @@
 #include "qtree.hpp"
 #include "search.hpp"
 
-bool empty_cb(const Coord &pos, const char &value, int len, void *data) {
+void empty_cb(const char &value, const Coord &pos, void *data) {
     ((Qtree<char> *)data)->add('.', pos);
-    return true;
 }
 
 void empty_generator(Qtree<char> &newdata, const Coord &start) {
-    bfs(newdata, start, '%', &newdata, &empty_cb);
+    newdata.map(&newdata, &empty_cb);
 }
