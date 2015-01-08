@@ -17,7 +17,7 @@
 
 SDL_Window *screen;
 
-void init_ui() {
+void init_ui(bool fullscreen) {
     int width = 640, height = 480;
     SDL_Init(SDL_INIT_EVERYTHING);
     SDL_GL_SetAttribute(SDL_GL_MULTISAMPLEBUFFERS, 1);
@@ -26,7 +26,7 @@ void init_ui() {
                           SDL_WINDOWPOS_UNDEFINED,
                           SDL_WINDOWPOS_UNDEFINED,
                           width, height,
-//                          SDL_WINDOW_FULLSCREEN |
+                          (fullscreen ? SDL_WINDOW_FULLSCREEN_DESKTOP : 0) |
                           SDL_WINDOW_OPENGL);
  
     if(screen == NULL)

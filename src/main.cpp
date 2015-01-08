@@ -17,15 +17,19 @@ void handler(int sig) {
     longjmp(env, 1);
 }
 
-void init() {
+void init(int argc, char *argv[]) {
     srand((unsigned)time(NULL));
     handle_signals(&handler);
-    init_ui();
+    bool fullscreen = false;
+    if(argc > 1)
+        if(!strcmp("-f", argv[1]))
+            fullscreen = true;
+    init_ui(fullscreen);
 }
 
-int main() {
+int main(int argc, char *argv[]) {
     if(!setjmp(env)) {
-        init();
+        init(argc, argv);
         Level level;
         Player player;
         generate(level.data, Coord(0, 0), 10, 0);
