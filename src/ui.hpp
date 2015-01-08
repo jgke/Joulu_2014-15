@@ -2,7 +2,7 @@
 #define UI_HPP
 
 #define GENDISTANCE 45
-#define VIEWDISTANCE 45
+#define VIEWDISTANCE 32
 
 #include "coord.hpp"
 #include "qtree.hpp"
