@@ -211,7 +211,6 @@ void dig(Level &level, GLCoord origin, const GLCoord &direction) {
     double dx = direction.x / direction.length();
     double dy = direction.y / direction.length();
     double nx, ny;
-    std::cout << origin << std::endl;
     nx = ny = 1.0/0.0; // +inf
     if(dx < 0)
         nx = -ABS(modf(origin.x, &tmp));
@@ -228,7 +227,6 @@ void dig(Level &level, GLCoord origin, const GLCoord &direction) {
     tmp = 0;
     while(tmp <= digrange) {
         Coord intpos(floor(origin.x), floor(origin.y));
-        std::cout << intpos << std::endl;
         if(level.data.get(intpos, '.') != '.') {
             level.data.add('.', intpos);
             return;
@@ -236,21 +234,17 @@ void dig(Level &level, GLCoord origin, const GLCoord &direction) {
         double nxdx = nx/dx;
         double nydy = ny/dy;
         if(nxdx < nydy) {
-            std::cout << "branch nx" << std::endl;
             origin += GLCoord(nx, SIGN(dy) * ABS(dy*nxdx));
             tmp += nx*nx + (nx*dy)*(nx*dy);
             ny += SIGN(dy) * ABS(ny*(nxdx));
             nx = SIGN(dx);
         }
         else {
-            std::cout << "branch ny" << std::endl;
             origin += GLCoord(SIGN(dx) * ABS(dx*nydy), ny);
             tmp += (ny*dx)*(ny*dx) + ny*ny;
             nx += SIGN(dx) * ABS(nx*(nydy));
             ny = SIGN(dy);
         }
-        std::cout << origin << std::endl;
-        std::cout << std::endl;
     }
 }
 
@@ -289,10 +283,14 @@ void input(Level &level, Player &player) {
         case SDL_KEYDOWN:
             switch(ev.key.keysym.sym) {
             case SDLK_c:
-                if(player.collisions)
+                if(player.collisions) {
                     player.pos.z = 50;
-                else
+                    glDisable(GL_FOG);
+                }
+                else {
                     player.pos.z = 0.5;
+                    glEnable(GL_FOG);
+                }
                 player.collisions = !player.collisions;
                 break;
             case SDLK_x:

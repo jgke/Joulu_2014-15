@@ -33,5 +33,9 @@
  * Macro for absolute value of a.
  */
 #define ABS(a) ((a) >= 0 ? (a) : (-(a)))
+/**
+ * Macro for the sign of a, 1 if >= +0, -1 if <= -0.
+ */
+#define SIGN(a) ((a) >= +0 ? 1 : -1)
 
 #endif
