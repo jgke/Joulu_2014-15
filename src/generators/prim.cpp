@@ -10,10 +10,6 @@
 typedef Pair<Qtree<char> *, Qtree<char> *> Qpair;
 typedef Pair<Coord, Coord> Cpair;
 
-void prim_data_cb(const char &value, const Coord &pos, void *data) {
-    ((Qtree<char> *)data)->add(value, pos);
-}
-
 void prim_map_cb(const char &value, const Coord &pos, void *data) {
     Pair<List<Coord> *, Qpair> *pair = (Pair<List<Coord> *, Qpair> *)data;
     if(!pair->b.b->contains(pos))
@@ -79,7 +75,10 @@ void prim_generator(Qtree<char> &data, const Coord &_start) {
     List<Coord> walls;
     Pair<List<Coord> *, Qpair> pair(&walls, Qpair(&data, &newdata));
     data.map(&pair, &prim_map_cb);
-    newdata.map(&data, &prim_data_cb);
+    auto cb = [](const char &value, const Coord &pos, void *data) {
+        ((Qtree<char> *)data)->add(value, pos);
+    };
+    newdata.map(&data, cb);
     for(int i = 0; i < 4 && walls.size(); i++)
         data.add('.', walls.remove(rand()%walls.size()));
 }

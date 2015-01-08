@@ -17,12 +17,11 @@ int neighborCount(const Qtree<char> &data, const Coord &coord) {
     return ret;
 }
 
-void life_cb(const char &value, const Coord &pos, void *data) {
-    ((Qtree<char> *)data)->add((rand()%2) ? '.' : '#', pos);
-}
-
 void life_generator(Qtree<char> &newdata, const Coord &start) {
-    newdata.map(&newdata, &life_cb);
+    auto cb = [](const char &value, const Coord &pos, void *data) {
+        ((Qtree<char> *)data)->add((rand()%2) ? '.' : '#', pos);
+    };
+    newdata.map(&newdata, cb);
 
     Coord corner = newdata.corner();
     int width = newdata.width();
