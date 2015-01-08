@@ -5,7 +5,11 @@
 
 #include "generator.hpp"
 
-const Generator generators[3] = {
+#include "generators/empty.hpp"
+#include "generators/life.hpp"
+#include "generators/prim.hpp"
+
+const Generator generators[] = {
     empty_generator,
     life_generator,
     prim_generator
