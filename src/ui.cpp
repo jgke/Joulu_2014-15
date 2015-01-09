@@ -178,7 +178,7 @@ void render(Level &level, Player &plr) {
             if(data == '#')
                 Cube(GLCoord(curpos.x, curpos.y, 0), wallTexture).draw();
             else if(data == '%')
-                Cube(GLCoord(curpos.x, curpos.y, 0), ceilingTexture).draw();
+                Cube(GLCoord(curpos.x, curpos.y, 0), highlightTexture).draw();
         }
     }
     if(level.data.get(colorpos, '.') == '%')

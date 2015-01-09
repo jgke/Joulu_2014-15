@@ -4,6 +4,7 @@
 #include <GL/gl.h>
 
 extern GLuint groundTexture;
+extern GLuint highlightTexture;
 extern GLuint wallTexture;
 extern GLuint ceilingTexture;
 
