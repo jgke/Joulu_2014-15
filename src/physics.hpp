@@ -12,6 +12,7 @@ void raycast(Level &level, const GLCoord &origin, const GLCoord &direction,
         bool (*cb)(char val, const Coord &pos, void *data),
         char defaultvalue='.');
 void dig(Level &level, GLCoord origin, const GLCoord &direction);
+void place(Level &level, GLCoord origin, const GLCoord &direction);
 Coord color(Level &level, GLCoord origin, const GLCoord &direction);
 
 #endif

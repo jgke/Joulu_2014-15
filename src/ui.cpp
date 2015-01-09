@@ -256,6 +256,9 @@ void input(Level &level, Player &player) {
                 }
                 player.collisions = !player.collisions;
                 break;
+            case SDLK_p:
+                place(level, player.pos, player.cameraTarget - player.pos);
+                break;
             case SDLK_x:
                 dig(level, player.pos, player.cameraTarget - player.pos);
                 break;
