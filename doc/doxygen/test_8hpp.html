@@ -1,0 +1,454 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=9"/>
+<meta name="generator" content="Doxygen 1.8.9"/>
+<title>putkijuoksu: test.hpp tiedostoreferenssi</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<script type="text/javascript">
+  $(document).ready(function() { init_search(); });
+</script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr style="height: 56px;">
+  <td style="padding-left: 0.5em;">
+   <div id="projectname">putkijuoksu
+   </div>
+   <div id="projectbrief">Dynamic dungeon generator.</div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Generoinut Doxygen 1.8.9 -->
+<script type="text/javascript">
+var searchBox = new SearchBox("searchBox", "search",false,'Etsi');
+</script>
+  <div id="navrow1" class="tabs">
+    <ul class="tablist">
+      <li><a href="index.html"><span>Pääsivu</span></a></li>
+      <li><a href="annotated.html"><span>Tietueet</span></a></li>
+      <li class="current"><a href="files.html"><span>Tiedostot</span></a></li>
+      <li>
+        <div id="MSearchBox" class="MSearchBoxInactive">
+        <span class="left">
+          <img id="MSearchSelect" src="search/mag_sel.png"
+               onmouseover="return searchBox.OnSearchSelectShow()"
+               onmouseout="return searchBox.OnSearchSelectHide()"
+               alt=""/>
+          <input type="text" id="MSearchField" value="Etsi" accesskey="S"
+               onfocus="searchBox.OnSearchFieldFocus(true)" 
+               onblur="searchBox.OnSearchFieldFocus(false)" 
+               onkeyup="searchBox.OnSearchFieldChange(event)"/>
+          </span><span class="right">
+            <a id="MSearchClose" href="javascript:searchBox.CloseResultsWindow()"><img id="MSearchCloseImg" border="0" src="search/close.png" alt=""/></a>
+          </span>
+        </div>
+      </li>
+    </ul>
+  </div>
+  <div id="navrow2" class="tabs2">
+    <ul class="tablist">
+      <li><a href="files.html"><span>Tiedostolista</span></a></li>
+      <li><a href="globals.html"><span>Globaalit</span></a></li>
+    </ul>
+  </div>
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<iframe src="javascript:void(0)" frameborder="0" 
+        name="MSearchResults" id="MSearchResults">
+</iframe>
+</div>
+
+<div id="nav-path" class="navpath">
+  <ul>
+<li class="navelem"><a class="el" href="dir_13e138d54eb8818da29c3992edef070a.html">test</a></li>  </ul>
+</div>
+</div><!-- top -->
+<div class="header">
+  <div class="summary">
+<a href="#define-members">Määrittelyt</a> &#124;
+<a href="#func-members">Funktiot</a>  </div>
+  <div class="headertitle">
+<div class="title">test.hpp tiedostoreferenssi</div>  </div>
+</div><!--header-->
+<div class="contents">
+
+<p>Test framework.  
+<a href="#details">Lisää...</a></p>
+<div class="textblock"><code>#include &lt;iostream&gt;</code><br />
+<code>#include &lt;string&gt;</code><br />
+<code>#include &lt;sstream&gt;</code><br />
+</div>
+<p><a href="test_8hpp_source.html">Siirry tämän tiedoston lähdekoodiin.</a></p>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="define-members"></a>
+Määrittelyt</h2></td></tr>
+<tr class="memitem:ad72dbcf6d0153db1b8d8a58001feed83"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ad72dbcf6d0153db1b8d8a58001feed83"></a>
+#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="test_8hpp.html#ad72dbcf6d0153db1b8d8a58001feed83">DEBUG</a></td></tr>
+<tr class="memdesc:ad72dbcf6d0153db1b8d8a58001feed83"><td class="mdescLeft">&#160;</td><td class="mdescRight">Defining will use alternative rendering and enables exceptions. <br /></td></tr>
+<tr class="separator:ad72dbcf6d0153db1b8d8a58001feed83"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2a60860a6fae286f1b868fe4795d4310"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="test_8hpp.html#a2a60860a6fae286f1b868fe4795d4310">NO_DEATH_TEST</a>(name,  func)</td></tr>
+<tr class="memdesc:a2a60860a6fae286f1b868fe4795d4310"><td class="mdescLeft">&#160;</td><td class="mdescRight">Test that does the piece of code run without throwing an exception.  <a href="#a2a60860a6fae286f1b868fe4795d4310">Lisää...</a><br /></td></tr>
+<tr class="separator:a2a60860a6fae286f1b868fe4795d4310"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9ddf93fb2b0020d559ab97579bb8c81b"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="test_8hpp.html#a9ddf93fb2b0020d559ab97579bb8c81b">DEATH_TEST</a>(name,  func)</td></tr>
+<tr class="memdesc:a9ddf93fb2b0020d559ab97579bb8c81b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Test that does the piece of code throw an exception.  <a href="#a9ddf93fb2b0020d559ab97579bb8c81b">Lisää...</a><br /></td></tr>
+<tr class="separator:a9ddf93fb2b0020d559ab97579bb8c81b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
+Funktiot</h2></td></tr>
+<tr class="memitem:a0c38ed457f90e06f41a3238692c70397"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a0c38ed457f90e06f41a3238692c70397"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="test_8hpp.html#a0c38ed457f90e06f41a3238692c70397">init_tests</a> ()</td></tr>
+<tr class="memdesc:a0c38ed457f90e06f41a3238692c70397"><td class="mdescLeft">&#160;</td><td class="mdescRight">Initialize tests. <br /></td></tr>
+<tr class="separator:a0c38ed457f90e06f41a3238692c70397"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af937e64a7f5bd37618320eab9f5a5337"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="test_8hpp.html#af937e64a7f5bd37618320eab9f5a5337">test_success</a> (const char *name)</td></tr>
+<tr class="memdesc:af937e64a7f5bd37618320eab9f5a5337"><td class="mdescLeft">&#160;</td><td class="mdescRight">Print a successful test.  <a href="#af937e64a7f5bd37618320eab9f5a5337">Lisää...</a><br /></td></tr>
+<tr class="separator:af937e64a7f5bd37618320eab9f5a5337"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a20f196c9f2ee1f4fa21f962a32efd24c"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="test_8hpp.html#a20f196c9f2ee1f4fa21f962a32efd24c">test_failure</a> (const char *name)</td></tr>
+<tr class="memdesc:a20f196c9f2ee1f4fa21f962a32efd24c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Print a failed test.  <a href="#a20f196c9f2ee1f4fa21f962a32efd24c">Lisää...</a><br /></td></tr>
+<tr class="separator:a20f196c9f2ee1f4fa21f962a32efd24c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aed71e4708d1aa1f1dfd44e5dfc72a230"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="test_8hpp.html#aed71e4708d1aa1f1dfd44e5dfc72a230">test_failure</a> (const char *name, const char *reason)</td></tr>
+<tr class="memdesc:aed71e4708d1aa1f1dfd44e5dfc72a230"><td class="mdescLeft">&#160;</td><td class="mdescRight">Print a failed test, with a reason.  <a href="#aed71e4708d1aa1f1dfd44e5dfc72a230">Lisää...</a><br /></td></tr>
+<tr class="separator:aed71e4708d1aa1f1dfd44e5dfc72a230"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9cef2952046eb2c92b506fe685ec56bd"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="test_8hpp.html#a9cef2952046eb2c92b506fe685ec56bd">test_true</a> (const char *name, bool value)</td></tr>
+<tr class="memdesc:a9cef2952046eb2c92b506fe685ec56bd"><td class="mdescLeft">&#160;</td><td class="mdescRight">Test that is the value true.  <a href="#a9cef2952046eb2c92b506fe685ec56bd">Lisää...</a><br /></td></tr>
+<tr class="separator:a9cef2952046eb2c92b506fe685ec56bd"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad60bba633990bccf7e2b758f7122f1c4"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="test_8hpp.html#ad60bba633990bccf7e2b758f7122f1c4">test_false</a> (const char *name, bool value)</td></tr>
+<tr class="memdesc:ad60bba633990bccf7e2b758f7122f1c4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Test that is the value false.  <a href="#ad60bba633990bccf7e2b758f7122f1c4">Lisää...</a><br /></td></tr>
+<tr class="separator:ad60bba633990bccf7e2b758f7122f1c4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a39996f7247c105939544d7fa4acbd726"><td class="memTemplParams" colspan="2">template&lt;class T &gt; </td></tr>
+<tr class="memitem:a39996f7247c105939544d7fa4acbd726"><td class="memTemplItemLeft" align="right" valign="top">void&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="test_8hpp.html#a39996f7247c105939544d7fa4acbd726">test_equal</a> (const char *name, T a, T b)</td></tr>
+<tr class="memdesc:a39996f7247c105939544d7fa4acbd726"><td class="mdescLeft">&#160;</td><td class="mdescRight">Test that are two values equal.  <a href="#a39996f7247c105939544d7fa4acbd726">Lisää...</a><br /></td></tr>
+<tr class="separator:a39996f7247c105939544d7fa4acbd726"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a651e79e65e3eff87c2424758087ff17a"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a651e79e65e3eff87c2424758087ff17a"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="test_8hpp.html#a651e79e65e3eff87c2424758087ff17a">print_test_status</a> ()</td></tr>
+<tr class="memdesc:a651e79e65e3eff87c2424758087ff17a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Print status of the tests. <br /></td></tr>
+<tr class="separator:a651e79e65e3eff87c2424758087ff17a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table>
+<a name="details" id="details"></a><h2 class="groupheader">Yksityiskohtainen selite</h2>
+<div class="textblock"><p>Test framework. </p>
+
+<p>Määrittely tiedostossa <a class="el" href="test_8hpp_source.html">test.hpp</a>.</p>
+</div><h2 class="groupheader">Määritysten dokumentointi</h2>
+<a class="anchor" id="a9ddf93fb2b0020d559ab97579bb8c81b"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define DEATH_TEST</td>
+          <td>(</td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname">name, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname">func&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<b>Arvo:</b><div class="fragment"><div class="line"><span class="keywordflow">do</span> { \</div>
+<div class="line">        try { \</div>
+<div class="line">            {func} <a class="code" href="test_8hpp.html#a20f196c9f2ee1f4fa21f962a32efd24c">\</a></div>
+<div class="line"><a class="code" href="test_8hpp.html#a20f196c9f2ee1f4fa21f962a32efd24c">            test_failure</a>(name); \</div>
+<div class="line">        } <span class="keywordflow">catch</span> (...) { <a class="code" href="test_8hpp.html#af937e64a7f5bd37618320eab9f5a5337">\</a></div>
+<div class="line"><a class="code" href="test_8hpp.html#af937e64a7f5bd37618320eab9f5a5337">            test_success</a>(name); \</div>
+<div class="line">        } \</div>
+<div class="line">    } <span class="keywordflow">while</span>(0)</div>
+<div class="ttc" id="test_8hpp_html_a20f196c9f2ee1f4fa21f962a32efd24c"><div class="ttname"><a href="test_8hpp.html#a20f196c9f2ee1f4fa21f962a32efd24c">test_failure</a></div><div class="ttdeci">void test_failure(const char *name)</div><div class="ttdoc">Print a failed test. </div></div>
+<div class="ttc" id="test_8hpp_html_af937e64a7f5bd37618320eab9f5a5337"><div class="ttname"><a href="test_8hpp.html#af937e64a7f5bd37618320eab9f5a5337">test_success</a></div><div class="ttdeci">void test_success(const char *name)</div><div class="ttdoc">Print a successful test. </div></div>
+</div><!-- fragment -->
+<p>Test that does the piece of code throw an exception. </p>
+<dl class="params"><dt>Parametrit</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">name</td><td>name of the test </td></tr>
+    <tr><td class="paramname">func</td><td>code to run </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p>Määrittely tiedoston <a class="el" href="test_8hpp_source.html">test.hpp</a> rivillä <a class="el" href="test_8hpp_source.html#l00090">90</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="a2a60860a6fae286f1b868fe4795d4310"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define NO_DEATH_TEST</td>
+          <td>(</td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname">name, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname">func&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<b>Arvo:</b><div class="fragment"><div class="line"><span class="keywordflow">do</span> { \</div>
+<div class="line">        try { \</div>
+<div class="line">            {func} <a class="code" href="test_8hpp.html#af937e64a7f5bd37618320eab9f5a5337">\</a></div>
+<div class="line"><a class="code" href="test_8hpp.html#af937e64a7f5bd37618320eab9f5a5337">            test_success</a>(name); \</div>
+<div class="line">        } <span class="keywordflow">catch</span> (...) { <a class="code" href="test_8hpp.html#a20f196c9f2ee1f4fa21f962a32efd24c">\</a></div>
+<div class="line"><a class="code" href="test_8hpp.html#a20f196c9f2ee1f4fa21f962a32efd24c">            test_failure</a>(name); \</div>
+<div class="line">        } \</div>
+<div class="line">    } <span class="keywordflow">while</span>(0)</div>
+<div class="ttc" id="test_8hpp_html_a20f196c9f2ee1f4fa21f962a32efd24c"><div class="ttname"><a href="test_8hpp.html#a20f196c9f2ee1f4fa21f962a32efd24c">test_failure</a></div><div class="ttdeci">void test_failure(const char *name)</div><div class="ttdoc">Print a failed test. </div></div>
+<div class="ttc" id="test_8hpp_html_af937e64a7f5bd37618320eab9f5a5337"><div class="ttname"><a href="test_8hpp.html#af937e64a7f5bd37618320eab9f5a5337">test_success</a></div><div class="ttdeci">void test_success(const char *name)</div><div class="ttdoc">Print a successful test. </div></div>
+</div><!-- fragment -->
+<p>Test that does the piece of code run without throwing an exception. </p>
+<dl class="params"><dt>Parametrit</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">name</td><td>name of the test </td></tr>
+    <tr><td class="paramname">func</td><td>code to run </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p>Määrittely tiedoston <a class="el" href="test_8hpp_source.html">test.hpp</a> rivillä <a class="el" href="test_8hpp_source.html#l00075">75</a>.</p>
+
+</div>
+</div>
+<h2 class="groupheader">Funktioiden dokumentaatio</h2>
+<a class="anchor" id="a39996f7247c105939544d7fa4acbd726"></a>
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class T &gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">void test_equal </td>
+          <td>(</td>
+          <td class="paramtype">const char *&#160;</td>
+          <td class="paramname"><em>name</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">T&#160;</td>
+          <td class="paramname"><em>a</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">T&#160;</td>
+          <td class="paramname"><em>b</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Test that are two values equal. </p>
+<dl class="params"><dt>Parametrit</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">name</td><td>name of the test </td></tr>
+    <tr><td class="paramname">a</td><td>expected value </td></tr>
+    <tr><td class="paramname">b</td><td>value to test </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p>Määrittely tiedoston <a class="el" href="test_8hpp_source.html">test.hpp</a> rivillä <a class="el" href="test_8hpp_source.html#l00057">57</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="a20f196c9f2ee1f4fa21f962a32efd24c"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void test_failure </td>
+          <td>(</td>
+          <td class="paramtype">const char *&#160;</td>
+          <td class="paramname"><em>name</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Print a failed test. </p>
+<dl class="params"><dt>Parametrit</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">name</td><td>name of the test </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a class="anchor" id="aed71e4708d1aa1f1dfd44e5dfc72a230"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void test_failure </td>
+          <td>(</td>
+          <td class="paramtype">const char *&#160;</td>
+          <td class="paramname"><em>name</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const char *&#160;</td>
+          <td class="paramname"><em>reason</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Print a failed test, with a reason. </p>
+<dl class="params"><dt>Parametrit</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">name</td><td>name of the test </td></tr>
+    <tr><td class="paramname">reason</td><td>reason why the test failed </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a class="anchor" id="ad60bba633990bccf7e2b758f7122f1c4"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void test_false </td>
+          <td>(</td>
+          <td class="paramtype">const char *&#160;</td>
+          <td class="paramname"><em>name</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">bool&#160;</td>
+          <td class="paramname"><em>value</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Test that is the value false. </p>
+<dl class="params"><dt>Parametrit</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">name</td><td>name of the test </td></tr>
+    <tr><td class="paramname">value</td><td>boolean to test </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a class="anchor" id="af937e64a7f5bd37618320eab9f5a5337"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void test_success </td>
+          <td>(</td>
+          <td class="paramtype">const char *&#160;</td>
+          <td class="paramname"><em>name</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Print a successful test. </p>
+<dl class="params"><dt>Parametrit</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">name</td><td>name of the test </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a class="anchor" id="a9cef2952046eb2c92b506fe685ec56bd"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void test_true </td>
+          <td>(</td>
+          <td class="paramtype">const char *&#160;</td>
+          <td class="paramname"><em>name</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">bool&#160;</td>
+          <td class="paramname"><em>value</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Test that is the value true. </p>
+<dl class="params"><dt>Parametrit</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">name</td><td>name of the test </td></tr>
+    <tr><td class="paramname">value</td><td>boolean to test </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+</div><!-- contents -->
+<!-- start footer part -->
+<hr class="footer"/><address class="footer"><small>
+Generoinut projektille putkijuoksu Sun Jan 11 2015 20:35:35  &#160;<a href="http://www.doxygen.org/index.html">
+<img class="footer" src="doxygen.png" alt="doxygen"/>
+</a> 1.8.9
+</small></address>
+</body>
+</html>

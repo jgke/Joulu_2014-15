@@ -1,0 +1,164 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=9"/>
+<meta name="generator" content="Doxygen 1.8.9"/>
+<title>putkijuoksu: search.hpp lähdekooditiedosto</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<script type="text/javascript">
+  $(document).ready(function() { init_search(); });
+</script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr style="height: 56px;">
+  <td style="padding-left: 0.5em;">
+   <div id="projectname">putkijuoksu
+   </div>
+   <div id="projectbrief">Dynamic dungeon generator.</div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Generoinut Doxygen 1.8.9 -->
+<script type="text/javascript">
+var searchBox = new SearchBox("searchBox", "search",false,'Etsi');
+</script>
+  <div id="navrow1" class="tabs">
+    <ul class="tablist">
+      <li><a href="index.html"><span>Pääsivu</span></a></li>
+      <li><a href="annotated.html"><span>Tietueet</span></a></li>
+      <li class="current"><a href="files.html"><span>Tiedostot</span></a></li>
+      <li>
+        <div id="MSearchBox" class="MSearchBoxInactive">
+        <span class="left">
+          <img id="MSearchSelect" src="search/mag_sel.png"
+               onmouseover="return searchBox.OnSearchSelectShow()"
+               onmouseout="return searchBox.OnSearchSelectHide()"
+               alt=""/>
+          <input type="text" id="MSearchField" value="Etsi" accesskey="S"
+               onfocus="searchBox.OnSearchFieldFocus(true)" 
+               onblur="searchBox.OnSearchFieldFocus(false)" 
+               onkeyup="searchBox.OnSearchFieldChange(event)"/>
+          </span><span class="right">
+            <a id="MSearchClose" href="javascript:searchBox.CloseResultsWindow()"><img id="MSearchCloseImg" border="0" src="search/close.png" alt=""/></a>
+          </span>
+        </div>
+      </li>
+    </ul>
+  </div>
+  <div id="navrow2" class="tabs2">
+    <ul class="tablist">
+      <li><a href="files.html"><span>Tiedostolista</span></a></li>
+      <li><a href="globals.html"><span>Globaalit</span></a></li>
+    </ul>
+  </div>
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<iframe src="javascript:void(0)" frameborder="0" 
+        name="MSearchResults" id="MSearchResults">
+</iframe>
+</div>
+
+<div id="nav-path" class="navpath">
+  <ul>
+<li class="navelem"><a class="el" href="dir_d44c64559bbebec7f509842c48db8b23.html">include</a></li>  </ul>
+</div>
+</div><!-- top -->
+<div class="header">
+  <div class="headertitle">
+<div class="title">search.hpp</div>  </div>
+</div><!--header-->
+<div class="contents">
+<a href="search_8hpp.html">Siirry tämän tiedoston dokumentaatioon.</a><div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;</div>
+<div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;<span class="preprocessor">#ifndef SEARCH_HPP</span></div>
+<div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;<span class="preprocessor">#define SEARCH_HPP</span></div>
+<div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;</div>
+<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="common_8hpp.html">common.hpp</a>&quot;</span></div>
+<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="coord_8hpp.html">coord.hpp</a>&quot;</span></div>
+<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="queue_8hpp.html">queue.hpp</a>&quot;</span></div>
+<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="qtree_8hpp.html">qtree.hpp</a>&quot;</span></div>
+<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;</div>
+<div class="line"><a name="l00017"></a><span class="lineno"><a class="line" href="classBFS__entry.html">   17</a></span>&#160;<span class="keyword">class </span><a class="code" href="classBFS__entry.html">BFS_entry</a> {</div>
+<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;    <span class="keyword">public</span>:</div>
+<div class="line"><a name="l00022"></a><span class="lineno"><a class="line" href="classBFS__entry.html#a40e560adf3ab446873b9815e171cb25a">   22</a></span>&#160;        <a class="code" href="classBFS__entry.html#a40e560adf3ab446873b9815e171cb25a">BFS_entry</a>(<a class="code" href="class__Coord.html">Coord</a> <a class="code" href="classBFS__entry.html#af64647575d7078d5ddb75e91228fbe90">a</a>, <span class="keywordtype">int</span> <a class="code" href="classBFS__entry.html#a203f911c96ea1af968a130460cb57fd7">len</a>): a(a), len(len) {}</div>
+<div class="line"><a name="l00026"></a><span class="lineno"><a class="line" href="classBFS__entry.html#af64647575d7078d5ddb75e91228fbe90">   26</a></span>&#160;        <span class="keyword">const</span> <a class="code" href="class__Coord.html">Coord</a> <a class="code" href="classBFS__entry.html#af64647575d7078d5ddb75e91228fbe90">a</a>;</div>
+<div class="line"><a name="l00030"></a><span class="lineno"><a class="line" href="classBFS__entry.html#a203f911c96ea1af968a130460cb57fd7">   30</a></span>&#160;        <span class="keyword">const</span> <span class="keywordtype">int</span> <a class="code" href="classBFS__entry.html#a203f911c96ea1af968a130460cb57fd7">len</a>;</div>
+<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;};</div>
+<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;</div>
+<div class="line"><a name="l00043"></a><span class="lineno"><a class="line" href="search_8hpp.html#ab52b9b285277e95c0cbdd36e180a3173">   43</a></span>&#160;<span class="keyword">template</span> &lt;<span class="keyword">class</span> T&gt; <span class="keywordtype">void</span> <a class="code" href="search_8hpp.html#ab52b9b285277e95c0cbdd36e180a3173">bfs</a>(<a class="code" href="classQtree.html">Qtree&lt;T&gt;</a> &amp;data, <span class="keyword">const</span> <a class="code" href="class__Coord.html">Coord</a> &amp;start,</div>
+<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;        <span class="keyword">const</span> T &amp;allowed, <span class="keywordtype">void</span> *cbdata,</div>
+<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;        <span class="keywordtype">bool</span> (*cb)(<span class="keyword">const</span> <a class="code" href="class__Coord.html">Coord</a> &amp;pos, <span class="keyword">const</span> T &amp;value, <span class="keywordtype">int</span> len, <span class="keywordtype">void</span> *data),</div>
+<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;        <span class="keywordtype">int</span> dist=10000, <span class="keywordtype">bool</span> allowEmpty=<span class="keyword">false</span>) {</div>
+<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;    <a class="code" href="classQtree.html">Qtree&lt;bool&gt;</a> visited;</div>
+<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;    <a class="code" href="classQueue.html">Queue&lt;BFS_entry&gt;</a> queue;</div>
+<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;    queue.<a class="code" href="classQueue.html#a5597838174b173b34b5ec0a98ee0af45">add</a>(<a class="code" href="classBFS__entry.html">BFS_entry</a>(start, 0));</div>
+<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;    <span class="keywordflow">while</span>(queue.<a class="code" href="classQueue.html#ab9e199e0f1a1d00fd5d5babfe7e259a3">hasNext</a>()) {</div>
+<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;        <span class="keyword">const</span> <a class="code" href="classBFS__entry.html">BFS_entry</a> &amp;c = queue.<a class="code" href="classQueue.html#abeee018138cbb5226e5352a5788e23bd">pop</a>();</div>
+<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;        <span class="keywordflow">if</span>(c.<a class="code" href="classBFS__entry.html#a203f911c96ea1af968a130460cb57fd7">len</a> &gt;= dist)</div>
+<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;            <span class="keywordflow">continue</span>;</div>
+<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;        <span class="keywordflow">if</span>(!allowEmpty)</div>
+<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;            <span class="keywordflow">if</span>(!data.contains(c.<a class="code" href="classBFS__entry.html#af64647575d7078d5ddb75e91228fbe90">a</a>))</div>
+<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;                <span class="keywordflow">continue</span>;</div>
+<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;        <span class="keyword">const</span> T &amp;val = data.get(c.<a class="code" href="classBFS__entry.html#af64647575d7078d5ddb75e91228fbe90">a</a>, allowed);</div>
+<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;        <span class="keywordflow">if</span>(val != allowed)</div>
+<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;            <span class="keywordflow">continue</span>;</div>
+<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;        <span class="keywordflow">if</span>(visited.<a class="code" href="classQtree.html#a4e32bc7a0be2880c7f49809efacf8d66">get</a>(c.<a class="code" href="classBFS__entry.html#af64647575d7078d5ddb75e91228fbe90">a</a>, <span class="keyword">false</span>))</div>
+<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;            <span class="keywordflow">continue</span>;</div>
+<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;        visited.<a class="code" href="classQtree.html#a8bdb7462ad8667e03839091836ae8905">add</a>(<span class="keyword">true</span>, c.<a class="code" href="classBFS__entry.html#af64647575d7078d5ddb75e91228fbe90">a</a>);</div>
+<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;        <span class="keywordflow">if</span>(!cb(c.<a class="code" href="classBFS__entry.html#af64647575d7078d5ddb75e91228fbe90">a</a>, val, c.<a class="code" href="classBFS__entry.html#a203f911c96ea1af968a130460cb57fd7">len</a>, cbdata))</div>
+<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;            <span class="keywordflow">continue</span>;</div>
+<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;        <span class="keywordtype">int</span> addlen = 1 + rand()%5;</div>
+<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;        queue.<a class="code" href="classQueue.html#a5597838174b173b34b5ec0a98ee0af45">add</a>(<a class="code" href="classBFS__entry.html">BFS_entry</a>(c.<a class="code" href="classBFS__entry.html#af64647575d7078d5ddb75e91228fbe90">a</a> + <a class="code" href="class__Coord.html">Coord</a>(-1, 0), c.<a class="code" href="classBFS__entry.html#a203f911c96ea1af968a130460cb57fd7">len</a>+addlen));</div>
+<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;        queue.<a class="code" href="classQueue.html#a5597838174b173b34b5ec0a98ee0af45">add</a>(<a class="code" href="classBFS__entry.html">BFS_entry</a>(c.<a class="code" href="classBFS__entry.html#af64647575d7078d5ddb75e91228fbe90">a</a> + <a class="code" href="class__Coord.html">Coord</a>(1, 0), c.<a class="code" href="classBFS__entry.html#a203f911c96ea1af968a130460cb57fd7">len</a>+addlen));</div>
+<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;        queue.<a class="code" href="classQueue.html#a5597838174b173b34b5ec0a98ee0af45">add</a>(<a class="code" href="classBFS__entry.html">BFS_entry</a>(c.<a class="code" href="classBFS__entry.html#af64647575d7078d5ddb75e91228fbe90">a</a> + <a class="code" href="class__Coord.html">Coord</a>(0, -1), c.<a class="code" href="classBFS__entry.html#a203f911c96ea1af968a130460cb57fd7">len</a>+addlen));</div>
+<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;        queue.<a class="code" href="classQueue.html#a5597838174b173b34b5ec0a98ee0af45">add</a>(<a class="code" href="classBFS__entry.html">BFS_entry</a>(c.<a class="code" href="classBFS__entry.html#af64647575d7078d5ddb75e91228fbe90">a</a> + <a class="code" href="class__Coord.html">Coord</a>(0, 1), c.<a class="code" href="classBFS__entry.html#a203f911c96ea1af968a130460cb57fd7">len</a>+addlen));</div>
+<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;    }</div>
+<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;}</div>
+<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;</div>
+<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;<span class="preprocessor">#endif</span></div>
+<div class="ttc" id="search_8hpp_html_ab52b9b285277e95c0cbdd36e180a3173"><div class="ttname"><a href="search_8hpp.html#ab52b9b285277e95c0cbdd36e180a3173">bfs</a></div><div class="ttdeci">void bfs(Qtree&lt; T &gt; &amp;data, const Coord &amp;start, const T &amp;allowed, void *cbdata, bool(*cb)(const Coord &amp;pos, const T &amp;value, int len, void *data), int dist=10000, bool allowEmpty=false)</div><div class="ttdoc">Use breadth-first search to walk through a dataset. </div><div class="ttdef"><b>Definition:</b> <a href="search_8hpp_source.html#l00043">search.hpp:43</a></div></div>
+<div class="ttc" id="qtree_8hpp_html"><div class="ttname"><a href="qtree_8hpp.html">qtree.hpp</a></div><div class="ttdoc">Quadtree implementation. </div></div>
+<div class="ttc" id="class__Coord_html"><div class="ttname"><a href="class__Coord.html">_Coord</a></div><div class="ttdoc">Class for a coordinate. </div><div class="ttdef"><b>Definition:</b> <a href="coord_8hpp_source.html#l00017">coord.hpp:17</a></div></div>
+<div class="ttc" id="classQtree_html"><div class="ttname"><a href="classQtree.html">Qtree</a></div><div class="ttdoc">Quadtree implementation. </div><div class="ttdef"><b>Definition:</b> <a href="qtree_8hpp_source.html#l00020">qtree.hpp:20</a></div></div>
+<div class="ttc" id="classQueue_html"><div class="ttname"><a href="classQueue.html">Queue</a></div><div class="ttdoc">Queue. </div><div class="ttdef"><b>Definition:</b> <a href="queue_8hpp_source.html#l00018">queue.hpp:18</a></div></div>
+<div class="ttc" id="common_8hpp_html"><div class="ttname"><a href="common_8hpp.html">common.hpp</a></div><div class="ttdoc">Utility macros. </div></div>
+<div class="ttc" id="classQueue_html_ab9e199e0f1a1d00fd5d5babfe7e259a3"><div class="ttname"><a href="classQueue.html#ab9e199e0f1a1d00fd5d5babfe7e259a3">Queue::hasNext</a></div><div class="ttdeci">bool hasNext() const </div><div class="ttdoc">Returns true if there is a next member. </div><div class="ttdef"><b>Definition:</b> <a href="queue_8hpp_source.html#l00126">queue.hpp:126</a></div></div>
+<div class="ttc" id="classBFS__entry_html_a40e560adf3ab446873b9815e171cb25a"><div class="ttname"><a href="classBFS__entry.html#a40e560adf3ab446873b9815e171cb25a">BFS_entry::BFS_entry</a></div><div class="ttdeci">BFS_entry(Coord a, int len)</div><div class="ttdoc">Constructor for BFS_entry. </div><div class="ttdef"><b>Definition:</b> <a href="search_8hpp_source.html#l00022">search.hpp:22</a></div></div>
+<div class="ttc" id="classQueue_html_a5597838174b173b34b5ec0a98ee0af45"><div class="ttname"><a href="classQueue.html#a5597838174b173b34b5ec0a98ee0af45">Queue::add</a></div><div class="ttdeci">void add(const T &amp;value)</div><div class="ttdoc">Add a value to this queue. </div><div class="ttdef"><b>Definition:</b> <a href="queue_8hpp_source.html#l00116">queue.hpp:116</a></div></div>
+<div class="ttc" id="classBFS__entry_html_a203f911c96ea1af968a130460cb57fd7"><div class="ttname"><a href="classBFS__entry.html#a203f911c96ea1af968a130460cb57fd7">BFS_entry::len</a></div><div class="ttdeci">const int len</div><div class="ttdoc">Current length. </div><div class="ttdef"><b>Definition:</b> <a href="search_8hpp_source.html#l00030">search.hpp:30</a></div></div>
+<div class="ttc" id="coord_8hpp_html"><div class="ttname"><a href="coord_8hpp.html">coord.hpp</a></div><div class="ttdoc">Coordinate class. </div></div>
+<div class="ttc" id="classQtree_html_a8bdb7462ad8667e03839091836ae8905"><div class="ttname"><a href="classQtree.html#a8bdb7462ad8667e03839091836ae8905">Qtree::add</a></div><div class="ttdeci">void add(const T &amp;t, const Coord &amp;coord)</div><div class="ttdoc">Add an element to coord at this quadtree. </div><div class="ttdef"><b>Definition:</b> <a href="qtree_8hpp_source.html#l00205">qtree.hpp:205</a></div></div>
+<div class="ttc" id="classBFS__entry_html_af64647575d7078d5ddb75e91228fbe90"><div class="ttname"><a href="classBFS__entry.html#af64647575d7078d5ddb75e91228fbe90">BFS_entry::a</a></div><div class="ttdeci">const Coord a</div><div class="ttdoc">Current coordinate. </div><div class="ttdef"><b>Definition:</b> <a href="search_8hpp_source.html#l00026">search.hpp:26</a></div></div>
+<div class="ttc" id="classQtree_html_a4e32bc7a0be2880c7f49809efacf8d66"><div class="ttname"><a href="classQtree.html#a4e32bc7a0be2880c7f49809efacf8d66">Qtree::get</a></div><div class="ttdeci">T get(const Coord &amp;coord) const </div><div class="ttdoc">Get an element from coord at this quadtree. </div><div class="ttdef"><b>Definition:</b> <a href="qtree_8hpp_source.html#l00239">qtree.hpp:239</a></div></div>
+<div class="ttc" id="queue_8hpp_html"><div class="ttname"><a href="queue_8hpp.html">queue.hpp</a></div><div class="ttdoc">Queue. </div></div>
+<div class="ttc" id="classQueue_html_abeee018138cbb5226e5352a5788e23bd"><div class="ttname"><a href="classQueue.html#abeee018138cbb5226e5352a5788e23bd">Queue::pop</a></div><div class="ttdeci">T pop()</div><div class="ttdoc">Returns the next member and removes it from the queue. </div><div class="ttdef"><b>Definition:</b> <a href="queue_8hpp_source.html#l00134">queue.hpp:134</a></div></div>
+<div class="ttc" id="classBFS__entry_html"><div class="ttname"><a href="classBFS__entry.html">BFS_entry</a></div><div class="ttdoc">Single BFS queue entry. </div><div class="ttdef"><b>Definition:</b> <a href="search_8hpp_source.html#l00017">search.hpp:17</a></div></div>
+</div><!-- fragment --></div><!-- contents -->
+<!-- start footer part -->
+<hr class="footer"/><address class="footer"><small>
+Generoinut projektille putkijuoksu Sun Jan 11 2015 20:35:35  &#160;<a href="http://www.doxygen.org/index.html">
+<img class="footer" src="doxygen.png" alt="doxygen"/>
+</a> 1.8.9
+</small></address>
+</body>
+</html>
