@@ -9,6 +9,7 @@ clean:
 	cd lib; ${MAKE} clean
 	cd src; ${MAKE} clean
 	cd test; ${MAKE} clean
+	cd test/performance; ${MAKE} clean
 
 doc: lib
 	cd doc; ${MAKE}
@@ -22,3 +23,6 @@ putkijuoksu: lib
 
 test: lib
 	cd test; ${MAKE}
+
+performance: lib
+	cd test; ${MAKE} performance
