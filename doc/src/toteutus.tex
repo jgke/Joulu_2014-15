@@ -1,0 +1,39 @@
+\documentclass{article}
+\usepackage[finnish]{babel}
+\usepackage[utf8]{inputenc}
+\author{Jaakko Hannikainen}
+
+\title{Tietorakenteiden ja algoritmien harjoitustyö - Toteutusdokumentti}
+\begin{document}
+\maketitle
+
+\section{Ohjelman yleisrakenne}
+(main.cpp) main() alustaa signaalikäsittelijän, generoi tyhjää aluetta
+aloituspaikan ympärille ja pyörittää input-render -silmukkaa. (ui.cpp) input()
+lukee syötteet ja liikuttaa pelaajaa/kameraa niiden mukaisesti, ja lisää ja
+poistaa palikoita. render() piirtää ensin lattian ja katon, joiden jälkeen se
+piirtää jokaisen palikan tietyn etäisyyden päässä pelaajasta. Jos jossakin
+kohtaa ei ole asetettu palikkaa tyhjäksi tai täydeksi, luodaan sinne uutta
+aluetta. (generator.cpp) generate() ensin määrittää tietyn kokoisen alueen
+kaivettavaksi, jonka jälkeen se antaa alueen satunnaiselle generaattorille,
+(generators/*.cpp) joka puolestaan luo omanlaisensa alueen generate()n antaman
+alueen päälle.
+
+\section{Saavutetut aika- ja tilavaativuudet}
+Quadtree on suurimaksi osaksi $O(\log_4 n)$, sillä se on yksinkertainen
+nelihaarainen puu. Poikkeus on tosin map-metodi, joka on $O(n)$, koska se iteroi
+puun läpi. Prim-generaattori on $O(|V|^2)$, life-generaattori on $O(|V|)$ ja
+empty-generaattori on $O(|V|)$. Piirtosilmukka on $O(|V|^2)$, sillä siinä
+käydään läpi $|V|$ alkiota, joille kutsutaan lineaarisesti kasvavaa
+piirtofunktiota.
+
+\subsection{Työn mahdoliset puutteet ja parannusehdotukset}
+Työ on pelimäinen, mutta siinä ei ole paljoa pelillistämisominaisuuksia, kuten
+esineitä ja vihollisia. Näitä voisi lisätä. Myös ylös- ja alaspäin voisi luoda
+maailmaa, ja muokata piirtoa vastaavasti. Myös moninpeli voisi olla hyvä.
+
+Piirto on kallista, sillä se ei käytä kaikkia OpenGL-ominaisuuksia, jotka
+nopeuttaisivat piirtoa. Myöskin piilossa olevat ruudut piirretään, joka
+aiheuttaa raskaamman piirtokutsun.
+
+\end{document}
