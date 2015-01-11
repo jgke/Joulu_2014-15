@@ -106,6 +106,9 @@ template <class T> _Coord<T> &_Coord<T>::operator=(const _Coord<T> &c) {
     return *this;
 }
 
+/**
+ * Assignment operator for typecasting Coord.
+ */
 template <class T> template <class V> _Coord<T> &_Coord<T>::operator=(const _Coord<V> &c) {
     x = static_cast<T>(c.x);
     y = static_cast<T>(c.y);
@@ -172,6 +175,9 @@ namespace std {
  * Coord used for coordinates.
  */
 typedef _Coord<int> Coord;
+/**
+ * Coord used for OpenGL coordinates.
+ */
 typedef _Coord<double> GLCoord;
 
 #endif
