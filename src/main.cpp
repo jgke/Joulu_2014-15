@@ -5,6 +5,7 @@
 #include "coord.hpp"
 #include "handle.hpp"
 
+#include "ai.hpp"
 #include "game.hpp"
 #include "generator.hpp"
 #include "ui.hpp"
@@ -37,6 +38,7 @@ int main(int argc, char *argv[]) {
         long newTicks;
         while(true) {
             input(level, player);
+            level.srch.tick(player.pos);
             render(level, player);
             newTicks = SDL_GetTicks();
             if(newTicks - ticks < TICKS_PER_FRAME) {

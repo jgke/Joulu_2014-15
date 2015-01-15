@@ -4,6 +4,8 @@
 #include "qtree.hpp"
 #include "coord.hpp"
 
+#include "ai.hpp"
+
 #define HITBOX 0.2
 
 class Level {
@@ -11,6 +13,7 @@ class Level {
         Level() {}
         Qtree<char> data;
         Qtree<bool> vision;
+        Searcher srch;
 };
 
 

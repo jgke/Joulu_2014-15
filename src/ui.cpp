@@ -181,6 +181,7 @@ void render(Level &level, Player &plr) {
                 Cube(GLCoord(curpos.x, curpos.y, 0), highlightTexture).draw();
         }
     }
+    level.srch.render();
     if(level.data.get(colorpos, '.') == '%')
         level.data.add('#', colorpos);
     SDL_GL_SwapWindow(screen);

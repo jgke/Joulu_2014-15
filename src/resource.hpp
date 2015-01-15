@@ -7,6 +7,7 @@ extern GLuint groundTexture;
 extern GLuint highlightTexture;
 extern GLuint wallTexture;
 extern GLuint ceilingTexture;
+extern GLuint enemyTexture;;
 
 void init_resources();
 

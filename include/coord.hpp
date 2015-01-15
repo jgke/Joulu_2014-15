@@ -144,6 +144,20 @@ template <class T> _Coord<T> _Coord<T>::operator-=(const _Coord<T> &coord) {
     return *this;
 }
 
+/**
+ * Multiply coord by V.
+ */
+template <class T, class V> _Coord<T> operator*(const _Coord<T> &a, const V &b) {
+    return _Coord<T>(a.x*b, a.y*b, a.z*b);
+}
+
+/**
+ * Divide coord by V.
+ */
+template <class T, class V> _Coord<T> operator/(const _Coord<T> &a, const V &b) {
+    return _Coord<T>(a.x/b, a.y/b, a.z/b);
+}
+
 template <class T> bool _Coord<T>::operator== (const _Coord<T> &coord) const {
     return this->x == coord.x && this->y == coord.y && this->z == coord.z;
 }

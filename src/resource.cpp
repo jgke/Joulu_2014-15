@@ -13,6 +13,7 @@ GLuint groundTexture;
 GLuint highlightTexture;
 GLuint wallTexture;
 GLuint ceilingTexture;
+GLuint enemyTexture;
 
 int texy = 16;
 int texx = 16;
@@ -93,4 +94,9 @@ void init_resources() {
         }
     ceilingTexture = apply_buffer(pixels);
 
+    for(int y = 0; y < texy; y++)
+        for(int x = 0; x < texx; x++)
+            for(int i = 0; i < components; i++)
+                pixels[y*texx*components + x * components + i] = 0.5;
+    enemyTexture = apply_buffer(pixels);
 }

@@ -1,8 +1,8 @@
 include ../config.mk
 
 TARGET=../putkijuoksu
-OBJECTS=main.o cube.o generator.o physics.o resource.o ui.o generators/prim.o \
-	generators/life.o generators/empty.o
+OBJECTS=main.o ai.o cube.o generator.o physics.o resource.o ui.o \
+	generators/prim.o generators/life.o generators/empty.o
 LIBS=-lm -lSDL2 -lGL -lGLU
 
 %.o : %.cpp ${HEADERS}
