@@ -16,6 +16,5 @@ void Searcher::tick(GLCoord target) {
 }
 
 void Searcher::render() {
-    std::cout << this->pos << std::endl;
     Cube(this->pos, enemyTexture).draw();
 }
