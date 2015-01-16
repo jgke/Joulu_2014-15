@@ -31,14 +31,14 @@ void init(int argc, char *argv[]) {
 int main(int argc, char *argv[]) {
     if(!setjmp(env)) {
         init(argc, argv);
-        Level level;
         Player player;
+        Level level(player);
         generate(level.data, Coord(0, 0), 10, 0);
         long ticks = SDL_GetTicks();
         long newTicks;
         while(true) {
+            level.tick();
             input(level, player);
-            level.srch.tick(player.pos);
             render(level, player);
             newTicks = SDL_GetTicks();
             if(newTicks - ticks < TICKS_PER_FRAME) {

@@ -97,6 +97,6 @@ void init_resources() {
     for(int y = 0; y < texy; y++)
         for(int x = 0; x < texx; x++)
             for(int i = 0; i < components; i++)
-                pixels[y*texx*components + x * components + i] = 0.5;
+                pixels[y*texx*components + x * components + i] = 0.1;
     enemyTexture = apply_buffer(pixels);
 }

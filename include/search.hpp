@@ -8,6 +8,7 @@
 
 #include "common.hpp"
 #include "coord.hpp"
+#include "list.hpp"
 #include "queue.hpp"
 #include "qtree.hpp"
 
@@ -69,5 +70,60 @@ template <class T> void bfs(Qtree<T> &data, const Coord &start,
         queue.add(BFS_entry(c.a + Coord(0, 1), c.len+addlen));
     }
 }
+
+/**
+ * Use breadth-first search to find a path
+ * @param data data to walk through
+ * @param path Queue of Coords where the path should be stored
+ * @param start coordinate to start from
+ * @param end coordinate to go to
+ * @param allowed value that can be traversed
+ * @param cbdata data to be passed to callback
+ */
+template <class T> void bfs(Qtree<T> data, Queue<Coord> &path,
+        const Coord &start, const Coord &end, const T &allowed) {
+    if(start == end)
+        return;
+    Queue<std::pair<Coord, Coord> > queue;
+    Qtree<Coord> prev;
+    prev.add(start, start);
+    queue.add(std::pair<Coord, Coord>(start + Coord(1, 0), start));
+    queue.add(std::pair<Coord, Coord>(start + Coord(-1, 0), start));
+    queue.add(std::pair<Coord, Coord>(start + Coord(0, 1), start));
+    queue.add(std::pair<Coord, Coord>(start + Coord(0, -1), start));
+    std::pair<Coord, Coord> c;
+    while(queue.hasNext()) {
+        c = queue.pop();
+        if(!data.contains(c.first))
+            continue;
+        if(data.get(c.first) != allowed)
+            continue;
+        if(prev.contains(c.first))
+            continue;
+        prev.add(c.second, c.first);
+        if(c.first == end)
+            goto found;
+        queue.add(std::pair<Coord, Coord>(c.first + Coord(-1, 0), c.first));
+        queue.add(std::pair<Coord, Coord>(c.first + Coord(1, 0), c.first));
+        queue.add(std::pair<Coord, Coord>(c.first + Coord(0, -1), c.first));
+        queue.add(std::pair<Coord, Coord>(c.first + Coord(0, 1), c.first));
+    }
+    // not found
+    return;
+found:
+    Coord cur = end;
+    List<Coord> stack;
+    while(cur != start) {
+        stack.add(cur);
+        cur = prev.get(cur);
+    }
+    // stack contains route from b to a, so iterate in reverse
+    for(int i = 0; i < stack.size(); i++) {
+        cur = stack.get(stack.size()-1-i);
+        path.add(cur);
+    }
+}
+
+
 
 #endif

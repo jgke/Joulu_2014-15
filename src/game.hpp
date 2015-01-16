@@ -1,21 +1,12 @@
 #ifndef GAME_HPP
 #define GAME_HPP
 
-#include "qtree.hpp"
 #include "coord.hpp"
+#include "qtree.hpp"
 
 #include "ai.hpp"
 
 #define HITBOX 0.2
-
-class Level {
-    public:
-        Level() {}
-        Qtree<char> data;
-        Qtree<bool> vision;
-        Searcher srch;
-};
-
 
 class Player {
     public:
@@ -25,5 +16,17 @@ class Player {
         GLCoord cameraTarget;
         GLCoord cameraDirection;
         bool collisions;
+};
+
+class Level {
+    public:
+        Level(Player &plr): plr(plr) {}
+        void tick() {
+            srch.tick(data, plr.pos);
+        }
+        Qtree<char> data;
+        Qtree<bool> vision;
+        Searcher srch;
+        Player &plr;
 };
 #endif
