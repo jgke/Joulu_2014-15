@@ -84,6 +84,12 @@ template <class T> void bfs(Qtree<T> data, Queue<Coord> &path,
         const Coord &start, const Coord &end, const T &allowed) {
     if(start == end)
         return;
+    // starting or ending at nothing
+    if(!data.contains(start) || !data.contains(end))
+        return;
+    // starting or ending at a wall
+    if(data.get(start) != allowed || data.get(end) != allowed)
+        return;
     Queue<std::pair<Coord, Coord> > queue;
     Qtree<Coord> prev;
     prev.add(start, start);
