@@ -7,10 +7,11 @@
 
 class Cube {
     public:
-        Cube(const GLCoord &pos, GLuint texture);
+        Cube(const GLCoord &pos, GLuint texture, double scale=1);
         void draw();
         GLCoord pos;
         GLuint texture;
+        double scale;
 };
 
 #endif

@@ -6,7 +6,8 @@
 
 #include "cube.hpp"
 
-Cube::Cube(const GLCoord &pos, GLuint texture): pos(pos), texture(texture) {}
+Cube::Cube(const GLCoord &pos, GLuint texture, double scale): pos(pos),
+    texture(texture), scale(scale) {}
 
 static const GLubyte cubeIndices[] = {
     0,1,2, 2,3,0,       // front
@@ -63,7 +64,9 @@ void Cube::draw() {
     glPushMatrix();
     glTranslatef(pos.x, pos.y, pos.z);
 
+    glScaled(scale, scale, scale);
     glDrawElements(GL_TRIANGLES, 36, GL_UNSIGNED_BYTE, cubeIndices);
+    glScaled(1/scale, 1/scale, 1/scale);
 
     glPopMatrix();
 

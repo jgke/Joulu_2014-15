@@ -13,6 +13,7 @@ class Searcher {
         GLCoord pos;
         GLCoord delta;
         Coord target;
+        int movec;
 };
 
 #endif
