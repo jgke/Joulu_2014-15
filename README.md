@@ -16,7 +16,9 @@ depends on:
 running
 =======
 
-        $ ./putkijuoksu
+        $ ./putkijuoksu [-f]
+
+Using -f will launch putkijuoksu in fullscreen mode - press 'q' to quit.
 
 Use ./libtest to run tests against the library.
 
