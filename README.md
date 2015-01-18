@@ -11,6 +11,7 @@ compiling
 depends on:
 * gl
 * glu
+* SDL2
 * c++ compiler
 
 running
