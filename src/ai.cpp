@@ -1,4 +1,5 @@
 #include <iostream>
+#include <math.h>
 
 #include "coord.hpp"
 #include "search.hpp"
@@ -11,25 +12,26 @@
 Searcher::Searcher() {
 }
 
+int roundToInt(double d) {
+    return (int)floor(d);
+}
+
 void Searcher::tick(Qtree<char> &level, GLCoord player) {
     this->pos += this->delta;
     this->movec--;
     player.z = 0;
     if(this->movec <= 0) {
         this->delta = GLCoord();
-        if(this->pos != player) {
+        if(this->pos != target)
+            this->pos = target;
+        Coord curpos(Coord(this->pos, &roundToInt));
+        Coord plrpos(Coord(player, &roundToInt));
+        if(curpos != plrpos) {
             Queue<Coord> queue;
-            bfs<char>(level, queue, this->pos, player, '.');
+            bfs<char>(level, queue, curpos, plrpos, '.');
             if(queue.size()) {
-                Coord next;
-                while(queue.size()) {
-                    next = queue.pop();
-                    if(level.get(next, '#') == '.')
-                        break;
-                }
-                if(level.get(next, '#') != '.')
-                    return;
-                this->delta = GLCoord(next - Coord(this->pos))/10;
+                Coord next(queue.pop());
+                this->delta = GLCoord(next - curpos)/10;
                 this->target = next;
                 this->movec = 10;
             }
