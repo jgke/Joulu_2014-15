@@ -37,6 +37,10 @@ template <class T> class _Coord {
          */
         template <class V> _Coord(const _Coord<V> &c);
         /**
+         * Constructor for typecasted coord, with function f for casting.
+         */
+        template <class V> _Coord(const _Coord<V> &c, T (*f)(V v));
+        /**
          * Length of this coord.
          * ABS(x) + ABS(y).
          */
@@ -94,6 +98,13 @@ _Coord<T>::_Coord(const _Coord<V> &c):
     x(static_cast<T>(c.x)),
     y(static_cast<T>(c.y)),
     z(static_cast<T>(c.z)) {}
+
+template <class T>
+template <class V>
+_Coord<T>::_Coord(const _Coord<V> &c, T (*f)(V v)):
+    x(f(c.x)),
+    y(f(c.y)),
+    z(f(c.z)) {}
 
 template <class T> T _Coord<T>::length() const {
     return ABS(this->x) + ABS(this->y) + ABS(this->z);
