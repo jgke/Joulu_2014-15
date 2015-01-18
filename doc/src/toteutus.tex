@@ -1,11 +1,14 @@
 \documentclass{article}
 \usepackage[finnish]{babel}
 \usepackage[utf8]{inputenc}
+\usepackage{hyperref}
 \author{Jaakko Hannikainen}
 
 \title{Tietorakenteiden ja algoritmien harjoitustyö - Toteutusdokumentti}
 \begin{document}
 \maketitle
+
+\textbf{Osoitteessa \url{http://jgke.fi/putkijuoksu.webm} on video ohjelmasta.}
 
 \section{Ohjelman yleisrakenne}
 (main.cpp) main() alustaa signaalikäsittelijän, generoi tyhjää aluetta
@@ -23,17 +26,28 @@ alueen päälle.
 Quadtree on suurimaksi osaksi $O(\log_4 n)$, sillä se on yksinkertainen
 nelihaarainen puu. Poikkeus on tosin map-metodi, joka on $O(n)$, koska se iteroi
 puun läpi. Prim-generaattori on $O(|V|^2)$, life-generaattori on $O(|V|)$ ja
-empty-generaattori on $O(|V|)$. Piirtosilmukka on $O(|V|^2)$, sillä siinä
-käydään läpi $|V|$ alkiota, joille kutsutaan lineaarisesti kasvavaa
-piirtofunktiota.
+empty-generaattori on $O(|V|)$. Piirtosilmukka on $O(|V|)$, sillä siinä
+käydään läpi $|V|$ alkiota, joille kutsutaan vakioaikaista piirtofunktiota.
 
-\subsection{Työn mahdoliset puutteet ja parannusehdotukset}
-Työ on pelimäinen, mutta siinä ei ole paljoa pelillistämisominaisuuksia, kuten
-esineitä ja vihollisia. Näitä voisi lisätä. Myös ylös- ja alaspäin voisi luoda
-maailmaa, ja muokata piirtoa vastaavasti. Myös moninpeli voisi olla hyvä.
+\section{Työn mahdoliset puutteet ja parannusehdotukset}
 
-Piirto on kallista, sillä se ei käytä kaikkia OpenGL-ominaisuuksia, jotka
-nopeuttaisivat piirtoa. Myöskin piilossa olevat ruudut piirretään, joka
-aiheuttaa raskaamman piirtokutsun.
+\begin{itemize}
+    \item Työ on pelimäinen, mutta siinä ei ole paljoa
+        pelillistämisominaisuuksia, kuten esineitä ja vihollisia. Näitä voisi
+        lisätä. Myös ylös- ja alaspäin voisi luoda maailmaa, ja muokata piirtoa
+        vastaavasti. Myös moninpeli voisi olla hyvä.
+    \item Piirto on kallista, sillä se ei käytä kaikkia OpenGL-ominaisuuksia,
+        jotka nopeuttaisivat piirtoa. Myöskin piilossa olevat ruudut piirretään,
+        joka aiheuttaa raskaamman piirtokutsun.
+    \item Monissa tietorakenteissa voisi olla pientä siistimistä toteutuksen ja
+        rajapinnan kannalta. Myös esimerkiksi ostreamin ylikuormitus puuttuu
+        monesta luokasta.
+    \item  Generaattoreja on huomattavasti suunniteltua vähemmän, ja niitä
+        tulisi implementoida lisää.
+    \item Testit, vaikkakin melko kattavia, eivät testaa aivan kaikkea.
+    \item Ikkuna kaappaa hiiren, mikä voi vaikeuttaa käyttöä tietyissä
+        olosuhteissa.
+    \item Raycast-metodi ei toimi kunnolla.
+\end{itemize}
 
 \end{document}
