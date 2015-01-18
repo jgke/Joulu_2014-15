@@ -25,7 +25,7 @@ documentation
 =============
 
         $ make doc
-        $ make test
+        $ make performance
 
 After compilation, documentation is located at doc/*.pdf. Doxygen output is
 located at doc/doxygen/index.html. Test coverage reports are at
