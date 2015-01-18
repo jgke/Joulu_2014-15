@@ -22,9 +22,17 @@ class BFS_entry {
          */
         BFS_entry(Coord a, int len): a(a), len(len) {}
         /**
+         * Constructor for BFS_entry.
+         */
+        BFS_entry(Coord a, Coord b, int len): a(a), b(b), len(len) {}
+        /**
          * Current coordinate.
          */
         const Coord a;
+        /**
+         * Previous cordinate.
+         */
+        const Coord b;
         /**
          * Current length.
          */
@@ -78,44 +86,50 @@ template <class T> void bfs(Qtree<T> &data, const Coord &start,
  * @param start coordinate to start from
  * @param end coordinate to go to
  * @param allowed value that can be traversed
- * @param cbdata data to be passed to callback
+ * @param maxlen maximum length of route, 0 for no limit
+ * @returns true if route found
  */
-template <class T> void bfs(Qtree<T> data, Queue<Coord> &path,
-        const Coord &start, const Coord &end, const T &allowed) {
+template <class T> bool bfs(Qtree<T> data, Queue<Coord> &path,
+        const Coord &start, const Coord &end, const T &allowed, int maxlen=-1) {
     if(start == end)
-        return;
+        return true;
     // starting or ending at nothing
     if(!data.contains(start) || !data.contains(end))
-        return;
+        return false;
     // starting or ending at a wall
     if(data.get(start) != allowed || data.get(end) != allowed)
-        return;
-    Queue<std::pair<Coord, Coord> > queue;
+        return false;
+    if(maxlen < 0) {
+        Coord diff(start - end);
+        maxlen = diff.x * diff.y;
+    }
+    Queue<BFS_entry> queue;
     Qtree<Coord> prev;
     prev.add(start, start);
-    queue.add(std::pair<Coord, Coord>(start + Coord(1, 0), start));
-    queue.add(std::pair<Coord, Coord>(start + Coord(-1, 0), start));
-    queue.add(std::pair<Coord, Coord>(start + Coord(0, 1), start));
-    queue.add(std::pair<Coord, Coord>(start + Coord(0, -1), start));
-    std::pair<Coord, Coord> c;
+    queue.add(BFS_entry(start + Coord(1, 0), start, 1));
+    queue.add(BFS_entry(start + Coord(-1, 0), start, 1));
+    queue.add(BFS_entry(start + Coord(0, 1), start, 1));
+    queue.add(BFS_entry(start + Coord(0, -1), start, 1));
     while(queue.hasNext()) {
-        c = queue.pop();
-        if(!data.contains(c.first))
+        BFS_entry c(queue.pop());
+        // too far
+        if(maxlen > 0 && c.len > maxlen)
             continue;
-        if(data.get(c.first) != allowed)
+        if(!data.contains(c.a))
             continue;
-        if(prev.contains(c.first))
+        if(data.get(c.a) != allowed)
             continue;
-        prev.add(c.second, c.first);
-        if(c.first == end)
+        if(prev.contains(c.a))
+            continue;
+        prev.add(c.b, c.a);
+        if(c.a == end)
             goto found;
-        queue.add(std::pair<Coord, Coord>(c.first + Coord(-1, 0), c.first));
-        queue.add(std::pair<Coord, Coord>(c.first + Coord(1, 0), c.first));
-        queue.add(std::pair<Coord, Coord>(c.first + Coord(0, -1), c.first));
-        queue.add(std::pair<Coord, Coord>(c.first + Coord(0, 1), c.first));
+        queue.add(BFS_entry(c.a + Coord(-1, 0), c.a, c.len+1));
+        queue.add(BFS_entry(c.a + Coord(1, 0), c.a, c.len+1));
+        queue.add(BFS_entry(c.a + Coord(0, -1), c.a, c.len+1));
+        queue.add(BFS_entry(c.a + Coord(0, 1), c.a, c.len+1));
     }
-    // not found
-    return;
+    return false;
 found:
     Coord cur = end;
     List<Coord> stack;
@@ -128,6 +142,7 @@ found:
         cur = stack.get(stack.size()-1-i);
         path.add(cur);
     }
+    return true;
 }
 
 
